@@ -1,9 +1,9 @@
 import axios from "axios";
 import * as actions from '../api.js'
+import { loadUser, logout } from "../auth.js";
 
 const api = ({dispatch}) => next => async action => {
     if (action.type !== actions.apiCallBegan.type ) return next(action);
-
     
     const {url, method, data, headers, onStart, onSuccess, onError} = action.payload
     
@@ -11,6 +11,15 @@ const api = ({dispatch}) => next => async action => {
     
     next(action);
 
+    const token = localStorage.getItem('token')
+
+    if (!token) {
+        dispatch(logout())
+    }
+    // content type by default. Add the token
+    headers['Content-Type'] = 'application/json'
+    headers['Authorization'] = `Token ${token}`
+    
     try {
         const response = await axios.request({
             baseURL: 'http://localhost:8000/api',
@@ -28,7 +37,10 @@ const api = ({dispatch}) => next => async action => {
     } catch(err) {
         // general
         dispatch(actions.apiCallFailed(err.message))
-        
+
+        if (err.request.status === 401) {
+            dispatch(logout())
+        }
         // specific
         if (onError) dispatch({
             type: onError,

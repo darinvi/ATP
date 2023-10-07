@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import Logout from "./accounts/Logout"
+import Logout from "../accounts/Logout"
 
 export default function Headers() {
     return (
@@ -13,7 +13,7 @@ export default function Headers() {
                 
                 <li
                     className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"
-                >Features</li>
+                ><Link to="/features">Features</Link></li>
 
             </ul>
 

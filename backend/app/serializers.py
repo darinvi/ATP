@@ -1,7 +1,7 @@
 from rest_framework import serializers
-# from app.models import ...
+from app.models import Filing
 
-# class ...Serializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = ...
-#         fields = '__all__'
+class FilingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Filing
+        fields = '__all__'
