@@ -46,7 +46,7 @@ def call_propreports(request):
         response = requests.post(REPORT_URL, data=data, headers=REPORT_HEADERS)
         res_text = prepare_response(data.get('action'), response.text)
         if response.status_code != 200:
-            return JsonResponse({'message': res_text}, status=response.status_code)
+            return JsonResponse({'message': response.text}, status=response.status_code)
         else:
             return JsonResponse({'response': res_text})
     except requests.exceptions.RequestException as e:

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { loadAccounts } from "../../../store/reports";
 import { tokenUndefined } from "../../../store/reports";
 import { clearReportData } from "../../../store/reports";
+import { loadAccounts } from "../../../store/reports";
 
 export default function GetReportForm(props) {
 
@@ -15,7 +15,7 @@ export default function GetReportForm(props) {
     const [end, setEnd] = useState("");
 
     const actions = {
-        
+
     }
 
     useEffect(() => {
@@ -34,6 +34,7 @@ export default function GetReportForm(props) {
     function handleSubmitForm(e) {
         e.preventDefault();
         props.disableForm(false)
+        dispatch(loadAccounts(localStorage.getItem('reportToken')))
     }
 
     return (

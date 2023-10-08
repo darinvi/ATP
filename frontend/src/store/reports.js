@@ -39,10 +39,17 @@ const slice = createSlice({
             reports.currentData = [];
         },
         removeReportToken: (reports, action) => {
-
+            
         },
         setAccounts: (reports, action) => {
             reports.accounts = action.payload.response
+        },
+        genericError: (reports, action) => {
+            if (action.payload.message === "Invalid or expired token.") {
+                localStorage.removeItem('reportToken');
+                reports.reportToken = null;
+                reports.currentData = [];
+            } 
         }
     }
 });
@@ -53,7 +60,8 @@ const {
     setTokenFailed,
     clearToken,
     resetReports,
-    setAccounts
+    setAccounts,
+    genericError
 } = slice.actions;
 
 export default slice.reducer;
@@ -88,7 +96,7 @@ export const loadAccounts = (token) => (dispatch) => {
             'token': token
         },
         onSuccess: setAccounts.type,
-        // onError: 
+        onError: genericError.type
     }))
 }
 

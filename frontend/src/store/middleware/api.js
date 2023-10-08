@@ -55,6 +55,9 @@ const api = ({dispatch}) => next => async action => {
             onErrorMessage = 'No specific message'
         }
 
+        console.log(onErrorMessage)
+        console.log(err)
+
         if (onError) dispatch({
             type: onError,
             payload: {
