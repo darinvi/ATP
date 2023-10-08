@@ -8,12 +8,12 @@ export default function Reports() {
     const token = useSelector(state => state.entities.reports.reportToken);
     // const dispatch = useDispatch();
 
-    useEffect(() => {
-        // if ( token older than 2 hours ) {
-        //     dispatch( delete token -> need to log in again )
-        // }
+    // useEffect(() => {
+    //     // if ( token older than 2 hours ) {
+    //     //     dispatch( delete token -> need to log in again )
+    //     // }
 
-    }, [])
+    // }, [])
 
     return token
         ?
