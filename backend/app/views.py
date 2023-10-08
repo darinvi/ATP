@@ -2,7 +2,7 @@ from django.http import JsonResponse
 import requests, json
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.hashers import make_password
+from .models import Filing 
 from .serializers import FilingSerializer
 
 
@@ -18,3 +18,13 @@ def get_filing_text(request):
     html_text = requests.get(url, headers=headers).text
     context = {'text': html_text}
     return JsonResponse(context)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def get_filings(request):
+    data = json.loads(request.body)
+    # filters = data.get('filters','') -> #APPLY FILTERS IF ANY
+    filings = Filing.objects.all()
+    serializer = FilingSerializer(filings, many=True)
+    serialized_filings = serializer.data
+    return JsonResponse({'filings': serialized_filings})

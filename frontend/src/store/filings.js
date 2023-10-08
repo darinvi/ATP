@@ -10,29 +10,36 @@ import { apiCallBegan } from "./api";
 const slice = createSlice({
     name: 'filings',
     initialState: {
-        prefix: 'https://www.sec.gov/Archives/edgar/data/',
+        // prefix: 'https://www.sec.gov/Archives/edgar/data/',
         filings: [],
         currentHTML: "",
         filters: []
     },
     reducers:{
         populateFilings: (filings, action) => {
-            // filings.filings = action.payload
-            console.log(action.payload)
+            filings.filings = action.payload.filings
+        },  
+        setCurrentHTML: (filings, action) => {
+            filings.currentHTML = action.payload.text
         },
+        resetFilings: (filings, action) => {
+            filings.filings = [];
+            filings.currentHTML = "";
+        }
     }
 });
 
 const {
     populateFilings,
-
+    setCurrentHTML,
+    resetFilings,
 } = slice.actions;
 
 export default slice.reducer;
 
 export const loadFilings  = () => (dispatch, getState) => {
     dispatch(apiCallBegan({
-        ulr: '/list-all-filings',
+        url: 'get-filings',
         method: 'POST',
         data: {
             // 'filters': getState().filings.filters
@@ -41,3 +48,7 @@ export const loadFilings  = () => (dispatch, getState) => {
         onSuccess: populateFilings.type,
     }))
 }
+
+export const setHTML = setCurrentHTML;
+
+export const cleanFilings = resetFilings;

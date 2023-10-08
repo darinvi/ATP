@@ -1,13 +1,12 @@
-import SingleFiling from './components/singleFiling'
+import SingleFiling from './singleFiling'
+import { useSelector } from 'react-redux/es/hooks/useSelector'
 
-const jsons = require('../../../../example_responses')
+export default function ListFilings() {
 
-export default function ListFilings(props) {
-    const renderFilings = jsons.allFilingTypes.filings.map(e => {
-        return <SingleFiling
-            setHTMLLink={props.setHTML}
-            data={e}
-        />
+    const filings = useSelector(state => state.entities.filings.filings)
+
+    const renderFilings = filings.map(f => {
+        return <SingleFiling content={f}/>
     })
 
     return (

@@ -1,16 +1,29 @@
-import { useState } from "react"
-import ExternalHTMLViewer from "./components/components/ExternalHTMLViewer"
-import ListFilings from "./components/ListFilings"
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { loadFilings, cleanFilings } from "../../../store/filings";
+import ListFilings from "./ListFilings";
+import ExternalHTMLViewer from "./ExternalHTMLViewer";
 
 
-export default function Filing() {
-    const [currentHTML, setCurrentHTML] = useState('')
+export default function WTF(){
 
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(loadFilings())
+
+        return () => {
+            dispatch(cleanFilings());
+        }
+            
+    },[])
 
     return (
-        <div className="display-html">
-            <ListFilings setHTML={setCurrentHTML} />
-            {currentHTML && <ExternalHTMLViewer content={currentHTML} />}
-        </div>
+        <>
+            <ListFilings />
+            <ExternalHTMLViewer />
+        </>
     )
+
+
 }
