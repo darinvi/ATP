@@ -16,8 +16,11 @@ const api = ({dispatch}) => next => async action => {
     if (!token) {
         dispatch(logout())
     }
+    
     // content type by default. Add the token
-    headers['Content-Type'] = 'application/json'
+    if (!headers['Content-Type']) {
+        headers['Content-Type'] = 'application/json'
+    } 
     headers['Authorization'] = `Token ${token}`
     
     try {
@@ -36,15 +39,28 @@ const api = ({dispatch}) => next => async action => {
 
     } catch(err) {
         // general
+
         dispatch(actions.apiCallFailed(err.message))
 
         if (err.request.status === 401) {
             dispatch(logout())
         }
         // specific
+
+        
+        let onErrorMessage;
+        if (err.response.data.message) {
+            onErrorMessage = err.response.data.message;
+        } else {
+            onErrorMessage = 'No specific message'
+        }
+
         if (onError) dispatch({
             type: onError,
-            payload: err.message
+            payload: {
+                'general':err.message, 
+                'message': onErrorMessage
+            }
         })
     }
     

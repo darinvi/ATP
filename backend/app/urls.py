@@ -10,8 +10,5 @@ urlpatterns = [
     *router.urls,
     path('api/filings', views.get_filing_text),
     path('api/get-filings', views.get_filings),
-    # path('api/save-filings', views.save_filings),
-    # path('api/make-password', views.make_passwordd),
+    path('api/call-propreports', views.call_propreports),
 ]
-
-# urlpatterns = router.urls

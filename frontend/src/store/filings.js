@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { apiCallBegan } from "./api";
 
 // Will hold the endpoints (concat with the prefix)

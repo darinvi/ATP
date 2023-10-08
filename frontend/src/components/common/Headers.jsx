@@ -3,7 +3,7 @@ import Logout from "../accounts/Logout"
 
 export default function Headers() {
     return (
-        <header className="flex justify-between bg-cyan-800 text-2xl h-14">
+        <header className="flex justify-between bg-cyan-800 text-2xl h-14 select-none">
             
             <ul className="flex items-center">
                 
