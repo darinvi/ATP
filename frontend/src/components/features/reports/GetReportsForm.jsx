@@ -34,7 +34,6 @@ export default function GetReportForm(props) {
     function handleSubmitForm(e) {
         e.preventDefault();
         props.disableForm(false)
-        dispatch(loadAccounts(localStorage.getItem('reportToken')))
     }
 
     return (
