@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { tokenUndefined } from "../../../store/reports";
-import { clearReportData } from "../../../store/reports";
-import { loadAccounts } from "../../../store/reports";
+import { useState } from "react";
 
 export default function GetReportForm(props) {
 
@@ -17,19 +14,6 @@ export default function GetReportForm(props) {
     const actions = {
 
     }
-
-    useEffect(() => {
-        if (reportToken === 'undefined' || !reportToken) {
-            dispatch(tokenUndefined())
-        }
-        if (!accounts) {
-            dispatch(loadAccounts(reportToken))
-        }
-
-        return () => {
-            dispatch(clearReportData())
-        }
-    }, [])
 
     function handleSubmitForm(e) {
         e.preventDefault();

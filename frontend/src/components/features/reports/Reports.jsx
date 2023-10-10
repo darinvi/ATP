@@ -2,22 +2,32 @@ import { useSelector, useDispatch } from "react-redux"
 import ReportTokenForm from "./ReportTokenForm";
 import { useEffect, useState } from "react";
 import GetReportsForm from './GetReportsForm';
+import { loadAccounts, clearReportData, clearReportState } from "../../../store/reports";
+import moment from 'moment/moment.js';
 
 export default function Reports() {
 
-    const token = useSelector(state => state.entities.reports.reportToken);
-    // const dispatch = useDispatch();
+    const reportToken = useSelector(state => state.entities.reports.reportToken);
+    const accounts = useSelector(state => state.entities.reports.accounts);
+    const lastLogin = useSelector(state => state.entities.reports.lastLogin);
+    const dispatch = useDispatch();
     const [ showForm, setShowForm ] = useState(true)
 
+    useEffect(() => {
+        // CLEAR DATA ONLY IF NO TOKEN OR 1.5H HAVE PASSED
+        if ( !reportToken || moment().diff(moment(lastLogin), "minutes") > 90 ) {
+            dispatch(clearReportState())
+        }
+        if (!accounts) {
+            dispatch(loadAccounts(reportToken))
+        }
 
-    // useEffect(() => {
-    //     // if ( token older than 2 hours ) {
-    //     //     dispatch( delete token -> need to log in again )
-    //     // }
+        return () => {
+            dispatch(clearReportData())
+        }
+    }, [])
 
-    // }, [])
-
-    return token
+    return reportToken
         ?
 
         

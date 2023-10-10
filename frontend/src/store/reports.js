@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
 
+
 const errorMessages = [
     'Invalid token'
 ]
@@ -11,7 +12,7 @@ const slice = createSlice({
         reportToken: localStorage.getItem('reportToken'),
         currentData: [],
         filters: [],
-        lastTokenTime: null, // Log out token agter 2hours and request new Or try to dispatch a log out on a specific error from server
+        lastLogin: null, // Log out token after 2hours and request new Or try to dispatch a log out on a specific error from server
         accounts: null,
         reportRange: []
     },
@@ -21,21 +22,20 @@ const slice = createSlice({
         },  
         setTokenSuccess: (reports, action) => {
             localStorage.setItem('reportToken', action.payload.response);
-            reports.reportToken = action.payload.response
+            reports.reportToken = action.payload.response;
+            reports.lastLogin = Date.now();
         },
-        // status code 500: 
-        // ["Invalid or expired token.", Incorrect password or User Id / E-mail., ]
         setTokenFailed: (reports, action) => {
             localStorage.removeItem('reportToken')
             reports.currentData = [];
         },
-        clearToken: (reports, action) => {
+        clearState: (reports, action) => {
             localStorage.removeItem('reportToken');
             reports.reportToken = null;
             reports.currentData = [];
             reports.accounts = [];
         },
-        resetReports: (reports, action) => {
+        clearData: (reports, action) => {
             reports.currentData = [];
         },
         removeReportToken: (reports, action) => {
@@ -58,8 +58,8 @@ const {
     populateData,
     setTokenSuccess,
     setTokenFailed,
-    clearToken,
-    resetReports,
+    clearState,
+    clearData,
     setAccounts,
     genericError
 } = slice.actions;
@@ -104,5 +104,5 @@ export const loadData = (token) => (dispatch, getState) => {
     // CHECK WHETHER 1.5/2 HOURS HAVE PASSED HERE
 }
 
-export const clearReportData = resetReports;
-export const tokenUndefined = clearToken;
+export const clearReportState = clearState;
+export const clearReportData = clearData;
