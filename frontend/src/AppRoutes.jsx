@@ -5,6 +5,7 @@ import Profile from './components/accounts/Profile'
 import Features from './components/common/Features'
 import Filing from './components/features/filings/Filing'
 import Reports from './components/features/reports/Reports'
+import Journal from './components/features/journal/Journal'
 
 export default function AppRoutes() {
     return (
@@ -16,6 +17,7 @@ export default function AppRoutes() {
                 <Route path="/features" element={<Features />} />
                 <Route path="/filings" element={<Filing />} />
                 <Route path="/reports" element={<Reports />} />
+                <Route path="/journal" element={<Journal />} />
             </Routes>
         </>
     )

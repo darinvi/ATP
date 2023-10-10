@@ -33,7 +33,7 @@ export default function Headers() {
             <ul className="flex items-center">
                 <li
                     className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"
-                >Journal</li>
+                ><Link to="/journal">Journal</Link></li>
                 
                 <li 
                     className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"

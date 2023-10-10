@@ -45,7 +45,7 @@ const slice = createSlice({
             reports.accounts = action.payload.response
         },
         genericError: (reports, action) => {
-            if (action.payload.message === "Invalid or expired token.") {
+            if (action.payload.err === "Invalid or expired token.") {
                 localStorage.removeItem('reportToken');
                 reports.reportToken = null;
                 reports.currentData = [];
