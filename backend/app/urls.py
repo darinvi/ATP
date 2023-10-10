@@ -10,5 +10,4 @@ urlpatterns = [
     *router.urls,
     path('api/filings', views.get_filing_text),
     path('api/get-filings', views.get_filings),
-    path('api/call-propreports', views.call_propreports),
 ]

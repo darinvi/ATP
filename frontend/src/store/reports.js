@@ -33,7 +33,7 @@ const slice = createSlice({
             localStorage.removeItem('reportToken');
             reports.reportToken = null;
             reports.currentData = [];
-            reports.accounts = [];
+            reports.accounts = null;
         },
         clearData: (reports, action) => {
             reports.currentData = [];

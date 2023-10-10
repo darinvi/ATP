@@ -10,10 +10,10 @@ export default function Login(){
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth.authenticated)
 
+    
     function handleSubmitForm(e){
         e.preventDefault()
         dispatch(login(username, password))
-        // dispatch(loadUser())
     }
 
     return (

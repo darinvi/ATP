@@ -1,4 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth.models import User
+from .models import Mentors
 
-# admin.site.register(User)
+@admin.register(Mentors)
+class MentorsAdmin(admin.ModelAdmin):
+    list_display = ('user',)  # Fields to display in the list view
+    search_fields = ('user__username',)  # Fields to search in th

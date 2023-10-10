@@ -30,6 +30,7 @@ const slice = createSlice({
             auth.token = action.payload.token;
             auth.authenticated = true;
             auth.loading = false;
+            // auth.user = action.payload;
         },
         loginFail: (auth, action) => {
             localStorage.removeItem("token");

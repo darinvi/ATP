@@ -13,6 +13,10 @@ export default function Reports() {
     const dispatch = useDispatch();
     const [ showForm, setShowForm ] = useState(true)
 
+
+    // FIX: CLEAR REPORT DATA ONLY CLEARS THE FETCHED DATA SO AFTER LOG OUT AND THEN LOG IN OF NEW ACCOUNT THE OLD REPORT IS DISPLAYED.
+    // THIS WILL CAUSE A NEW ACCOUNT TO BE ABLE TO KEEP FETCHING REPORTS OF THE OLD USER
+
     useEffect(() => {
         // CLEAR DATA ONLY IF NO TOKEN OR 1.5H HAVE PASSED
         if ( !reportToken || moment().diff(moment(lastLogin), "minutes") > 90 ) {
