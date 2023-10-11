@@ -16,7 +16,7 @@ export default function Headers() {
     },[])
 
     return (
-        <header className="flex justify-between bg-cyan-800 text-2xl h-14 select-none">
+        <header className="fixed flex justify-between bg-cyan-800 text-2xl h-14 select-none w-full z-50 bg-opacity-95">
             
             <ul className="flex items-center">
                 

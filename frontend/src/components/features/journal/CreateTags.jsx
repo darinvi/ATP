@@ -47,12 +47,12 @@ export default function CreateTags() {
 
                     <button
                         type="submit"
-                        className="bg-green-500 px-4 h-8 transform hover:scale-110 disabled:bg-gray-500 disabled:scale-90"
+                        className="bg-green-500 px-4 h-8 transform hover:scale-110 disabled:bg-gray-500 disabled:scale-90 rounded"
                         disabled={!(name && description)}
                     >Create</button>
                 </form>
                 <button 
-                    className="bg-red-500 px-4 h-8 transform hover:scale-110"
+                    className="bg-red-500 px-4 h-8 transform hover:scale-110 rounded"
                     onClick={()=>setShowForm(false)}
                 >Close</button>
             </>
@@ -60,7 +60,7 @@ export default function CreateTags() {
         
             <button
                 onClick={() => setShowForm(true)}
-                className="bg-green-500 px-4 h-8 transform hover:scale-110"
+                className="bg-green-500 px-4 h-8 transform hover:scale-110 rounded"
             >Create Tag</button>
         }
     </div>

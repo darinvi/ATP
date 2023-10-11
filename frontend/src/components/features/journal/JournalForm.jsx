@@ -19,6 +19,8 @@ export default function JournalForm() {
     const tags = useSelector(state => state.entities.journal.tags);
     const dispatch = useDispatch();
 
+
+
     useEffect(() => {
         dispatch(loadTags());
     }, [])
@@ -56,6 +58,11 @@ export default function JournalForm() {
         setComments({ ...neweComments })
     }
 
+    function handleCommentEdit(e, k) {
+        setCurrentComment(comments[k])
+        handleCommentDelete(e, k)
+    }
+
 
     function createChoiceSelect(labelName, setVal) {
         return <div className="flex gap-2">
@@ -78,17 +85,28 @@ export default function JournalForm() {
     const listSelectedTags = selectedTags && Object.entries(selectedTags).map(([k, v]) => {
         return <p
             key={v}
-            className="bg-blue-300 px-4 tranform hover:scale-90 hover:bg-red-300"
+            className="bg-blue-300 px-4 tranform hover:scale-90 hover:bg-red-300 rounded"
             onClick={() => handleTagClick(v)}
         >{k}</p>
     })
 
+    function handleFormSubmit(e){
+        e.preventDefault()
+        const wtf = {
+            patience,
+            discipline,
+            preparation,
+            'risk_management': riskManagement,
+            'emotional_management': emotionalManagement,
+        }
+        console.log(wtf)
+    }
 
     // Form will have add comment, on add button click the comment will be saved to state. 
     // On form submit comments will be sent to th   e DailyJournalViewset and the perform_create will
     // Loop over the comments, in each iteration saving the comment and adding it to the comments field of the daily Journal
     return <>
-        <form className="flex flex-col items-center">
+        <form className="flex flex-col items-center" onSubmit={handleFormSubmit}>
             <div className="flex items-center h-12 gap-4">
                 <label htmlFor="tags-select">Select tags: </label>
 
@@ -107,13 +125,13 @@ export default function JournalForm() {
                 <button
                     onClick={handleTagAdd}
                     disabled={!currentTag}
-                    className="bg-green-300 px-4 h-8 transform hover:scale-110 disabled:scale-100 disabled:bg-gray-100"
+                    className="bg-green-300 px-4 h-8 transform hover:scale-110 disabled:scale-100 disabled:bg-gray-100 rounded"
                 >Add</button>
             </div>
 
             {listSelectedTags &&
                 <div className="flex items-center gap-4">
-                    <p>Tags:</p>
+                    <p className="text-2xl">Tags:</p>
                     {listSelectedTags}
                 </div>
             }
@@ -137,20 +155,24 @@ export default function JournalForm() {
 
                     <button
                         disabled={currentComment===""}
-                        className="bg-gray-200 transform hover:scale-105 px-4 hover:bg-gray-300 disabled:scale-100 disabled:bg-gray-100"
+                        className="bg-gray-200 transform hover:scale-105 px-4 hover:bg-gray-300 disabled:scale-100 disabled:bg-gray-100 rounded"
                         onClick={handleCommentCreate}
                     >Add Comment</button>
                 </div>
 
                 {comments != {} &&
-                    <div>
-                        <p>Comments:</p>
+                    <div className="flex flex-col gap-4 items-center">
+                        <p className="text-2xl">Comments:</p>
                         {Object.entries(comments).map(([k, v]) => {
                             return <div className="flex gap-4">
-                                <div>{v}</div>
+                                <p className="overflow-auto w-96">{v}</p>
+                                <button 
+                                    onClick={e => handleCommentEdit(e, k)}
+                                    className="rounded bg-yellow-200 px-2 text-xs hover:text-sm max-h-8"
+                                >edit</button>
                                 <button 
                                     onClick={e => handleCommentDelete(e, k)}
-                                    className="disabled: "
+                                    className="rounded bg-red-200 px-2 text-xs hover:text-sm max-h-8"
                                 >Delete</button>
                             </div>
                         })}
@@ -158,6 +180,11 @@ export default function JournalForm() {
                 }
 
             </div>
+            <button 
+                type="submit" 
+                className="mt-12 bg-blue-300 rounded px-4 transform hover:scale-105 rounded disabled:scale-100 disabled:bg-gray-100"
+                disabled={!(patience && discipline && preparation && riskManagement && emotionalManagement)}
+            >Submit Daily Journal</button>
         </form>
     </>
 
