@@ -27,7 +27,7 @@ export default function DeleteTags() {
                     >
                         {
                             tags.map(tag => {
-                                return <option value={tag.id}>{tag.name}</option>
+                                return <option key={tag.id} value={tag.id}>{tag.name}</option>
                             })
                         }
                     </select>
