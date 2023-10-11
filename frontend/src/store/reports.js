@@ -12,7 +12,7 @@ const slice = createSlice({
         reportToken: localStorage.getItem('reportToken'),
         currentData: [],
         filters: [],
-        lastLogin: null, // Log out token after 2hours and request new Or try to dispatch a log out on a specific error from server
+        lastLogin: 0, // Log out token after 2hours and request new Or try to dispatch a log out on a specific error from server
         accounts: null,
         reportRange: []
     },
@@ -30,7 +30,7 @@ const slice = createSlice({
             reports.currentData = [];
         },
         clearState: (reports, action) => {
-            localStorage.removeItem('reportToken');
+            // localStorage.removeItem('reportToken');
             reports.reportToken = null;
             reports.currentData = [];
             reports.accounts = null;

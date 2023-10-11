@@ -19,9 +19,12 @@ export default function Reports() {
 
     useEffect(() => {
         // CLEAR DATA ONLY IF NO TOKEN OR 1.5H HAVE PASSED
+        // Reload of page causes the loging to be required again. fix.
         if ( !reportToken || moment().diff(moment(lastLogin), "minutes") > 90 ) {
             dispatch(clearReportState())
         }
+        // the two calls happen async so at the time I call for loading accounts,
+        // I don't yet have a token and the call fails. Find a way to.handle.
         if (!accounts) {
             dispatch(loadAccounts(reportToken))
         }
