@@ -23,20 +23,22 @@ export default function Reports() {
         if ( !reportToken || moment().diff(moment(lastLogin), "minutes") > 90 ) {
             dispatch(clearReportState())
         }
-        // the two calls happen async so at the time I call for loading accounts,
-        // I don't yet have a token and the call fails. Find a way to.handle.
-        if (!accounts) {
-            dispatch(loadAccounts(reportToken))
-        }
 
         return () => {
             dispatch(clearReportData())
         }
     }, [])
+    
+    function handleAccounts() {
+        dispatch(loadAccounts(reportToken))
+    }
 
     return reportToken
         ?
-
+        <>
+        {/* SET ACCOUNTS ACTION DISPATCHED TOO MANY TIMES HAVE TO FIX*/}
+        {/* I HAVE TO ADD LOADING TO THE REDUCER AND ONLY DISPATCH IF NOT LOADING */}
+        {!accounts && handleAccounts()}
         
         <div className="flex flex-col mx-auto items-center">
             
@@ -50,10 +52,9 @@ export default function Reports() {
             }
             <h1>RENDER REPORTS</h1>
         </div>
-
+        </>
 
         :
-
 
         <ReportTokenForm />
 }

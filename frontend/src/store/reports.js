@@ -10,11 +10,11 @@ const slice = createSlice({
     name: 'reports',
     initialState: {
         reportToken: localStorage.getItem('reportToken'),
-        currentData: [],
+        currentData: null,
         filters: [],
         lastLogin: 0, // Log out token after 2hours and request new Or try to dispatch a log out on a specific error from server
         accounts: null,
-        reportRange: []
+        reportRange: [],
     },
     reducers:{
         populateData: (reports, action) => {
@@ -50,6 +50,9 @@ const slice = createSlice({
                 reports.reportToken = null;
                 reports.currentData = [];
             } 
+        },
+        setAccountPositions: (reports, action) => {
+            reports.currentData = action.payload.response;
         }
     }
 });
@@ -61,7 +64,8 @@ const {
     clearState,
     clearData,
     setAccounts,
-    genericError
+    genericError,
+    setAccountPositions
 } = slice.actions;
 
 export default slice.reducer;
@@ -100,8 +104,22 @@ export const loadAccounts = (token) => (dispatch) => {
     }))
 }
 
-export const loadData = (token) => (dispatch, getState) => {
-    // CHECK WHETHER 1.5/2 HOURS HAVE PASSED HERE
+export const loadAccountPositions = (token, start, end, id) => (dispatch) => {
+    dispatch(apiCallBegan({
+        method: 'POST',
+        headers: {},
+        url: URL,
+        data: {
+            "action":"positions",
+            "startDate": start,
+            "endDate": end,
+            "type": "all",
+            "page":1,
+            "accountId": id,
+            "token": token
+        },
+        onSuccess: setAccountPositions.type
+    }))
 }
 
 export const clearReportState = clearState;
