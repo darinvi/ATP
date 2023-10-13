@@ -23,7 +23,10 @@ const slice = createSlice({
         },
         clearError: (journal, action) => {
             // How do I indicate whether created succesfully?
-        }
+        },
+        journalCreated: (journal, action) => {
+            console.log('success')
+        },
     }
 });
 
@@ -32,6 +35,7 @@ const {
     tagAdded,
     tagDeleted,
     tagAddFailed,
+    journalCreated
 } = slice.actions;
 
 export default slice.reducer;
@@ -71,5 +75,15 @@ export const deleteTag = (id) => (dispatch) => {
         method: 'DELETE',
         // onSuccess: loadTags.type, // CAN'T UPDATE THE STATE ON DELETE
         // onError: tagAddFailed.type,
+    }))
+}
+
+export const submitDailyJournal = (journal) => (dispatch) => {
+    dispatch(apiCallBegan({
+        url: 'daily-journal-create/',
+        method: 'POST',
+        data: journal,
+        headers: {},
+        onSuccess: journalCreated.type
     }))
 }

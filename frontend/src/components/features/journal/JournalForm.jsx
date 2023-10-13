@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { loadTags } from "../../../store/journal"
+import journal, { loadTags, submitDailyJournal } from "../../../store/journal"
 
 export default function JournalForm() {
 
@@ -18,8 +18,6 @@ export default function JournalForm() {
 
     const tags = useSelector(state => state.entities.journal.tags);
     const dispatch = useDispatch();
-
-
 
     useEffect(() => {
         dispatch(loadTags());
@@ -92,19 +90,27 @@ export default function JournalForm() {
 
     function handleFormSubmit(e){
         e.preventDefault()
-        const wtf = {
+        const journal = {
             patience,
             discipline,
             preparation,
-            'risk_management': riskManagement,
-            'emotional_management': emotionalManagement,
+            risk_management: riskManagement,
+            emotional_management: emotionalManagement,
+            comments: Object.values(comments),
+            tags: Object.values(selectedTags).map(Number)
         }
-        console.log(wtf)
+        dispatch(submitDailyJournal(journal))
+
+        setPatience(null)
+        setDiscipline(null)
+        setPreparation(null)
+        setRiskManagement(null)
+        setEmotionalManagement(null)
+        setSelectedTags([])
+        setCurrentComment("")
     }
 
-    // Form will have add comment, on add button click the comment will be saved to state. 
-    // On form submit comments will be sent to th   e DailyJournalViewset and the perform_create will
-    // Loop over the comments, in each iteration saving the comment and adding it to the comments field of the daily Journal
+    // ToDo: fix choices to have a N/A option by default.
     return <>
         <form className="flex flex-col items-center" onSubmit={handleFormSubmit}>
             <div className="flex items-center h-12 gap-4">

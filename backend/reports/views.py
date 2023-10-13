@@ -16,7 +16,8 @@ REPORT_HEADERS = {"Content-Type": "application/x-www-form-URLencoded"}
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def test_user(request):
-    print(get_trainees_pk(request.user.pk))
+    # print(get_trainees_pk(request.user.pk))
+    print(request.user)
     return JsonResponse({'da':'ne'})
 
 

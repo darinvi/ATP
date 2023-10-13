@@ -11,5 +11,5 @@ admin.site.register(JournalComment)
 
 class DailyJournalAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'date')  
-    filter_horizontal = ('tags', 'comments')
+    filter_horizontal = ('tags',)
 admin.site.register(DailyJournal, DailyJournalAdmin)
