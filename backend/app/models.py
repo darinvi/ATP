@@ -8,3 +8,7 @@ class Filing(models.Model):
     formType = models.CharField(max_length=10)
     filedAt = models.CharField()
     linkToFilingDetails = models.CharField(max_length=100)
+
+class MarketHolidays(models.Model):
+    date = models.DateTimeField(blank=False, null=False)
+    weekday = models.BooleanField(blank=False, null=False)
