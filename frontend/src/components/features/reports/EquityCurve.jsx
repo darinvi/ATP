@@ -15,9 +15,7 @@ export default function EquityCurve(props){
         return labels
     }
 
-    function getMinMax(){
-        
-    }
+    const [min, max] = [Math.min(...props.data), Math.max(...props.data)]
 
     const data = {
         labels:getLabels(),
@@ -36,8 +34,8 @@ export default function EquityCurve(props){
         },
         scales: {
             y: {
-                min: -1000,
-                max: 50000
+                min: min - 0.1*min,
+                max: max + 0.1*max
             }
         }
     }
