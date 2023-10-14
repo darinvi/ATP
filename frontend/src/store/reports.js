@@ -32,7 +32,7 @@ const slice = createSlice({
         clearState: (reports, action) => {
             // localStorage.removeItem('reportToken');
             reports.reportToken = null;
-            reports.currentData = [];
+            reports.currentData = null;
             reports.accounts = null;
         },
         clearData: (reports, action) => {
