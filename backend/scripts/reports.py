@@ -39,18 +39,24 @@ def convert_matrix(lst, colnames):
     df_original = pd.DataFrame(lst, columns=colnames[2:])
     df = df_original[['Symbol', 'Unrealized Delta', 'Qty Traded', 'Realized', 'Comm', 'ECN Fee', 'Regulatory Fees']].copy()
     columns_to_convert = df.columns.difference(['Symbol'])
-    df[columns_to_convert] = df[columns_to_convert].map(lambda x: float(x))
-    df['Net'] = df['Realized'] - df['Comm'] - df['ECN Fee'] - df['Regulatory Fees']
-    df['Total'] = df['Net'] + df['Unrealized Delta']
+    df[columns_to_convert] = df[columns_to_convert].map(lambda x: round(float(x), 2))
+    df['net'] = (df['Realized'] - df['Comm'] - df['ECN Fee'] - df['Regulatory Fees']).round(2)
+    df['total'] = (df['net'] + df['Unrealized Delta']).round(2)
     new_column_names = {
-    'Symbol': 'ticker',
-    'Unrealized Delta': 'unrealized',
-    'Qty Traded': 'quantity',
-    'Realized': 'realized',
-    'Comm': 'commision',
-    'ECN Fee': 'ecn_fee',
-    'Regulatory Fees': 'reg_fee'
+        'Symbol': 'ticker',
+        'Unrealized Delta': 'unrealized',
+        'Qty Traded': 'quantity',
+        'Realized': 'realized',
+        'Comm': 'commision',
+        'ECN Fee': 'ecn_fee',
+        'Regulatory Fees': 'reg_fee'
     }
     df.rename(columns=new_column_names, inplace=True)
+    totals = df.drop(columns=['ticker']).sum().to_dict()
+    totals['ticker'] = 'TOTALS'
+    totals_df = pd.DataFrame(totals, index=[0])
+    df = pd.concat([df, totals_df], ignore_index=True)
+    columns_to_convert = df.columns.difference(['ticker'])
+    df[columns_to_convert] = df[columns_to_convert].map(lambda x: round(float(x), 2))
     json_data = df.set_index('ticker').to_dict(orient='index')
     return json_data

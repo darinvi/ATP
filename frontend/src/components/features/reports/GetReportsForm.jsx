@@ -115,7 +115,7 @@ export default function GetReportForm(props) {
 
             <button
                 type="submit"
-                className="disabled:text-sm disabled:text-white disabled:bg-gray-100 bg-gray-300 w-48"
+                className="disabled:text-sm disabled:text-white disabled:bg-gray-100 bg-gray-300 w-48 rounded"
             // disabled={}
             >Load Report</button>
             <h1 className="text-2cl">{start}</h1>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import GetReportsForm from './GetReportsForm';
 import { loadAccounts, clearReportData, clearReportState } from "../../../store/reports";
 import moment from 'moment/moment.js';
+import ReportData from "./ReportData";
 
 export default function Reports() {
 
@@ -47,10 +48,10 @@ export default function Reports() {
                 : 
                 <button 
                     onClick={()=> setShowForm(true)}
-                    className="shadow bg-gray-300 px-2 mt-12 mb-6"
+                    className="shadow bg-gray-300 px-2 mt-12 mb-6 rounded"
                 >Change Report Criteria</button>
             }
-            <h1>RENDER REPORTS</h1>
+            <ReportData />
         </div>
         </>
 
