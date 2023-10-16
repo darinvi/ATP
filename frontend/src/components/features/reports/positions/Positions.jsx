@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
 import PositionsSingleDay from "./PositionsSingleDay"
-import EquityCurve from "./EquityCurve"
+import EquityCurve from "../EquityCurve"
 
-export default function ReportData() {
+export default function Positions() {
     const currentData = useSelector(state => state.entities.reports.currentData)
 
     const total = currentData && Object.values(currentData).reduce((prev, curr) => {
@@ -21,6 +21,7 @@ export default function ReportData() {
             currentData 
             &&
             <div className="flex flex-col gap-8 overflow-y-scroll h-96">
+                <p>HAVE A FILTER FOR DAYS WHERE PFF / SPY / TLT GAP MORE THAN x. </p>
                 {renderReports}
             </div>
         }

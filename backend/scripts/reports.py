@@ -101,9 +101,9 @@ def row_as_object(row, date):
     date_open = datetime.strptime(date_open, "%m/%d/%y")
     date = datetime.strptime(date, "%m/%d/%Y")
     as_object = {
-        'date_open': date_open,
+        'date_open': date_open.strftime('%Y-%m-%d'),
         'time_open': datetime.strptime(time_open, '%H:%M:%S').strftime('%H:%M:%S'),
-        'date_closed': date,
+        'date_closed': date.strftime('%Y-%m-%d'),
         'time_closed': datetime.strptime(row[1], '%H:%M:%S').strftime('%H:%M:%S'),
         'intraday': True if date_open == date else False,
         'held': row[2],

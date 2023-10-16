@@ -15,11 +15,11 @@ const slice = createSlice({
         lastLogin: 0, // Log out token after 2hours and request new Or try to dispatch a log out on a specific error from server
         accounts: null,
         reportRange: [],
+        type: null,
+        loading: false,
+        tradeFilters: []
     },
     reducers:{
-        populateData: (reports, action) => {
-            reports.currentData = action.payload.reports
-        },  
         setTokenSuccess: (reports, action) => {
             localStorage.setItem('reportToken', action.payload.response);
             reports.reportToken = action.payload.response;
@@ -34,9 +34,11 @@ const slice = createSlice({
             reports.reportToken = null;
             reports.currentData = null;
             reports.accounts = null;
+            reports.loading = false;
         },
         clearData: (reports, action) => {
             reports.currentData = null;
+            reports.loading = false;
         },
         removeReportToken: (reports, action) => {
             
@@ -50,22 +52,31 @@ const slice = createSlice({
                 reports.reportToken = null;
                 reports.currentData = null;
             } 
+            reports.loading = false;
         },
-        setAccountPositions: (reports, action) => {
+        setCurrentData: (reports, action) => {
             reports.currentData = action.payload.response;
-        }
+            reports.loading = false;
+        },
+        setCurrentType: (reports, action) => {
+            reports.type = action.payload
+        },
+        setLoading:(reports, action) => {
+            reports.loading = true;
+        },
     }
 });
 
 const {
-    populateData,
     setTokenSuccess,
     setTokenFailed,
     clearState,
     clearData,
     setAccounts,
     genericError,
-    setAccountPositions
+    setCurrentData,
+    setCurrentType,
+    setLoading,
 } = slice.actions;
 
 export default slice.reducer;
@@ -104,7 +115,8 @@ export const loadAccounts = (token) => (dispatch) => {
     }))
 }
 
-export const loadAccountPositions = (token, start, end, id) => (dispatch) => {
+export const loadPositions = (token, start, end, id) => (dispatch) => {
+    dispatch(setLoading());
     dispatch(apiCallBegan({
         method: 'POST',
         headers: {},
@@ -118,9 +130,30 @@ export const loadAccountPositions = (token, start, end, id) => (dispatch) => {
             "accountId": id,
             "token": token
         },
-        onSuccess: setAccountPositions.type
+        onSuccess: setCurrentData.type
     }))
 }
 
+export const loadTrades = (token, start, end, id) => (dispatch) => {
+    dispatch(setLoading());
+    dispatch(apiCallBegan({
+        method: 'POST',
+        headers: {},
+        url: URL,
+        data: {
+            "action":"report",
+            "startDate": start,
+            "endDate": end,
+            "type": "trades",
+            "accountId": id,
+            "baseCurrency": "USD",
+            "token": token
+        }, 
+        onSuccess: setCurrentData.type
+    }))
+}
+
+
 export const clearReportState = clearState;
 export const clearReportData = clearData;
+export const setCalledType = setCurrentType;

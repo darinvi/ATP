@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { loadAccountPositions } from "../../../store/reports";
+import { loadPositions, loadTrades, setCalledType } from "../../../store/reports";
 
 export default function GetReportForm(props) {
 
@@ -18,10 +18,17 @@ export default function GetReportForm(props) {
 
     function handleSubmitForm(e) {
         e.preventDefault();
-        dispatch(loadAccountPositions(reportToken, start, end, accountId))
+        dispatch(setCalledType(type))
+        if (type == 'Totals') {
+            dispatch(loadPositions(reportToken, start, end, accountId))
+        } else if (type == 'Trades') {
+            dispatch(loadTrades(reportToken, start, end, accountId))
+        } else if (type == 'Summary') {
+            console.log('ToDo: dispatch Summary')
+        }
         props.disableForm(false);
     }
-
+    
     function validateDateInput(date) {
         // if (date == "") return true; 
         const [day, month, year] = date.split('/').map(Number);
@@ -57,10 +64,10 @@ export default function GetReportForm(props) {
                 setDatesValid({ ...datesValid, end: true })
             })()
             : setDatesValid({ ...datesValid, end: false })
-    }
+        }
 
-    // handle start year > end year and invalid inputs.
-    return (
+        // handle start year > end year and invalid inputs.
+        return (
         <form onSubmit={handleSubmitForm} className="flex flex-col mx-auto gap-4 mt-12 mb-6 items-center">
             <div className="flex gap-6" >
                 <div className="flex gap-2">
@@ -83,14 +90,14 @@ export default function GetReportForm(props) {
                         className={`shadow rounded ${!datesValid.end && 'bg-red-100'}`}
                         placeholder="dd/mm/yy"
                         onChange={handleEndInput}
-                    // value={start}
-                    ></input>
+                        // value={start}
+                        ></input>
                 </div>
             </div>
 
             <div className="flex gap-4">
                 <label htmlFor="account-select">Account:</label>
-                <select id="account-select" className="shadow" onChange={(e)=>setAccountId(e.target.value)}>
+                <select id="account-select" className="shadow" onChange={(e) => setAccountId(e.target.value)}>
                     {accounts && accounts.map(acc => {
                         return <option value={acc[0]}>{acc[1]} {acc[2]}</option>
                     })}
@@ -112,13 +119,20 @@ export default function GetReportForm(props) {
                 </select>
             </div>
 
-            <button
-                type="submit"
-                className="disabled:text-sm disabled:text-white disabled:bg-gray-100 bg-gray-300 w-48 rounded"
-            // disabled={}
-            >Load Report</button>
-            <h1 className="text-2cl">{start}</h1>
-            <h1 className="text-2cl">{end}</h1>
+            <div className="flex gap-4">
+                <button
+                    type="submit"
+                    className="disabled:text-sm disabled:text-white disabled:bg-gray-100 bg-green-300 w-48 rounded transform hover:scale-105"
+                    // disabled={}
+                    >Load Report</button>
+                <button
+                    className="bg-yellow-200 px-4 rounded transform hover:scale-105"
+                    onClick={(e)=>{
+                        e.preventDefault()
+                        props.disableForm(false);
+                    }}
+                >Hide Form</button>
+            </div>
         </form>
     )
 

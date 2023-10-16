@@ -5,5 +5,6 @@ export default function Features(){
         <li><Link to="/filings">Filings</Link></li>
         <li><Link>Tables</Link></li>
         <li><Link to="/reports">Reports</Link></li>
+        <li>Backtests</li>
     </ul>
 }
