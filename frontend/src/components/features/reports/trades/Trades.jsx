@@ -9,7 +9,7 @@ export default function Trades() {
     const trades = useSelector(state => state.entities.reports.currentData);
     const [tradeInfo, setTradeInfo] = useState("");
     const [showTags, setShowTags] = useState(false);
-
+    const [renderCheckbox, setRenderCheckbox] = useState({'duration': false, 'direction': false})
     const renderTrades = trades && trades.map(el => {
         return <SingleTrade trade={el} setInfo={setTradeInfo} />
     })

@@ -7,8 +7,8 @@ export default function SingleTrade(props) {
         onMouseEnter={()=>{props.setInfo({...trade})}}
     >
         <input type="checkbox"></input>
-        <p>Ticker: {trade.ticker}</p>
-        <p>Direction: {trade.type}</p>
-        <p>Net: {parseFloat(trade.net).toFixed(2)}</p>
+        <p>{trade.ticker}</p>
+        <p>{trade.type}</p>
+        <p>{parseFloat(trade.net).toFixed(2)}</p>
     </div >
 }
