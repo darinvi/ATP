@@ -1,7 +1,11 @@
 import { useState } from "react"
 import {applySelectedFilters } from "../../../../scripts/filterTrades";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setFiltered } from "../../../../store/reports";
 
+// FOR NOW REMOVING THE DISABLING OF A GIVEN VARIABLE IF USED.
+// HAVE TO ADD 'BETWEEN' EXCEPT FOR THE GREATER/LESSER.
+// HAVE TO FIX THE BEHAVIOUR ON VARIABLE ADD. STATES GET VERY CONFUSED.
 export default function ApplyFilters() {
     const [showFilters, setShowFilters] = useState(false);
     const [currentFilter, setCurrentFilter] = useState(null)
@@ -12,7 +16,9 @@ export default function ApplyFilters() {
     const [filterValue, setFilterValue] = useState(null);
     const [valueDirection, setValueDirection] = useState(null);
 
+
     const trades = useSelector(state => state.entities.reports.currentData)
+    const dispatch = useDispatch();
 
     const renderFilterKeys = filterKeys && filterKeys.map(e => {
         return <option value={e} key={e}>
@@ -25,7 +31,7 @@ export default function ApplyFilters() {
             className="flex gap-2 bg-cyan-300 px-2 rounded hover:bg-red-100 transform hover:scale-95"
             onClick={()=>{
                 const newFilters = filters.filter(el => el[0] != e[0])
-                setFilterKeys([...filterKeys, e[0]])
+                // setFilterKeys([...filterKeys, e[0]])
                 setFilters(newFilters)
             }}
         >
@@ -36,9 +42,12 @@ export default function ApplyFilters() {
     })
 
     // require filter value to be numeric
+    // Only remove the variables that make no sense
     function handleFilterAdd() {
-        const newKeys = filterKeys.filter(e => e != currentFilter)
-        setFilterKeys(newKeys)
+        // if (filtersNotToRepeat.contains(currentFilter)){
+        //     const newKeys = filterKeys.filter(e => e != currentFilter)
+        //     setFilterKeys(newKeys)
+        // }
         setFilters([...filters, [currentFilter, valueDirection, filterValue]])
         setFilterValue("")
         setCurrentFilter("")
@@ -104,6 +113,11 @@ export default function ApplyFilters() {
         </div>
     }
 
+    // The way this works is once filtered, the original data is lost so it would require a new request to obtain it.
+    function handleApplyButton() {
+        dispatch(setFiltered(applySelectedFilters(trades, filters)))
+    }
+    
     function inputFilterButtons() {
         return <>
             <button
@@ -117,6 +131,7 @@ export default function ApplyFilters() {
             >Hide</button>
             <button
                 className="bg-cyan-200 px-4 rounded transform hover:scale-105 h-8"
+                onClick={handleApplyButton}
             >Apply</button>
         </>
     }
@@ -145,7 +160,6 @@ export default function ApplyFilters() {
                     {selectDurationAndDirection()}
                 </div>
                 {inputFilterButtons()}
-                <button onClick={()=> console.log(applySelectedFilters(trades, filters), 'wtf')}>WTF</button>
             </div>
         }
     </div>

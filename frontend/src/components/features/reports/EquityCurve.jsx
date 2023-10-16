@@ -41,6 +41,6 @@ export default function EquityCurve(props){
     }
     return <div className="w-96 h-96">
         <Line data={data} options={options} className="h-96 w-96" />
-
+        <p>ADD SOME STATS HERE (WIN RATE AND STUFF)</p>
     </div>
 }

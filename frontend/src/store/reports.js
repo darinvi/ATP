@@ -64,6 +64,9 @@ const slice = createSlice({
         setLoading:(reports, action) => {
             reports.loading = true;
         },
+        setFilteredData: (reports, action) => {
+            reports.currentData = action.payload
+        }
     }
 });
 
@@ -77,6 +80,7 @@ const {
     setCurrentData,
     setCurrentType,
     setLoading,
+    setFilteredData
 } = slice.actions;
 
 export default slice.reducer;
@@ -157,3 +161,4 @@ export const loadTrades = (token, start, end, id) => (dispatch) => {
 export const clearReportState = clearState;
 export const clearReportData = clearData;
 export const setCalledType = setCurrentType;
+export const setFiltered = setFilteredData;
