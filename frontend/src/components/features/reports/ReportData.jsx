@@ -11,7 +11,6 @@ export default function ReportData() {
         return prev
     }, [0])
 
-
     const renderReports = currentData && Object.entries(currentData).map(e => {
         const [date, data] = e;
         return <PositionsSingleDay day={date} positions={data} />

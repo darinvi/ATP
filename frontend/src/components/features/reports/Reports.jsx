@@ -39,6 +39,7 @@ export default function Reports() {
         <>
         {/* SET ACCOUNTS ACTION DISPATCHED TOO MANY TIMES HAVE TO FIX*/}
         {/* I HAVE TO ADD LOADING TO THE REDUCER AND ONLY DISPATCH IF NOT LOADING */}
+        {/* Add go to journal on reports */}
         {!accounts && handleAccounts()}
         
         <div className="flex flex-col mx-auto items-center">

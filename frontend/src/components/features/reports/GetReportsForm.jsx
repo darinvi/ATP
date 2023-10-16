@@ -20,7 +20,6 @@ export default function GetReportForm(props) {
         e.preventDefault();
         dispatch(loadAccountPositions(reportToken, start, end, accountId))
         props.disableForm(false);
-
     }
 
     function validateDateInput(date) {

@@ -39,5 +39,8 @@ export default function EquityCurve(props){
             }
         }
     }
-    return <Line data={data} options={options} className="h-96 w-96" />
+    return <div className="w-96 h-96">
+        <Line data={data} options={options} className="h-96 w-96" />
+
+    </div>
 }

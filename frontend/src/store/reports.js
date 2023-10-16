@@ -27,7 +27,7 @@ const slice = createSlice({
         },
         setTokenFailed: (reports, action) => {
             localStorage.removeItem('reportToken')
-            reports.currentData = [];
+            reports.currentData = null;
         },
         clearState: (reports, action) => {
             // localStorage.removeItem('reportToken');
@@ -36,7 +36,7 @@ const slice = createSlice({
             reports.accounts = null;
         },
         clearData: (reports, action) => {
-            reports.currentData = [];
+            reports.currentData = null;
         },
         removeReportToken: (reports, action) => {
             
@@ -48,7 +48,7 @@ const slice = createSlice({
             if (action.payload.err === "Invalid or expired token.") {
                 localStorage.removeItem('reportToken');
                 reports.reportToken = null;
-                reports.currentData = [];
+                reports.currentData = null;
             } 
         },
         setAccountPositions: (reports, action) => {

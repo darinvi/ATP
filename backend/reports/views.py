@@ -27,7 +27,11 @@ def call_propreports(request):
     try:
         data=json.loads(request.body)
         response = requests.post(REPORT_URL, data=data, headers=REPORT_HEADERS)
-        res_text = prepare_response(data.get('action'), response.text)
+        action = data.get('action')
+        report_type = None
+        if action == 'report':
+            report_type = data.get('type')
+        res_text = prepare_response(action, response.text, report_type)
         if response.status_code != 200:
             return JsonResponse({'message': response.text}, status=response.status_code)
         else:
