@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { apiCallBegan } from "./api";
 
 const slice = createSlice({
     name: 'auth',
@@ -8,6 +9,8 @@ const slice = createSlice({
         authenticated: null,
         loading: false,
         user:null,
+        mentor: null,
+        trainees: [],
     },
     reducers:{
         userLoading: (auth, action) => {
@@ -45,6 +48,12 @@ const slice = createSlice({
             auth.user = null;
             auth.authenticated = false;
             auth.loading = false;
+            auth.mentor = null;
+            auth.trainees = [];
+        },
+        setMentorStatus: (auth, action) => {
+            auth.mentor = action.payload.mentor;
+            auth.trainees = action.payload.trainees;
         }
 
     }
@@ -56,7 +65,8 @@ const {
     authError,
     loginSuccess,
     loginFail,
-    userLoggedOut
+    userLoggedOut,
+    setMentorStatus
 } = slice.actions;
 
 export default slice.reducer;
@@ -135,4 +145,14 @@ export const logout = () => (dispatch, getState) => {
                 payload: res.data
             })
         })
+}
+
+export const loadMentorStatus = () => (dispatch, getState) => {
+    dispatch(apiCallBegan({
+        url: 'get-mentor-status',
+        method: 'GET',
+        data: {},
+        headers: {},
+        onSuccess: setMentorStatus.type
+    }))
 }

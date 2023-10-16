@@ -6,6 +6,8 @@ import { setFiltered } from "../../../../store/reports";
 // FOR NOW REMOVING THE DISABLING OF A GIVEN VARIABLE IF USED.
 // HAVE TO ADD 'BETWEEN' EXCEPT FOR THE GREATER/LESSER.
 // HAVE TO FIX THE BEHAVIOUR ON VARIABLE ADD. STATES GET VERY CONFUSED.
+// ADD SOME VISUALIZATION ORIGINAL DATA VS FILTERED.
+// ADD FILTERING BY TAG AS WELL.
 export default function ApplyFilters() {
     const [showFilters, setShowFilters] = useState(false);
     const [currentFilter, setCurrentFilter] = useState(null)

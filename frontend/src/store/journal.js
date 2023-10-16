@@ -6,6 +6,7 @@ const slice = createSlice({
     initialState: {
         tags: null,
         error: null,
+        currentJournals: null,
     },
     reducers: {
         setTags: (journal, action) => {
@@ -27,6 +28,9 @@ const slice = createSlice({
         journalCreated: (journal, action) => {
             console.log('success')
         },
+        setCurrentJournals: (journal, action) => {
+            journal.currentJournals = action.payload;
+        },
     }
 });
 
@@ -35,7 +39,8 @@ const {
     tagAdded,
     tagDeleted,
     tagAddFailed,
-    journalCreated
+    journalCreated,
+    setCurrentJournals
 } = slice.actions;
 
 export default slice.reducer;
@@ -85,5 +90,25 @@ export const submitDailyJournal = (journal) => (dispatch) => {
         data: journal,
         headers: {},
         onSuccess: journalCreated.type
+    }))
+}
+
+export const loadPersonalJournals = () => (dispatch) => {
+    dispatch(apiCallBegan({
+        url: 'get-user-journals',
+        method: 'GET',
+        data: {},
+        headers: {},
+        onSuccess: setCurrentJournals.type,
+    }))
+}
+
+export const loadTraineesJournals = () => (dispatch) => {
+    dispatch(apiCallBegan({
+        url: 'get-trainees-journals',
+        method: "GET",
+        data: {},
+        headers: {},
+        onSuccess: setCurrentJournals.type
     }))
 }

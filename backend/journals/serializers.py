@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import Tag, DailyJournal, JournalComment
+from django.contrib.auth.models import User
+
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,7 +25,7 @@ class DailyJournalSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         tags_data = validated_data.pop('tags', [])
-        print(tags_data)
+        # print(tags_data)
         user = validated_data.pop('user', None)
 
         daily_journal = DailyJournal.objects.create(user=user, **validated_data)

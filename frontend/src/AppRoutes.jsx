@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Login from './components/accounts/Login'
 import Home from './components/common/Home'
-import Profile from './components/accounts/Profile'
+import Profile from './components/features/profile/Profile'
 import Features from './components/common/Features'
 import Filing from './components/features/filings/Filing'
 import Reports from './components/features/reports/Reports'

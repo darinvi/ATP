@@ -11,4 +11,5 @@ router.register('api/daily-journal-create', DailyJournalViewSet, 'daily-journal-
 urlpatterns = [
     *router.urls,
     path('api/get-user-journals', views.get_user_journals),
+    path('api/get-trainees-journals', views.get_trainees_journals),
 ]
