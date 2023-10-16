@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {applySelectedFilters } from "../../../../scripts/filterTrades";
+import { useSelector } from "react-redux";
 
 export default function ApplyFilters() {
     const [showFilters, setShowFilters] = useState(false);
@@ -10,6 +11,8 @@ export default function ApplyFilters() {
     const [filterKeys, setFilterKeys] = useState(['net', 'net (absolute)','gross', 'gross (absolute)','time opened', 'time closed', 'duration held', 'entry price', 'quantity'])
     const [filterValue, setFilterValue] = useState(null);
     const [valueDirection, setValueDirection] = useState(null);
+
+    const trades = useSelector(state => state.entities.reports.currentData)
 
     const renderFilterKeys = filterKeys && filterKeys.map(e => {
         return <option value={e} key={e}>
@@ -57,8 +60,8 @@ export default function ApplyFilters() {
                 onChange={(e) => setValueDirection(e.target.value)}
             >
                 <option disabled={valueDirection}> gt / ls ?</option>
-                <option>Greater</option>
-                <option>Lesser</option>
+                <option value="Greater">Greater</option>
+                <option value="Lesser">Lesser</option>
             </select>
             <p>than</p>
             <input
@@ -142,6 +145,7 @@ export default function ApplyFilters() {
                     {selectDurationAndDirection()}
                 </div>
                 {inputFilterButtons()}
+                <button onClick={()=> console.log(applySelectedFilters(trades, filters), 'wtf')}>WTF</button>
             </div>
         }
     </div>

@@ -33,7 +33,9 @@ export function applySelectedFilters(data, selectedFilters) {
     let filteredData = [...data];
 
     selectedFilters.forEach(filter => {
-        const { filterVariable, comparisonType, filterValue } = filter;
+        const [ filterVariable, comparisonType, filterValue ] = filter;
+        console.log(filter)
+        console.log(filterVariable, comparisonType, filterValue)
         filteredData = applyFilters(filteredData, filterVariable, comparisonType, filterValue);
     });
 
