@@ -64,3 +64,22 @@ def get_trainees_tags(request):
             return JsonResponse({"tags": serialized_data})
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
+        
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def add_comment_existing_journal(request):
+    try:
+        data = json.loads(request.body)
+        comment = data.get('comment')
+        id = data.get('id')
+        user = request.user
+
+        journal = DailyJournal.objects.get(pk=id)
+        comment = JournalComment.objects.create(user=user, comment=comment, journal=journal)
+
+        comment_serializer = JournalCommentSerializer(comment)
+        return JsonResponse({"comment": comment_serializer.data})        
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)

@@ -15,6 +15,9 @@ const slice = createSlice({
         setTags: (journal, action) => {
             journal.tags = action.payload
         },
+        clearTags: (journal, action) => {
+            journal.tags = null;
+        },
         tagAdded: (journal, action) => {
             journal.tags.push(action.payload)
         },
@@ -57,12 +60,14 @@ const {
     setCurrentJournals,
     setLoading,
     clearJournals,
-    setRequested
+    setRequested,
+    clearTags
 } = slice.actions;
 
 export default slice.reducer;
 
 export const clearJournalList = clearJournals;
+export const clearTagList = clearTags;
 
 const URL = 'tags/'
 
@@ -143,5 +148,15 @@ export const loadTraineesTags = (trainees_pks) => (dispatch) => {
         data: {'trainees' : trainees_pks},
         headers: {},
         onSuccess: setTags.type
+    }))
+}
+
+export const addCommentToTraineeJournal = (comment, id) => (dispatch) => {
+    dispatch(apiCallBegan({
+        url: 'add-comment-existing-journal',
+        method: 'POST',
+        data: {comment, id},
+        headers: {},
+        // onSuccess
     }))
 }

@@ -13,6 +13,7 @@ export default function SelectJournalOwner(props) {
         if (journalOwner === 'Personal') {
             dispatch(loadPersonalJournals());
             props.setLastCallType('Personal');
+            // load personal tags
         } else if (journalOwner === 'Trainees') {
             dispatch(loadTraineesJournals());
             props.setLastCallType('Trainees');

@@ -13,4 +13,5 @@ urlpatterns = [
     path('api/get-user-journals', views.get_user_journals),
     path('api/get-trainees-journals', views.get_trainees_journals),
     path('api/get-trainees-tags', views.get_trainees_tags),
+    path('api/add-comment-existing-journal', views.add_comment_existing_journal),
 ]
