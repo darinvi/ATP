@@ -5,8 +5,8 @@ const slice = createSlice({
     name: 'journal',
     initialState: {
         tags: null,
+        traineeTags: null,
         error: null,
-        currentJournals: null,
         currentJournals: null,
         loading: false,
         requested: false,
@@ -15,7 +15,7 @@ const slice = createSlice({
         setTags: (journal, action) => {
             journal.tags = action.payload
         },
-        clearTags: (journal, action) => {
+        clearTraineeTags: (journal, action) => {
             journal.tags = null;
         },
         tagAdded: (journal, action) => {
@@ -48,6 +48,9 @@ const slice = createSlice({
         setRequested: (journal, action) => {
             journal.requested = true;
         },
+        setTraineeTags: (journal, action) => {
+            journal.traineeTags = action.payload
+        },
     }
 });
 
@@ -61,13 +64,14 @@ const {
     setLoading,
     clearJournals,
     setRequested,
-    clearTags
+    clearTraineeTags,
+    setTraineeTags
 } = slice.actions;
 
 export default slice.reducer;
 
 export const clearJournalList = clearJournals;
-export const clearTagList = clearTags;
+export const clearTraineeTagList = clearTraineeTags;
 
 const URL = 'tags/'
 
@@ -147,7 +151,7 @@ export const loadTraineesTags = (trainees_pks) => (dispatch) => {
         method: 'POST',
         data: {'trainees' : trainees_pks},
         headers: {},
-        onSuccess: setTags.type
+        onSuccess: setTraineeTags.type
     }))
 }
 

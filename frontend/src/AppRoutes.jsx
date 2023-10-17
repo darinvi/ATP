@@ -8,6 +8,7 @@ import Reports from './components/features/reports/Reports'
 import Journal from './components/features/journal/Journal'
 import Backtests from './components/features/backtests/Backtests'
 import Tables from './components/features/tables/Tables'
+import MentorPanel from './components/features/mentor/MentorPanel'
 
 export default function AppRoutes() {
     return (
@@ -22,6 +23,7 @@ export default function AppRoutes() {
                 <Route path="/journal" element={<Journal />} />
                 <Route path="/backtests" element={<Backtests />} />
                 <Route path="/tables" element={<Tables />} />
+                <Route path="/mentor-panel" element={<MentorPanel />} />
             </Routes>
         </>
     )

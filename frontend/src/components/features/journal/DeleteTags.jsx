@@ -26,7 +26,7 @@ export default function DeleteTags() {
                         className="shadow bg-gray-100"
                     >
                         {
-                            tags.map(tag => {
+                            tags && tags.map(tag => {
                                 return <option key={tag.id} value={tag.id}>{tag.name}</option>
                             })
                         }

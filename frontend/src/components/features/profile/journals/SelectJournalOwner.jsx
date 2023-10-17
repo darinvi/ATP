@@ -31,18 +31,18 @@ export default function SelectJournalOwner(props) {
                 <option value="Trainees">Trainees</option>
             </select>}
             <button
-                className="bg-green-300 px-4 rounded transform hover:scale-105"
+                className="bg-green-200 px-4 rounded transform hover:scale-105 hover:bg-green-300"
                 onClick={handleJournalClick}
             >Get Journals</button>
             {props.hasJournals
                 &&
                 <>
                     <button 
-                        className="shadow bg-red-200 rounded px-2 transform hover:scale-105"
+                        className="shadow bg-red-200 rounded px-2 transform hover:scale-105 hover:bg-red-300"
                         onClick={()=>{dispatch(clearJournalList())}}
                     >Clear</button>
                     <button 
-                        className="shadow bg-yellow-100 rounded px-2 transform hover:scale-105"
+                        className="shadow bg-yellow-100 rounded px-2 transform hover:scale-105 hover:bg-yellow-200"
                     >Sync P&L</button>
                 </>
             }

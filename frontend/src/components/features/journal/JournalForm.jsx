@@ -113,6 +113,7 @@ export default function JournalForm() {
     // ToDo: fix choices to have a N/A option by default.
     // ToDo: check whether daily report already created.
     return <>
+        <h1>SUBMITING DOES NOT RESET THE FORM</h1>
         <form className="flex flex-col items-center" onSubmit={handleFormSubmit}>
             <div className="flex items-center h-12 gap-4">
                 <label htmlFor="tags-select">Select tags: </label>
@@ -162,7 +163,7 @@ export default function JournalForm() {
 
                     <button
                         disabled={currentComment===""}
-                        className="bg-gray-200 transform hover:scale-105 px-4 hover:bg-gray-300 disabled:scale-100 disabled:bg-gray-100 rounded"
+                        className="bg-green-300 transform hover:scale-105 px-4 hover:bg-gray-300 disabled:scale-100 disabled:bg-gray-100 rounded"
                         onClick={handleCommentCreate}
                     >Add Comment</button>
                 </div>

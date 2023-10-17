@@ -8,6 +8,7 @@ export default function Headers() {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user)
+    const isMentor = useSelector(state => state.auth.mentor)
 
     useEffect(()=>{
         if (!user) {
@@ -31,9 +32,12 @@ export default function Headers() {
             </ul>
 
             <ul className="flex items-center">
-                <li
-                    className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"
-                ><Link to="/journal">Journal</Link></li>
+                {/* this should also be protected inside the component */}
+                { isMentor && <>
+                    <li
+                        className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"
+                    ><Link to="/mentor-panel">Mentor Panel</Link></li>
+                </> }
                 
                 <li 
                     className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"
