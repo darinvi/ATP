@@ -6,6 +6,8 @@ import Features from './components/common/Features'
 import Filing from './components/features/filings/Filing'
 import Reports from './components/features/reports/Reports'
 import Journal from './components/features/journal/Journal'
+import Backtests from './components/features/backtests/Backtests'
+import Tables from './components/features/tables/Tables'
 
 export default function AppRoutes() {
     return (
@@ -18,6 +20,8 @@ export default function AppRoutes() {
                 <Route path="/filings" element={<Filing />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/journal" element={<Journal />} />
+                <Route path="/backtests" element={<Backtests />} />
+                <Route path="/tables" element={<Tables />} />
             </Routes>
         </>
     )

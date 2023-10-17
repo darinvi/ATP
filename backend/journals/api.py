@@ -15,6 +15,15 @@ class TagViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+class TagTraineesViewSet(viewsets.ModelViewSet):
+    serializer_class = TagSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user_ids_array = [1, 2, 3]  # Example array of user IDs
+        queryset = Tag.objects.filter(user__id__in=user_ids_array)
+        return queryset
+
 
 class JournalCommentViewSet(viewsets.ModelViewSet):
     serializer_class = JournalCommentSerializer

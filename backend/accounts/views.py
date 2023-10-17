@@ -11,7 +11,8 @@ from .models import Mentors
 def get_mentor_status(request):
     try:
         mentor = Mentors.objects.get(user=request.user)
-        trainee_pks = [trainee.pk for trainee in mentor.trainees.all()]
+        trainee_pks = [{'id':trainee.pk, 'first_name':trainee.first_name,'last_name':trainee.last_name,'username':trainee.username}\
+                        for trainee in mentor.trainees.all()]
         return JsonResponse({'trainees':trainee_pks, 'mentor': True})
     except Mentors.DoesNotExist:
         return JsonResponse({'trainees':[], 'mentor':False})

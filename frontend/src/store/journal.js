@@ -7,6 +7,9 @@ const slice = createSlice({
         tags: null,
         error: null,
         currentJournals: null,
+        currentJournals: null,
+        loading: false,
+        requested: false,
     },
     reducers: {
         setTags: (journal, action) => {
@@ -29,7 +32,18 @@ const slice = createSlice({
             console.log('success')
         },
         setCurrentJournals: (journal, action) => {
-            journal.currentJournals = action.payload;
+            journal.currentJournals = action.payload.journals;
+            journal.loading = false;
+            journal.requested = false;
+        },
+        setLoading:(journal, action) => {
+            journal.loading = true;
+        },
+        clearJournals: (journal, action) => {
+            journal.currentJournals = null;
+        },
+        setRequested: (journal, action) => {
+            journal.requested = true;
         },
     }
 });
@@ -40,10 +54,15 @@ const {
     tagDeleted,
     tagAddFailed,
     journalCreated,
-    setCurrentJournals
+    setCurrentJournals,
+    setLoading,
+    clearJournals,
+    setRequested
 } = slice.actions;
 
 export default slice.reducer;
+
+export const clearJournalList = clearJournals;
 
 const URL = 'tags/'
 
@@ -94,6 +113,8 @@ export const submitDailyJournal = (journal) => (dispatch) => {
 }
 
 export const loadPersonalJournals = () => (dispatch) => {
+    dispatch(setLoading());
+    dispatch(setRequested());
     dispatch(apiCallBegan({
         url: 'get-user-journals',
         method: 'GET',
@@ -104,11 +125,23 @@ export const loadPersonalJournals = () => (dispatch) => {
 }
 
 export const loadTraineesJournals = () => (dispatch) => {
+    dispatch(setLoading());
+    dispatch(setRequested());
     dispatch(apiCallBegan({
         url: 'get-trainees-journals',
         method: "GET",
         data: {},
         headers: {},
         onSuccess: setCurrentJournals.type
+    }))
+}
+
+export const loadTraineesTags = (trainees_pks) => (dispatch) => {
+    dispatch(apiCallBegan({
+        url:'get-trainees-tags',
+        method: 'POST',
+        data: {'trainees' : trainees_pks},
+        headers: {},
+        onSuccess: setTags.type
     }))
 }

@@ -8,6 +8,7 @@ import requests, json
 from .models import DailyJournal, JournalComment
 from .serializers import DailyJournalSerializer, JournalCommentSerializer
 from accounts.models import Mentors
+from .models import Tag
 
 # Many=True important
 @api_view(['GET'])
@@ -50,3 +51,16 @@ def get_trainees_journals(request):
 
     except Mentors.DoesNotExist:
         return JsonResponse({'response': 'Not a mentor!'})
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_trainees_tags(request):
+        try:
+            data = json.loads(request.body)
+            trainees = data.get('trainees', [])
+            queryset = Tag.objects.filter(user__id__in=trainees)
+            serialized_data = [{"id": tag.id, "name": tag.name} for tag in queryset]
+            return JsonResponse({"tags": serialized_data})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)

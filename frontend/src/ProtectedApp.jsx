@@ -16,7 +16,6 @@ export default function ProtectedApp() {
                 ?
                 <>
                     { isMentor === null && (()=>{
-                        console.log('dawe')
                         dispatch(loadMentorStatus())
                     })() }
                     <Headers />
