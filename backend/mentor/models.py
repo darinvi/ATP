@@ -7,6 +7,7 @@ class TraineeQuestion(models.Model):
     question_type = models.CharField(max_length=30, default='general')
     question = models.TextField(blank=False, null=False)
     anonymous = models.BooleanField(default=False)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
 class MentorAnswer(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)

@@ -18,6 +18,7 @@ export default function Profile() {
     return <div className="flex justify-around w-full my-8">
         <ListJournals />
         <AskMentor />
+        <button>Share Trade Idea</button>
         <div className="flex flex-col justify-between w-64 text-sm h-96">
             <h1>Get CEFs and show NAV change</h1>
             <h1 className="font-bold">A group chat where anyone can post a comment, an others in the mentor group can respond</h1>

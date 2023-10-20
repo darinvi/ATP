@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux";
+import { askQuestion } from "../../../../store/mentor";
 
 export default function QuestionForm(props) {
 
@@ -7,8 +9,12 @@ export default function QuestionForm(props) {
     const [question, setQuestion] = useState("");
     const [anonymous, setAnonymous] = useState(false);
 
+    const dispatch = useDispatch();
+
     function handleQuestionAsk(e){
         e.preventDefault()
+        dispatch(askQuestion({description, question, anonymous, question_type: type}))
+        props.setShowForm(false)
     }
 
     return <form className="flex flex-col gap-6">
