@@ -9,5 +9,6 @@ router.register('api/ask-mentor', api.TraineeQuestionViewSet, 'ask-mentor')
 
 urlpatterns = [
     *router.urls,
-    path('api/get-unanswered-questions', views.get_unanswered_questions)
+    path('api/get-unanswered-questions', views.get_unanswered_questions),
+    path('api/create-mentor-answer', views.add_mentor_answer)
 ]

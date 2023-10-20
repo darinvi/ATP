@@ -11,9 +11,9 @@ export default function QuestionForm(props) {
 
     const dispatch = useDispatch();
 
-    function handleQuestionAsk(e){
+    function handleQuestionAsk(e) {
         e.preventDefault()
-        dispatch(askQuestion({description, question, anonymous, question_type: type}))
+        dispatch(askQuestion({ description, question, anonymous, question_type: type }))
         props.setShowForm(false)
     }
 
@@ -33,7 +33,7 @@ export default function QuestionForm(props) {
                 className="shadow rounded border border-gray-100 hover:bg-gray-200"
                 id="type"
                 onChange={e => setType(e.target.value)}
-                >
+            >
                 <option value='general'>general</option>
                 <option value='risk management'>risk management</option>
                 <option value='emotional management'>emotional management</option>
@@ -53,11 +53,11 @@ export default function QuestionForm(props) {
         <div className="flex justify-around">
             <div className="flex gap-2">
                 <label htmlFor="anonymous">Anonymous?</label>
-                <input 
-                    type="checkbox" 
-                    id="anonymous" 
+                <input
+                    type="checkbox"
+                    id="anonymous"
                     checked={anonymous}
-                    onClick={()=>setAnonymous(prev => !prev)}
+                    onChange={() => setAnonymous(prev => !prev)}
                 />
             </div>
             <button
@@ -67,7 +67,7 @@ export default function QuestionForm(props) {
             >Ask</button>
             <button
                 className="bg-red-200 px-2 rounded transform hover:scale-105 hover:bg-red-300"
-                onClick={ e => {
+                onClick={e => {
                     e.preventDefault()
                     props.setShowForm(false);
                 }}

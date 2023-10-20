@@ -173,7 +173,7 @@ export default function JournalForm() {
                         <p className="text-2xl">Comments:</p>
                         {Object.entries(comments).map(([k, v]) => {
                             return <div className="flex gap-4">
-                                <p className="overflow-auto w-96">{v}</p>
+                                <p className="break-words w-96">{v}</p>
                                 <button 
                                     onClick={e => handleCommentEdit(e, k)}
                                     className="rounded bg-yellow-200 px-2 text-xs hover:text-sm max-h-8"

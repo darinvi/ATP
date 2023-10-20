@@ -8,6 +8,7 @@ class TraineeQuestion(models.Model):
     question = models.TextField(blank=False, null=False)
     anonymous = models.BooleanField(default=False)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    answered_by = models.ManyToManyField(to=User, related_name="answered_by", null=True, blank=True)
 
 class MentorAnswer(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)

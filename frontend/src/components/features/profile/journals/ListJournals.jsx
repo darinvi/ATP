@@ -45,6 +45,8 @@ export default function ListJournals() {
         <p>Comments to unhide</p>
         {/* <p className="w-48">If no date range specified, show the most recent journal (for each trainee if "TraineesO)</p>
         <p className="w-48">If I click Get after a refresh without getting trainees first, I get don't get the journals rendered because conditional on trainees tags. FIX PERSONAL TAGS ON PERSONAL QUERY</p> */}
+        {/* <p>What will happen when a trainee opens "Personal" and there are comments by the mentor? Should make sure colors consistent</p> */}
+        {/* Create a reducer that returns a journal by id. On click dispatch and reassing the data inside the single journal component */}
         <SelectJournalOwner setLastCallType={setLastCallType} hasJournals={journals !== null} trainees={trainees_pks} />
         <div className="flex flex-col overflow-y-auto h-96">
             {renderJournals}

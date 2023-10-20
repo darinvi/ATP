@@ -22,6 +22,8 @@ export default function Positions() {
             &&
             <div className="flex flex-col gap-8 overflow-y-scroll h-96">
                 <p>HAVE A FILTER FOR DAYS WHERE PFF / SPY / TLT GAP MORE THAN x. </p>
+                <p>ON CLICK OF SPECIFIC DAY, ALLOW FOR ADDING COMMENTS TO THE JOURNAL FOR SAID DAY. </p>
+                <p>FILTER DAYS BASED ON TAGS / AVERAGE / SPECIFIC</p>
                 {renderReports}
             </div>
         }
