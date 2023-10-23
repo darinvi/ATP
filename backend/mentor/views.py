@@ -34,6 +34,9 @@ def add_mentor_answer(request):
             answer=request.data.get('answer'),
             question=question_instance
         )
+        if question_instance.answered_by.count() >= 2:
+            question_instance.answered = True
+            question_instance.save()
         return Response({'message': 'MentorAnswer created successfully', 'question_id': question_id}, status=status.HTTP_201_CREATED)
     except TraineeQuestion.DoesNotExist:
         return Response({'error': 'Invalid question ID'}, status=status.HTTP_400_BAD_REQUEST)

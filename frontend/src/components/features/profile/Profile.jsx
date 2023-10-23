@@ -19,7 +19,7 @@ export default function Profile() {
         <ListJournals />
         <AskMentor />
         <button>Share Trade Idea</button>
-        <div className="flex flex-col justify-between w-64 text-sm h-96">
+        {/* <div className="flex flex-col justify-between w-64 text-sm h-96">
             <h1>Get CEFs and show NAV change</h1>
             <h1 className="font-bold">A group chat where anyone can post a comment, an others in the mentor group can respond</h1>
             <h1>FIX going from trainees journals -> Journal page causes an error</h1>
@@ -28,6 +28,6 @@ export default function Profile() {
             <h1>Clear should also clear trainee tags</h1>
             <h1>Filter journals based on average / specific scalar / tag / dates </h1>
             <h1>Ask Mentor && Questions Active/Answered</h1>
-        </div>
+        </div> */}
     </div>
 }

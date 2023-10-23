@@ -35,7 +35,6 @@ const api = ({dispatch, getState}) => next => async action => {
         });
         // general
         dispatch(actions.apiCallSuccess(response.data));
-        
         // specific
         if (onSuccess) dispatch({ type: onSuccess, payload: response.data})
 

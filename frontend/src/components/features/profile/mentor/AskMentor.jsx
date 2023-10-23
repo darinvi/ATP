@@ -17,19 +17,15 @@ export default function AskMentor() {
         {
             !showForm
                 ?
-                <div className="flex gap-6">
+                <div className="flex flex-col gap-6 items-center">
                     <button
-                        className="bg-orange-200 px-2 rounded transform hover:scale-105 hover:bg-orange-300"
+                        className="bg-orange-200 px-2 rounded transform hover:scale-105 hover:bg-orange-300 w-36"
                         onClick={handleButtonClick}
                     >Ask Mentor</button>
-                    <button
-                        className="bg-cyan-200 px-2 rounded transform hover:scale-105 hover:bg-cyan-300"
-                        onClick={()=>setShowQuestions(true)}
-                    >My Questions</button>
+                    <ListQuestions />
                 </div>
                 :
                 <QuestionForm setShowForm={setShowForm} />
         }
-        { showQuestions && <ListQuestions setShowQuestions={setShowQuestions} /> }
     </div>
 }
