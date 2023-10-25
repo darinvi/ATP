@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'accounts',
     'reports',
     'journals',
-    'mentor'
+    'mentor',
+    'backtests',
 ]
 
 MIDDLEWARE = [

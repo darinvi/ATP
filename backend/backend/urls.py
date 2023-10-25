@@ -24,5 +24,6 @@ urlpatterns = [
     path('', include('reports.urls')),
     path('', include('journals.urls')),
     path('', include('mentor.urls')),
+    path('', include('backtests.urls')),
 ]
 

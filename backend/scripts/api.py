@@ -1,1 +1,0 @@
-MARKET_HOLIDAYS = 'https://api.polygon.io/v1/marketstatus/upcoming?apiKey=apglB3aoCuwXtiJfG5sLuGrLgNN1Dh5H'

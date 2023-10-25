@@ -12,3 +12,18 @@ class Filing(models.Model):
 class MarketHolidays(models.Model):
     date = models.DateTimeField(blank=False, null=False)
     weekday = models.BooleanField(blank=False, null=False)
+
+class Tickers(models.Model):
+    ticker = models.CharField(blank=False, unique=True, max_length=10)
+    name = models.TextField(blank=True, null=True) #not migrated
+    parent_ticker = models.CharField(blank=True, null=True, max_length=10)
+
+# one ticker can have many ex-dates as historical will also be saved- backtest
+class ExDates(models.Model):
+    ex_date = models.DateField(null=True)
+    ticker = models.ForeignKey(to=Tickers, on_delete=models.CASCADE)
+
+class TickerVariables(models.Model):
+    ticker = models.ForeignKey(to=Tickers, on_delete=models.CASCADE)
+    atr = models.FloatField(null=True)
+    avg_v = models.FloatField(null=True)
