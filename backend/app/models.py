@@ -17,6 +17,7 @@ class Tickers(models.Model):
     ticker = models.CharField(blank=False, unique=True, max_length=10)
     name = models.TextField(blank=True, null=True) #not migrated
     parent_ticker = models.CharField(blank=True, null=True, max_length=10)
+    dividend_amount = models.FloatField(blank=True, null=True)
 
 # one ticker can have many ex-dates as historical will also be saved- backtest
 class ExDates(models.Model):

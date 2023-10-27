@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/get-filings', views.get_filings),
     # path('api/populate-preferreds', views.populate_preferreds)
     # path('api/populate-historical-dividends', views.populate_historical_dividends)
+    # path('api/populate-dividend-amounts', views.populate_dividend_amounts)
 ]

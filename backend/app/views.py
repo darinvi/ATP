@@ -58,3 +58,15 @@ def get_filings(request):
 #         for d in current_data:
 #             date_object = datetime.strptime(d['ex_date'], '%Y-%m-%d').date()
 #             ExDates.objects.create(ex_date=date_object, ticker=ticker)
+
+# POPULATE ALL OF THEM
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def populate_dividend_amounts(request):
+#     ticker = Tickers.objects.create(
+#         ticker='CMSD', 
+#         name="CMS Energy Corporation 5.875% Junior Subordinated Notes due 2079",
+#         parent_ticker='CMS',
+#         dividend_amount=0.367188
+#     )
+#     return JsonResponse({'ticker': ticker.dividend_amount})
