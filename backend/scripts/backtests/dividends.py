@@ -15,13 +15,14 @@ def get_stats(ticker):
     candles = convert_to_proper_types(candles)
     diffs = get_differences(get_indexes_of_ex_dates(candles, get_ex_dates(ticker)), candles, get_dividend_amount(ticker)) 
     pos, neg, pct = get_positive_negative_percentage(diffs)
-    avg_pos, avg_neg = get_averages(diffs)    
+    avg_pos, avg_neg, avg = get_averages(diffs)    
     return {
         'positive': pos,
         'negative': neg,
         'percentage': pct,
         'avg_positive': avg_pos,
         'avg_negative': avg_neg,
+        'average': avg
     }
 
 # returns an array of ex-dates
@@ -58,7 +59,8 @@ def get_averages(diffs):
     positive, negative = get_positive_negative(diffs)
     avg_positive = sum([diff['delta'] for diff in positive]) / len(positive)
     avg_negative = sum([diff['delta'] for diff in negative]) / len(negative)
-    return avg_positive, avg_negative
+    avg = sum([diff['delta'] for diff in diffs]) / len(diffs)
+    return avg_positive, avg_negative, avg
 
 def get_positive_negative(diffs):
     return [diff for diff in diffs if diff['delta'] > 0], [diff for diff in diffs if diff['delta'] < 0]

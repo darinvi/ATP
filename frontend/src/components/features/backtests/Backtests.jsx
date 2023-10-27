@@ -1,5 +1,7 @@
+import DividendStats from "./dividends/DividendStats"
+
 export default function Backtests() {
-    return <div>
-        <h1>Backtests</h1>
+    return <div className=" flex flex-col m-4 items-center w-full">
+        <DividendStats />
     </div>
 }
