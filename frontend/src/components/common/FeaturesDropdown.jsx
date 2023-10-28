@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {AiOutlineCaretUp, AiOutlineCaretDown}from 'react-icons/ai';
+import {AiOutlineCaretRight, AiOutlineCaretDown}from 'react-icons/ai';
 import Features from "./Features";
 
 export default function FeaturesDropdown(){
@@ -10,16 +10,16 @@ export default function FeaturesDropdown(){
             <button onClick={()=>setIsOpen(prev => !prev)} className="w-full flex items-center justify-between rounded">
                 Features
                 {!isOpen ?  (
-                    <AiOutlineCaretUp className='h-8' />
+                    <AiOutlineCaretRight className='h-4' />
                     ) : (
-                    <AiOutlineCaretDown className='h-8' />
+                    <AiOutlineCaretDown className='h-4' />
                 )}
             </button>
             {isOpen && (
                 <div 
                     className="bg-cyan-800 absolute top-12 rounded flex flex-col gap-2 items-center z-50"
                     onMouseLeave={()=>setIsOpen(false)}
-                    onClick={()=>setIsOpen(false)}
+                    // onClick={()=>setIsOpen(false)}
                 >
                     <Features />
                 </div>
