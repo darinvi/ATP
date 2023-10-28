@@ -4,6 +4,9 @@ import { useEffect } from "react"
 import { loadUser } from "../../store/auth"
 import { useDispatch, useSelector } from "react-redux"
 
+// 
+import MarketStats from "./FeaturesDropdown"
+// 
 export default function Headers() {
 
     const dispatch = useDispatch();
@@ -17,17 +20,17 @@ export default function Headers() {
     },[])
 
     return (
-        <header className="flex justify-between bg-cyan-800 text-2xl h-14 select-none w-full">
+        <header className="flex justify-between bg-cyan-800 text-2xl h-14 select-none w-full tracking-wider">
             
             <ul className="flex items-center">
                 
                 <li
-                    className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"
+                    className="hover:bg-cyan-700 hover:text-white px-6 list-none h-full flex items-center"
                 ><Link to="/">Home</Link></li>
                 
                 <li
-                    className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"
-                ><Link to="/features">Features</Link></li>
+                    className="hover:bg-cyan-700 hover:text-white px-6 list-none h-full flex items-center"
+                ><MarketStats /></li>
 
             </ul>
 
@@ -35,12 +38,12 @@ export default function Headers() {
                 {/* this should also be protected inside the component */}
                 { isMentor && <>
                     <li
-                        className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"
+                        className="hover:bg-cyan-700 hover:text-white px-6 list-none h-full flex items-center"
                     ><Link to="/mentor-panel">Mentor Panel</Link></li>
                 </> }
                 
                 <li 
-                    className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center"
+                    className="hover:bg-cyan-700 hover:text-white px-6 list-none h-full flex items-center"
                 ><Link to="/profile">Profile</Link></li>
                 
                 <Logout />

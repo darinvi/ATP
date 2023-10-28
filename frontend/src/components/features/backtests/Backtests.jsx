@@ -1,7 +1,7 @@
 import DividendStats from "./dividends/DividendStats"
 import { useState } from "react"
 import SideNav from "./SideNav";
-import MarketStats from "./market/MarketStats";
+import MarketStats from "../../common/FeaturesDropdown";
 
 export default function Backtests() {
 
