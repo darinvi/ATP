@@ -10,19 +10,34 @@ def get_candles(ticker):
         candles = json.load(file)['Time Series (Daily)']
     return candles
 
+# some of the data calculated in the return, should separate when I add caching
 def get_stats(ticker):
     candles = pd.DataFrame([{'date':x[0], **x[1]} for x in get_candles(ticker).items()])
     candles = convert_to_proper_types(candles)
-    diffs = get_differences(get_indexes_of_ex_dates(candles, get_ex_dates(ticker)), candles, get_dividend_amount(ticker)) 
+    ex_dates = get_indexes_of_ex_dates(candles, get_ex_dates(ticker))
+    dividend_amount = get_dividend_amount(ticker)
+    diffs = get_differences(ex_dates, candles, dividend_amount) 
     pos, neg, pct = get_positive_negative_percentage(diffs)
-    avg_pos, avg_neg, avg = get_averages(diffs)    
+    avg_pos, avg_neg, avg = get_averages(diffs)   
+    open_pos, open_neg = get_positive_negative_open(candles, ex_dates)
+    avg_pos_open, avg_neg_open, avg_open = get_averages_open(open_pos, open_neg)
+    # Was lazy above, but have to separate the func a bit.
+    data_close = get_stats_close_against_flat(candles, ex_dates, dividend_amount)
     return {
         'positive': pos,
         'negative': neg,
         'percentage': pct,
         'avg_positive': avg_pos,
         'avg_negative': avg_neg,
-        'average': avg
+        'average': avg,
+        'open_pos': len(open_pos),
+        'open_neg': len(open_neg),
+        'avg_pos_open': avg_pos_open,
+        'avg_neg_open': avg_neg_open,
+        'avg_open': avg_open,
+        'percentage_open': len(open_pos) / ( len(open_pos) + len(open_neg) ) * 100,
+        'average_open': sum([*open_pos, *open_neg]) / len([*open_pos, *open_neg]),
+        **data_close
     }
 
 # returns an array of ex-dates
@@ -63,7 +78,7 @@ def get_averages(diffs):
     return avg_positive, avg_negative, avg
 
 def get_positive_negative(diffs):
-    return [diff for diff in diffs if diff['delta'] > 0], [diff for diff in diffs if diff['delta'] < 0]
+    return [diff for diff in diffs if diff['delta'] >= 0], [diff for diff in diffs if diff['delta'] < 0]
 
 def convert_to_proper_types(df):
     df['date'] = pd.to_datetime(df['date'])
@@ -74,3 +89,32 @@ def convert_to_proper_types(df):
 def get_dividend_amount(ticker):
     return Tickers.objects.get(ticker=ticker).dividend_amount
 
+def get_positive_negative_open(candles, indexes):
+    changes = list(map(lambda x: candles['4. close'].iloc[x] - candles['1. open'].iloc[x], indexes))
+    return [c for c in changes if c >= 0], [c for c in changes if c < 0] 
+
+def get_averages_open(pos, neg):
+    avg_pos = sum(pos) / len(pos)
+    avg_neg = sum(neg) / len(neg)
+    avg = sum([*pos, *neg]) / len([*pos, *neg])
+    return avg_pos, avg_neg, avg
+
+def get_stats_close_against_flat(df, indexes, amount):
+    def get_ex_date_changes():
+        all_changes = []
+        for index in indexes:
+            change = df['change'].iloc[index]
+            all_changes.append(change + amount)
+        return all_changes
+    df['change'] = df['4. close'] - df['4. close'].shift(-1)
+    changes = get_ex_date_changes()
+    green = [c for c in changes if c >= 0]
+    red = [c for c in changes if c < 0]
+    return {
+        'green_close': len(green),
+        'red_close': len(red),
+        'pct_green': len(green) / len(changes) * 100,
+        'avg_green': sum(green) / len(green),
+        'avg_red': sum(red) / len(red),
+        'avg_close': sum(changes) / len(changes)
+    }

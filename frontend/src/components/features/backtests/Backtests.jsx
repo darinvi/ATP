@@ -1,13 +1,15 @@
 import DividendStats from "./dividends/DividendStats"
 import { useState } from "react"
 import SideNav from "./SideNav";
+import MarketStats from "./market/MarketStats";
 
 export default function Backtests() {
 
     const [currentComponent, setCurrentComponent] = useState(null);
 
     const components = {
-        dividendStats: <DividendStats />
+        dividendStats: <DividendStats />,
+        marketStats: <MarketStats />
     }
 
     return <div className="flex m-4 w-full">

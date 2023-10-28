@@ -12,8 +12,8 @@ export default function DividendStats() {
         dispatch(getDividendStats(ticker))
     }
 
-    return <div>
-        <div className="flex gap-4">
+    return <div className="flex flex-col">
+        <div className="flex gap-4 mx-auto mb-4">
             <label>Ticker:</label>
             <input
                 type="text"
