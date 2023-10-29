@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux";
 import { clearTablesData } from "../../../store/tables";
-import TablePrefs from "./TablePrefs";
+import TablePrefs from "./prefs/TablePrefs";
 
 export default function Tables(){
 
@@ -10,14 +10,15 @@ export default function Tables(){
 
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-        return () => {
-            dispatch(clearTablesData());
-        }
-    },[])
+    // useEffect(()=>{
+    //     return () => {
+    //         dispatch(clearTablesData());
+    //     }
+    // },[])
+    
 
-    return <div className="flex flex-col w-full">
-        <div className="mx-auto">
+    return <div className="flex flex-col w-full mt-2">
+        <div className="flex gap-1 mx-auto">
             <button
                 onClick={()=>{
                     if (cefsOpen) {
@@ -25,7 +26,7 @@ export default function Tables(){
                     }
                     setPrefsOpen(true);
                 }}
-                className={`bg-gray-200 hover:bg-green-300 px-4 border border-black ${prefsOpen && "bg-green-200"}`}
+                className={`bg-gray-200 hover:bg-green-300 px-6 py-2 border border-black transform ${prefsOpen && "bg-green-200 scale-110 rounded"}`}
                 >Prefs</button>
             <button
                 onClick={()=>{
@@ -34,7 +35,7 @@ export default function Tables(){
                     }
                     setCefsOpen(true);
                 }}
-                className={`bg-gray-200 hover:bg-green-300 px-4 border border-black ${cefsOpen && "bg-green-200"}`}
+                className={`bg-gray-200 hover:bg-green-300 px-6 py-2 border border-black transform ${cefsOpen && "bg-green-200 scale-110 rounded"}`}
             >Cefs</button>
         </div>
         {prefsOpen && <TablePrefs />}

@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import requests, json
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from knox.auth import TokenAuthentication
@@ -50,14 +50,15 @@ def load_table_data(request):
             object['ticker'] = ticker_data[0]
             # RANDOM VALUES USED FOR DEVELOPMENT, SHOULD WORK ON POPULATING
             object['amount'] = random.uniform(0.25, 0.5)
-            object['ATR'] = random.uniform(0.25, 0.5)
-            object['AV'] = random.uniform(5000, 50000)
+            object['atr'] = random.uniform(0.25, 0.5)
+            object['avg_volume'] = random.uniform(5000, 50000)
             object['industry'] = 'SomeIndustry'
-            # 
+            
             all_data.append(object)
         except KeyError:
             pass
-    return JsonResponse({'data': all_data})
+    # return JsonResponse({'data': all_data})
+    return JsonResponse({'data':all_data})
 
 
 # Not populating the parents here, need another script to do that

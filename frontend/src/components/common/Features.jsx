@@ -10,10 +10,10 @@ export default function Features() {
 
     function backtestsSubNav() {
         return (
-            <div className="flex flex-col" onMouseLeave={()=>setIsOpen(false)}>
-                <div className="flex items-center">
+            <div className="flex flex-col">
+                <div className="flex items-center" onClick={() => setIsOpen(prev => !prev)}>
                     <p
-                        onClick={() => setIsOpen(prev => !prev)}
+                        className="cursor-pointer"  
                     >Backtests</p>
                     {!isOpen ?  (
                         <AiOutlineCaretRight className='h-4' />
@@ -22,7 +22,7 @@ export default function Features() {
                     )}
                 </div>
                 {isOpen && (
-                    <div className="flex flex-col items-center w-full">
+                    <div className="flex flex-col pl-2 w-full">
                         <div><Link 
                             to='/backtests/dividends'
                             className="text-sm hover:text-gray-500"
