@@ -10,7 +10,7 @@ export default function Features() {
 
     function backtestsSubNav() {
         return (
-            <div className="flex flex-col">
+            <div className="flex flex-col" onMouseLeave={()=>setIsOpen(false)}>
                 <div className="flex items-center">
                     <p
                         onClick={() => setIsOpen(prev => !prev)}
@@ -25,15 +25,15 @@ export default function Features() {
                     <div className="flex flex-col items-center w-full">
                         <div><Link 
                             to='/backtests/dividends'
-                            className="text-sm hover:bg-cyan-200 w-full"
+                            className="text-sm hover:text-gray-500"
                         >Dividends</Link></div>
                         <div><Link 
                             to='#'
-                            className="text-sm hover:bg-cyan-200 w-full"
-                            >Backtest1</Link></div>
+                            className="text-sm hover:text-gray-500"
+                            >Market Profile</Link></div>
                         <div><Link 
                             to='#'
-                            className="text-sm hover:bg-cyan-200 w-full"
+                            className="text-sm hover:text-gray-500"
                         >Backtest2</Link></div>
                     </div>
                 )}
@@ -43,10 +43,9 @@ export default function Features() {
 
     return <div>
         <div className={className}><Link to="/filings">Filings</Link></div>
+        <div className={className}>{backtestsSubNav()}</div>
         <div className={className}><Link to="/tables">Tables</Link></div>
         <div className={className}><Link to="/reports">Reports</Link></div>
-        {/* <div className={className}><Link to="/backtests">{backtestsSubNav()}</Link></div> */}
-        <div className={className}>{backtestsSubNav()}</div>
         <div className={className}><Link to="">PlayBooks</Link></div>
         <div className={className}><Link to="/journal">Journal</Link></div>
     </div>

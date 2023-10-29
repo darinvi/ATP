@@ -19,7 +19,6 @@ export default function FeaturesDropdown(){
                 <div 
                     className="bg-cyan-800 absolute top-12 rounded flex flex-col gap-2 items-center z-50"
                     onMouseLeave={()=>setIsOpen(false)}
-                    // onClick={()=>setIsOpen(false)}
                 >
                     <Features />
                 </div>

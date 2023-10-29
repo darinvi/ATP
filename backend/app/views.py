@@ -1,11 +1,15 @@
 from django.http import JsonResponse
 import requests, json
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from knox.auth import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .models import Filing, Tickers, ExDates
+from .models import Filing, Tickers, ExDates, TickerVariables
 from .serializers import FilingSerializer
 from datetime import datetime
-
+from django.db.models import Max
+# 
+import random
+# 
 # FILINGS
 
 @api_view(['POST'])
@@ -31,8 +35,32 @@ def get_filings(request):
     serialized_filings = serializer.data
     return JsonResponse({'filings': serialized_filings})
 
+# @api_view(['GET'])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+def load_table_data(request):
+    tickers = {ticker.pk:[ticker.ticker, ticker.dividend_amount] for ticker in Tickers.objects.all()}
+    ex_dates = ExDates.objects.values('ticker').annotate(max_ex_date=Max('ex_date')).distinct()
+    # ticker_vars = TickerVariables.objects.all()
+    all_data = []
+    for object in ex_dates:
+        try:
+            ticker_data = tickers[object['ticker']]
+            # object['amount'] = tickers[object['ticker']]['dividend_amount']
+            object['ticker'] = ticker_data[0]
+            # RANDOM VALUES USED FOR DEVELOPMENT, SHOULD WORK ON POPULATING
+            object['amount'] = random.uniform(0.25, 0.5)
+            object['ATR'] = random.uniform(0.25, 0.5)
+            object['AV'] = random.uniform(5000, 50000)
+            object['industry'] = 'SomeIndustry'
+            # 
+            all_data.append(object)
+        except KeyError:
+            pass
+    return JsonResponse({'data': all_data})
 
-# Not populating the parrents here, need another script to do that
+
+# Not populating the parents here, need another script to do that
 # Should add the scripts to prepare the data and chain it in the project.
 # @api_view(['GET'])
 # @permission_classes([IsAuthenticated])

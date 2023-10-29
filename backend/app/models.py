@@ -28,3 +28,4 @@ class TickerVariables(models.Model):
     ticker = models.ForeignKey(to=Tickers, on_delete=models.CASCADE)
     atr = models.FloatField(null=True)
     avg_v = models.FloatField(null=True)
+    # industry = models.CharField(null=True)

@@ -15,10 +15,10 @@ const slice = createSlice({
             mentor.personal = action.payload
         },
         removeAnsweredQuestion: (mentor, action) => {
-            mentor.unanswered = mentor.unanswered.filter( q => q.id != action.payload.question_id)
+            mentor.unanswered = mentor.unanswered.filter( q => q.id !== action.payload.question_id)
         },
         removePersonalQuestion: (mentor, action) => {
-            mentor.personal = mentor.personal.filter( q => q.id != action.payload.question_id)
+            mentor.personal = mentor.personal.filter( q => q.id !== action.payload.question_id)
         }
     }
 });
