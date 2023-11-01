@@ -64,8 +64,6 @@ const api = ({dispatch, getState}) => next => async action => {
             }
         })
     }
-    
-
 }
 
 export default api;

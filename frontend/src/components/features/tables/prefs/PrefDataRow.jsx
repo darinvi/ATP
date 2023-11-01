@@ -14,7 +14,7 @@ export default function PrefDataRow(props) {
     return (
         <>
             <tr 
-                className={`hover:bg-gray-200 ${isActive && "bg-gray-200" } border-b`}
+                className={`hover:bg-gray-200 ${isActive && "bg-gray-200" } border-b cursor-pointer`}
                 onClick={()=>setIsActive(prev => !prev)}
             >
                 <td className="text-center">{data.ticker}</td>

@@ -19,11 +19,12 @@ export default function WTF(){
     },[])
 
     return (
-        <>
-            <p>ADD FILTERS FOR AN OPEN HTML FILING</p>
-            <ListFilings />
-            <ExternalHTMLViewer />
-        </>
+        <div className="flex mt-4 w-full">
+            <div className="flex w-full justify-center gap-16">
+                <ListFilings />
+                <ExternalHTMLViewer />
+            </div>
+        </div>
     )
 
 

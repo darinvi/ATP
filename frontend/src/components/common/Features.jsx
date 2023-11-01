@@ -46,7 +46,7 @@ export default function Features() {
         <div className={className}>{backtestsSubNav()}</div>
         <div className={className}><Link to="/tables">Tables</Link></div>
         <div className={className}><Link to="/reports">Reports</Link></div>
-        <div className={className}><Link to="">PlayBooks</Link></div>
+        {/* <div className={className}><Link to="">PlayBooks</Link></div> */}
         <div className={className}><Link to="/journal">Journal</Link></div>
     </div>
 }
