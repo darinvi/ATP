@@ -14,4 +14,5 @@ urlpatterns = [
     path('api/get-trainees-journals', views.get_trainees_journals),
     path('api/get-trainees-tags', views.get_trainees_tags),
     path('api/add-comment-existing-journal', views.add_comment_existing_journal),
+    path('api/delete-tag/<int:id>', views.delete_tag),
 ]

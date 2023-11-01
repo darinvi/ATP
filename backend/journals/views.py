@@ -82,3 +82,12 @@ def add_comment_existing_journal(request):
 
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def delete_tag(request, id):
+    tag = Tag.objects.get(pk=id)
+    if tag.user == request.user:
+        tag.delete()
+        return JsonResponse({'id': id})

@@ -34,6 +34,7 @@ export default function FormTagSelect() {
                     dispatch(selectTag())
                 }}
             >Add Tag</button>
+            <p>FINISH ADDING TAGS & CALLING CREATE PLAYBOOK</p>
         </div>
     )
 }

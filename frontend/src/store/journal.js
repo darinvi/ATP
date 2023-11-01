@@ -22,7 +22,7 @@ const slice = createSlice({
             journal.tags.push(action.payload)
         },
         tagDeleted: (journal, action) => {
-            journal.tags = journal.tags.filter(tag => tag.id !== action.payload.id);
+            journal.tags = journal.tags.filter( tag => tag.id !== action.payload.id);
         },
         tagAddFailed: (journal, action) => {
             journal.error['errorTime'] = Date.now();
@@ -49,7 +49,7 @@ const slice = createSlice({
             journal.requested = true;
         },
         setTraineeTags: (journal, action) => {
-            journal.traineeTags = action.payload
+            journal.traineeTags = action.payload;
         },
     }
 });
@@ -102,13 +102,14 @@ export const createTag = (name, description) => (dispatch) => {
 
 export const deleteTag = (id) => (dispatch) => {
     dispatch(apiCallBegan({
-        url: `tags/${id}/`,
+        url: `delete-tag/${id}`,
         data: {},
         headers: {},
-        method: 'DELETE',
-        // onSuccess: loadTags.type, // CAN'T UPDATE THE STATE ON DELETE
+        method: 'GET',
+        onSuccess: tagDeleted.type,
         // onError: tagAddFailed.type,
     }))
+
 }
 
 export const submitDailyJournal = (journal) => (dispatch) => {

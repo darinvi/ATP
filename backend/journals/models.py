@@ -7,7 +7,6 @@ class Tag(models.Model):
     description = models.TextField()
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
-
 class DailyJournal(models.Model):
     CHOICES = (
             (1, '1'),
@@ -19,7 +18,7 @@ class DailyJournal(models.Model):
 
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(to=Tag, related_name='tags')
+    tags = models.ManyToManyField(to=Tag, related_name='tags', blank=True)
 
     patience = models.IntegerField(choices=CHOICES)
     discipline = models.IntegerField(choices=CHOICES)

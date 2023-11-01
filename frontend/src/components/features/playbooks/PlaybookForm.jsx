@@ -10,6 +10,8 @@ export default function PlaybookForm() {
     const [ticker, setTicker] = useState("")
     const [playName, setPlayName] = useState("")
 
+    const playbook = useSelector(state => state.entities.playbooks.playbook )
+
     const selectedFeatures = useSelector(state => state.entities.playbooks.selectedFeatures)
         .map(feature => <VariableInput feature={feature} />)
 
@@ -48,12 +50,12 @@ export default function PlaybookForm() {
             {selectedFeatures}
 
             <div className="flex gap-1">
-                <label>Private</label>
-                <input type="checkbox"></input>
+                <label htmlFor="private">Private</label>
+                <input type="checkbox" id="private"></input>
             </div>
 
             <button
-                disabled={!(ticker && playName && selectedFeatures.length > 0)}
+                disabled={!(ticker && playName && Object.keys(playbook).length > 0)}
                 className="bg-green-200 hover:bg-green-300 transform hover:scale-105 active:scale-100 px-2 rounded border border-green-400 disabled:bg-gray-100 disabled:scale-100 disabled:border-gray-300"
                 type="submit"
             >Save Playbook</button>

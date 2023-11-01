@@ -1,8 +1,8 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from .models import Tag, DailyJournal, JournalComment
 from .serializers import DailyJournalSerializer, TagSerializer, JournalCommentSerializer
-
+from rest_framework.response import Response
 
 class TagViewSet(viewsets.ModelViewSet):
     serializer_class = TagSerializer

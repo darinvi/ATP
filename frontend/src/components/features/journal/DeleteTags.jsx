@@ -34,19 +34,19 @@ export default function DeleteTags() {
                     
                     <button
                         disabled={!deleteId}
-                        className="bg-red-500 px-4 h-8 transform hover:scale-110 rounded"
+                        className="bg-red-300 hover:bg-red-500 px-4 h-8 transform hover:scale-105 active:scale-100 rounded"
                         onClick={handleTagDelete}
                     >Delete</button>
                     
                     <button
                         onClick={()=>setShowForm(false)}
-                        className="bg-red-500 px-4 h-8 transform hover:scale-110 rounded"
+                        className="bg-red-300 hover:bg-red-500 px-4 h-8 transform hover:scale-105 active:scale-100 rounded"
                     >Close</button>
                 </div>
                 :
                 <button 
                     onClick={()=>setShowForm(true)}
-                    className="bg-red-500 px-4 h-8 transform hover:scale-110 rounded"
+                    className="bg-red-300 hover:bg-red-500 px-4 h-8 transform hover:scale-105 active:scale-100 rounded"
                 >Delete Tag</button>
         }
 

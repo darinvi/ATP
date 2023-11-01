@@ -18,7 +18,7 @@ export default function VariableInput(props) {
                     className="bg-cyan-100 border border-cyan-300 w-full py-1 items-center text-center hover:bg-red-200 hover:border-red-400 rounded-l-md"
                     onClick={() => {
                         dispatch(removeFeature(props.feature));
-                        if (text) dispatch(removeFeatureText(props.feature));
+                        dispatch(removeFeatureText(props.feature));
                     }}
                     onMouseEnter={()=>setEntered(true)}
                     onMouseLeave={()=>setEntered(false)}
@@ -36,7 +36,7 @@ export default function VariableInput(props) {
                             setSaved(false);
                         }
                     }}
-                    className={`px-6 disabled:bg-gray-100 border ${!saved ? "bg-green-200 hover:bg-green-300 border-green-500 rounded-r-md" : "bg-orange-200 hover:bg-orange-300 border-orange-300 rounded-r-md" }`}
+                    className={`px-6 border ${!saved ? "bg-green-200 hover:bg-green-300 border-green-500 rounded-r-md" : "bg-orange-200 hover:bg-orange-300 border-orange-300 rounded-r-md" }  disabled:bg-gray-100 disabled:border-gray-300`}
                 >{saved? "Edit" : "Save" }</button>
             </div>
             <textarea

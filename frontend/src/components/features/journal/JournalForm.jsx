@@ -20,7 +20,7 @@ export default function JournalForm() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(!tags){
+        if (!tags) {
             dispatch(loadTags());
         }
     }, [])
@@ -63,22 +63,68 @@ export default function JournalForm() {
         handleCommentDelete(e, k)
     }
 
+    const renderNumbers = [1, 2, 3, 4, 5].map((num) => {
+        return <option>{num}</option>
+    })
 
-    function createChoiceSelect(labelName, setVal) {
-        return <div className="flex gap-2">
-            <label htmlFor={`${labelName}`}>{labelName}</label>
-            <select
-                id={`${labelName}`}
-                onChange={(e) => setVal(e.target.value)}
-                className="shadow bg-gray-100 hover:bg-gray-200"
-            >
-                {[1, 2, 3, 4, 5].map((num) => {
-                    return <option
-                        key={num}
-                        value={num}
-                    >{num}</option>
-                })}
-            </select>
+    // ABSOLUTELY DISCUSTING CODE. THIS IS THE QUICK FIX FOR THE PROBLEM I HADE, I HAVE TO FIX IT LATER
+    function createChoiceSelect() {
+        return <div className="flex gap-8">
+            <div className="flex gap-2">
+                <label htmlFor="patience">patience</label>
+                <select
+                    id="patience"
+                    onChange={(e) => setPatience(e.target.value)}
+                    className="shadow bg-gray-100 hover:bg-gray-200"
+                >
+                    <option disabled={patience}>N/A</option>
+                    {renderNumbers}
+                </select>
+            </div>
+            <div className="flex gap-2">
+                <label htmlFor="discipline">discipline</label>
+                <select
+                    id="discipline"
+                    onChange={(e) => setDiscipline(e.target.value)}
+                    className="shadow bg-gray-100 hover:bg-gray-200"
+                >
+                    <option disabled={discipline}>N/A</option>
+                    {renderNumbers}
+                </select>
+            </div>
+            <div className="flex gap-2">
+                <label htmlFor="preparation">preparation</label>
+                <select
+                    id="preparation"
+                    onChange={(e) => setPreparation(e.target.value)}
+                    className="shadow bg-gray-100 hover:bg-gray-200"
+                >
+                    <option disabled={preparation}>N/A</option>
+                    {renderNumbers}
+                </select>
+            </div>
+            <div className="flex gap-2">
+                <label htmlFor="risk-management">risk management</label>
+                <select
+                    id="risk-management"
+                    onChange={(e) => setRiskManagement(e.target.value)}
+                    className="shadow bg-gray-100 hover:bg-gray-200"
+                >
+                    <option disabled={riskManagement}>N/A</option>
+                    {renderNumbers}
+                </select>
+            </div>
+            <div className="flex gap-2">
+                <label htmlFor="emotional-management">emotional management</label>
+                <select
+                    id="emotional-management"
+                    onChange={(e) => setEmotionalManagement(e.target.value)}
+                    className="shadow bg-gray-100 hover:bg-gray-200"
+                >
+                    <option disabled={emotionalManagement}>N/A</option>
+                    {renderNumbers}
+                </select>
+            </div>
         </div>
     }
 
@@ -90,19 +136,19 @@ export default function JournalForm() {
         >{k}</p>
     })
 
-    function handleFormSubmit(e){
+    function handleFormSubmit(e) {
         e.preventDefault()
         const journal = {
-            patience,
-            discipline,
-            preparation,
-            risk_management: riskManagement,
-            emotional_management: emotionalManagement,
+            patience: parseInt(patience),
+            discipline: parseInt(discipline),
+            preparation: parseInt(preparation),
+            risk_management: parseInt(riskManagement),
+            emotional_management: parseInt(emotionalManagement),
             comments: Object.values(comments),
             tags: Object.values(selectedTags).map(Number)
         }
         dispatch(submitDailyJournal(journal))
-
+        // console.log(journal)
         setPatience(null)
         setDiscipline(null)
         setPreparation(null)
@@ -112,14 +158,12 @@ export default function JournalForm() {
         setCurrentComment("")
     }
 
-    // ToDo: fix choices to have a N/A option by default.
     // ToDo: check whether daily report already created.
     return <>
         <h1>SUBMITING DOES NOT RESET THE FORM</h1>
         <form className="flex flex-col items-center" onSubmit={handleFormSubmit}>
             <div className="flex items-center h-12 gap-4">
                 <label htmlFor="tags-select">Select tags: </label>
-
                 <select
                     id='tags-select'
                     className="w-36 shadow bg-gray-100 hover:bg-gray-200"
@@ -147,24 +191,20 @@ export default function JournalForm() {
             }
 
             <div className="flex gap-8 my-12">
-                {createChoiceSelect('patience', setPatience)}
-                {createChoiceSelect('discipline', setDiscipline)}
-                {createChoiceSelect('preparation', setPreparation)}
-                {createChoiceSelect('risk management', setRiskManagement)}
-                {createChoiceSelect('emotional management', setEmotionalManagement)}
+                {createChoiceSelect()}
             </div>
 
             <div className="flex flex-col items-center">
 
                 <div className="flex items-center gap-2">
-                    <input 
-                        className="w-96 shadow bg-gray-100" 
+                    <input
+                        className="w-96 shadow bg-gray-100"
                         onChange={(e) => { setCurrentComment(e.target.value) }}
                         value={currentComment}
                     ></input>
 
                     <button
-                        disabled={currentComment===""}
+                        disabled={currentComment === ""}
                         className="bg-green-300 transform hover:scale-105 px-4 hover:bg-gray-300 disabled:scale-100 disabled:bg-gray-100 rounded"
                         onClick={handleCommentCreate}
                     >Add Comment</button>
@@ -176,11 +216,11 @@ export default function JournalForm() {
                         {Object.entries(comments).map(([k, v]) => {
                             return <div className="flex gap-4">
                                 <p className="break-words w-96">{v}</p>
-                                <button 
+                                <button
                                     onClick={e => handleCommentEdit(e, k)}
                                     className="rounded bg-yellow-200 px-2 text-xs hover:text-sm max-h-8"
                                 >edit</button>
-                                <button 
+                                <button
                                     onClick={e => handleCommentDelete(e, k)}
                                     className="rounded bg-red-200 px-2 text-xs hover:text-sm max-h-8"
                                 >Delete</button>
@@ -190,11 +230,16 @@ export default function JournalForm() {
                 }
 
             </div>
-            <button 
-                type="submit" 
+            <button
+                type="submit"
                 className="mt-12 bg-blue-300 rounded px-4 transform hover:scale-105 rounded disabled:scale-100 disabled:bg-gray-100"
                 disabled={!(patience && discipline && preparation && riskManagement && emotionalManagement)}
             >Submit Daily Journal</button>
+            <p>{patience}</p>
+            <p>{discipline}</p>
+            <p>{preparation}</p>
+            <p>{riskManagement}</p>
+            <p>{emotionalManagement}</p>
         </form>
     </>
 
