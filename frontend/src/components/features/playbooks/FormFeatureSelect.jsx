@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { selectFeature } from "../../../store/playbooks";
 
@@ -14,12 +14,10 @@ export default function FormFeatureSelect(props){
         'Market Technicals',
         'Ticker Fundamentals',
         'Ticker Technicals',
-        // 'Ticker Metrics',
         'Trade Management',
         'Tape Reading',
+        // 'Ticker Metrics',
     ]
-
-
     
     const renderFeatures = features.map( feature => {
         return (

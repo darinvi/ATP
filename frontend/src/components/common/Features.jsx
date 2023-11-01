@@ -49,7 +49,7 @@ export default function Features() {
                     <p
                         className="cursor-pointer"  
                     >Inquiries</p>
-                    {!backtestsOpen ?  (
+                    {!inquiriesOpen ?  (
                         <AiOutlineCaretRight className='h-4' />
                         ) : (
                         <AiOutlineCaretDown className='h-4' />
@@ -81,7 +81,5 @@ export default function Features() {
         <div className={className}>{inquiriesSubNav()}</div>
         <div className={className}><Link to="/tables">Tables</Link></div>
         <div className={className}><Link to="/reports">Reports</Link></div>
-        {/* <div className={className}><Link to="/journal">Journal</Link></div> */}
-        {/* <div className={className}><Link to="/playbook">PlayBooks</Link></div> */}
     </div>
 }

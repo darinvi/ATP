@@ -12,7 +12,7 @@ class PlayBookSerializer(serializers.ModelSerializer):
             'id', 
             'user',
             'tags',
-            # 'date',
+            'date',
             'market_fundamentals',
             'market_technicals',
             'ticker_fundamentals',

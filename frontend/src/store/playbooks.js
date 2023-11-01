@@ -6,6 +6,7 @@ const slice = createSlice({
     initialState: {
         selectedFeatures: [],
         selectedTags: [],
+        playbook: {}
     },
     reducers: {
         selectFeature: (playbooks, action) => {
@@ -20,6 +21,13 @@ const slice = createSlice({
         removeTag: (playbooks, action) => {
             playbooks.selectedTags = playbooks.selectedTags.filter( tag => tag !== action.payload);
         },
+        addFeatureText: (playbook, action) => {
+            const [key, value] = action.payload;
+            playbook.playbook[key] = value;
+        },
+        removeFeatureText: (playbook, action) => {
+            delete playbook.playbook[action.payload];
+        }
     }
 });
 
@@ -27,15 +35,19 @@ export const {
     selectFeature,
     removeFeature,
     selectTag,
-    removeTag
+    removeTag,
+    addFeatureText,
+    removeFeatureText
 } = slice.actions;
 export default slice.reducer;
 
-// export const  = () => (dispatch) => {
-//     dispatch(apiCallBegan({
-//         url: 'ask-mentor/',
-//         method: 'POST',
-//         data: {},
-//         headers: {},
-//     }))
-// }
+export const createPlaybook = (data) => (dispatch, getState) => {
+    const playbook = getState().entities.playbooks.playbook;
+    console.log(playbook)
+    // dispatch(apiCallBegan({
+    //     url: 'playbooks/',
+    //     method: 'POST',
+    //     data: data,
+    //     headers: {},
+    // }))
+}
