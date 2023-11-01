@@ -18,6 +18,7 @@ const slice = createSlice({
 
 export const {
     selectFeature,
+    removeFeature
 } = slice.actions;
 export default slice.reducer;
 

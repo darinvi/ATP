@@ -22,6 +22,7 @@ export default function FormFeatureSelect(props){
     const renderFeatures = features.map( feature => {
         return (
             <option
+                className="disabled:hidden"
                 disabled={selectedFeatures.includes(feature)}
             >{feature}</option>
         )

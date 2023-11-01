@@ -12,10 +12,14 @@ export default function PlaybookForm(){
     const selectedFeatures = useSelector(state => state.entities.playbooks.selectedFeatures)
         .map(feature => <VariableInput feature={feature} />)
 
+    function handleFormSubmit(e){
+        e.preventDefault();
+    }
 
     return (
             <form
-                className="flex flex-col items-center gap-4 select-none"
+                className="flex flex-col items-center gap-4 select-none w-full"
+                onSubmit={handleFormSubmit}
             >
                 <div className="flex gap-2">
                     <div className="flex flex-col items-center">
@@ -39,6 +43,11 @@ export default function PlaybookForm(){
                 </div>
                 <FormFeatureSelect setFeature={setFeature} feature={feature} />
                 {selectedFeatures}
+                <button 
+                    disabled={!(ticker && playName && selectedFeatures.length > 0)}
+                    className="bg-green-200 hover:bg-green-300 transform hover:scale-105 active:scale-100 px-2 rounded border border-green-400 disabled:bg-gray-100 disabled:scale-100 disabled:border-gray-300"
+                    type="submit"
+                >Save Playbook</button>
             </form>
     )
 }
