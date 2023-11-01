@@ -5,6 +5,7 @@ const slice = createSlice({
     name: 'playbooks',
     initialState: {
         selectedFeatures: [],
+        selectedTags: [],
     },
     reducers: {
         selectFeature: (playbooks, action) => {
@@ -12,17 +13,25 @@ const slice = createSlice({
         },
         removeFeature: (playbooks, action) => {
             playbooks.selectedFeatures = playbooks.selectedFeatures.filter( feature => feature !== action.payload);
-        }
+        },
+        selectTag: (playbooks, action) => {
+            playbooks.selectedTags.push(action.payload);
+        },
+        removeTag: (playbooks, action) => {
+            playbooks.selectedTags = playbooks.selectedTags.filter( tag => tag !== action.payload);
+        },
     }
 });
 
 export const {
     selectFeature,
-    removeFeature
+    removeFeature,
+    selectTag,
+    removeTag
 } = slice.actions;
 export default slice.reducer;
 
-// export const askQuestion = () => (dispatch) => {
+// export const  = () => (dispatch) => {
 //     dispatch(apiCallBegan({
 //         url: 'ask-mentor/',
 //         method: 'POST',

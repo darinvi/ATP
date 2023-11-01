@@ -16,9 +16,9 @@ export default function Trades() {
 
     return <div className="flex flex-col items-center gap-4">
         <ApplyFilters />
-        <p>RENDER FILTERED DATA, AT FIRST FILTERED = CURRENT</p>
+        <p>Add 'filtered':true/false to the state, map only for fitlered. Move filtering to reducers.</p>
         <div className="flex gap-32">
-            {<div className="flex flex-col gap-2 overflow-y-scroll h-96">
+            {<div className="flex flex-col gap-2 overflow-y-auto h-96">
                 {renderTrades}
             </div>}
             <ShowTradeDetails trade={tradeInfo} />

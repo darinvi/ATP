@@ -119,7 +119,7 @@ export default function GetReportForm(props) {
                 </select>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 border-b-2 border-gray-300 pb-4">
                 <button
                     type="submit"
                     className="disabled:text-sm disabled:text-white disabled:bg-gray-100 bg-green-300 w-48 rounded transform hover:scale-105"

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { removeFeature } from "../../../store/playbooks";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function VariableInput(props) {
 

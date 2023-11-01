@@ -20,7 +20,9 @@ export default function JournalForm() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadTags());
+        if(!tags){
+            dispatch(loadTags());
+        }
     }, [])
 
     const renderTags = tags && tags.map(tag => {

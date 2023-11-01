@@ -152,10 +152,10 @@ export default function ApplyFilters() {
                 <button
                     className="bg-green-300 px-4 rounded transform hover:scale-105"
                     onClick={() => setShowFilters(true)}
-                >Apply Filters</button>
+                >Show Filters</button>
             </>
             :
-            <div className="flex gap-4">
+            <div className="flex gap-4 border-2 py-4 px-2">
                 <div className="flex flex-col gap-2">
                     {getInputs()}
                     {getFilterList()}

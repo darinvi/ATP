@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'journals',
     'mentor',
     'backtests',
+    'playbooks',
 ]
 
 MIDDLEWARE = [
