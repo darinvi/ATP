@@ -1,13 +1,11 @@
-import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { apiCallBegan } from "../../../store/api";
 import { setHTML } from "../../../store/filings"
-import moment from 'moment-timezone'
 
 export default function SingleFiling(props) {
 
     const url = props.content.linkToFilingDetails
-    const date = new Date(props.content.filedAt)
+    // const date = new Date(props.content.filedAt)
     const dispatch = useDispatch()
 
     function handleFilingClick() {
@@ -30,12 +28,9 @@ export default function SingleFiling(props) {
             >
                 <td>{props.content.formType}</td>
                 <td>{props.content.ticker}</td>
-                <td>{date.getHours()}:{date.getMinutes()}:{date.getSeconds()}</td>
+                <td>{props.content.filedAt}</td>
+                {/* <td>{date.getHours()}:{date.getMinutes()}:{date.getSeconds()}</td> */}
             </tr>
-            {/* <button onClick={()=>{
-                const formattedDate = moment.tz(props.content.filedAt, 'America/New_York').format('YYYY-MM-DDTHH:mm:ssZ');
-                console.log(`Formatted New York time: ${formattedDate.hour()}`);
-            }}>WTF</button> */}
         </>
     )
 

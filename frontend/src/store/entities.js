@@ -5,6 +5,7 @@ import journalReducer from './journal.js'
 import mentorReducer from './mentor.js'
 import backtestsReducer from './backtests.js'
 import tablesReducer from './tables.js'
+import playbooksReducer from './playbooks.js'
 
 export default combineReducers({
     filings: filingsReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
     mentor: mentorReducer,
     backtests: backtestsReducer,
     tables: tablesReducer,
+    playbooks: playbooksReducer,
 })

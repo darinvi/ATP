@@ -6,10 +6,10 @@ import Features from './components/common/Features'
 import Filing from './components/features/filings/Filing'
 import Reports from './components/features/reports/Reports'
 import Journal from './components/features/journal/Journal'
-// import Backtests from './components/features/backtests/Backtests'
 import Tables from './components/features/tables/Tables'
 import MentorPanel from './components/features/mentor/MentorPanel'
 import DividendStats from './components/features/backtests/dividends/DividendStats'
+import PlaybookForm from './components/features/playbooks/PlaybookForm'
 
 export default function AppRoutes() {
     return (
@@ -22,10 +22,10 @@ export default function AppRoutes() {
                 <Route path="/filings" element={<Filing />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/journal" element={<Journal />} />
-                {/* <Route path="/backtests" element={<Backtests />} /> */}
                 <Route path="/backtests/dividends" element={<DividendStats />} />
                 <Route path="/tables" element={<Tables />} />
                 <Route path="/mentor-panel" element={<MentorPanel />} />
+                <Route path="/playbook" element={<PlaybookForm />} />
             </Routes>
         </>
     )
