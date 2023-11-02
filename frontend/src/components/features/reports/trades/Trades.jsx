@@ -3,6 +3,7 @@ import ShowTradeDetails from "./ShowTradeDetails";
 import { useState } from "react";
 import SingleTrade from "./SingleTrade";
 import ApplyFilters from "./ApplyFilters";
+import TradeChart from "./TradeChart";
 
 export default function Trades() {
 
@@ -17,13 +18,14 @@ export default function Trades() {
     return <div className="flex flex-col items-center gap-4">
         <ApplyFilters />
         <p>Add 'filtered':true/false to the state, map only for fitlered. Move filtering to reducers.</p>
-        <div className="flex gap-32">
+        <div className="flex gap-4">
             {<div className="flex flex-col gap-2 overflow-y-auto h-96">
                 {renderTrades}
             </div>}
             <ShowTradeDetails trade={tradeInfo} />
+            <TradeChart />
         </div>
-        {!showTags
+        {/* {!showTags
             ?
             <button
                 className="bg-gray-300 w-48 rounded"
@@ -31,6 +33,6 @@ export default function Trades() {
             >Show Tags</button>
             :
             <h1>WTF</h1>
-        }
+        } */}
     </div>
 }

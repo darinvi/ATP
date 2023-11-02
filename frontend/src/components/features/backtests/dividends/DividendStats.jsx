@@ -28,5 +28,7 @@ export default function DividendStats() {
             >Get</button>
         </div>
         <DisplayStats />
+        <p>VISUALIZE THE DIV DATA AS BARCHARTS</p>
+        <p>DIV STATS/BARCHART (RVOL/ATR) FOR EACH LAST DAY OF MONTH</p>
     </div>
 }

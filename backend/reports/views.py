@@ -26,7 +26,9 @@ def test_user(request):
 def call_propreports(request):
     try:
         data=json.loads(request.body)
+        # print(data)
         response = requests.post(REPORT_URL, data=data, headers=REPORT_HEADERS)
+        # print(response.text)
         action = data.get('action')
         report_type = None
         if action == 'report':

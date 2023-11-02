@@ -11,6 +11,7 @@ const slice = createSlice({
     initialState: {
         reportToken: localStorage.getItem('reportToken'),
         currentData: null,
+        filteredData: null,
         filters: [],
         lastLogin: 0, // Log out token after 2hours and request new Or try to dispatch a log out on a specific error from server
         accounts: null,
@@ -19,7 +20,7 @@ const slice = createSlice({
         loading: false,
         tradeFilters: []
     },
-    reducers:{
+    reducers: {
         setTokenSuccess: (reports, action) => {
             localStorage.setItem('reportToken', action.payload.response);
             reports.reportToken = action.payload.response;
@@ -41,7 +42,7 @@ const slice = createSlice({
             reports.loading = false;
         },
         removeReportToken: (reports, action) => {
-            
+
         },
         setAccounts: (reports, action) => {
             reports.accounts = action.payload.response
@@ -51,7 +52,7 @@ const slice = createSlice({
                 localStorage.removeItem('reportToken');
                 reports.reportToken = null;
                 reports.currentData = null;
-            } 
+            }
             reports.loading = false;
         },
         setCurrentData: (reports, action) => {
@@ -61,11 +62,11 @@ const slice = createSlice({
         setCurrentType: (reports, action) => {
             reports.type = action.payload
         },
-        setLoading:(reports, action) => {
+        setLoading: (reports, action) => {
             reports.loading = true;
         },
-        setFilteredData: (reports, action) => {
-            reports.currentData = action.payload
+        setFiltered: (reports, action) => {
+            reports.currentData = applySelectedFilters(reports.currentData, action.payload)
         }
     }
 });
@@ -80,8 +81,11 @@ const {
     setCurrentData,
     setCurrentType,
     setLoading,
-    setFilteredData
 } = slice.actions;
+
+export const {
+    setFiltered
+} = slice.actions
 
 export default slice.reducer;
 
@@ -126,11 +130,11 @@ export const loadPositions = (token, start, end, id) => (dispatch) => {
         headers: {},
         url: URL,
         data: {
-            "action":"positions",
+            "action": "positions",
             "startDate": start,
             "endDate": end,
             "type": "all",
-            "page":1,
+            "page": 1,
             "accountId": id,
             "token": token
         },
@@ -145,14 +149,14 @@ export const loadTrades = (token, start, end, id) => (dispatch) => {
         headers: {},
         url: URL,
         data: {
-            "action":"report",
+            "action": "report",
             "startDate": start,
             "endDate": end,
             "type": "trades",
             "accountId": id,
             "baseCurrency": "USD",
             "token": token
-        }, 
+        },
         onSuccess: setCurrentData.type
     }))
 }
@@ -161,4 +165,81 @@ export const loadTrades = (token, start, end, id) => (dispatch) => {
 export const clearReportState = clearState;
 export const clearReportData = clearData;
 export const setCalledType = setCurrentType;
-export const setFiltered = setFilteredData;
+
+
+// function applyFilters(data, filterVariable, comparisonType, filterValue) {
+//     filterValue = parseFloat(filterValue)
+//     return data.filter(trade => {
+//         console.log(trade.net)
+//         switch (filterVariable) {
+//             case 'net':
+//                 return comparisonType === 'Greater' ? trade.net > filterValue : trade.net < filterValue;
+//             case 'net (absolute)':
+//                 return comparisonType === 'Greater' ? Math.abs(trade.net) > filterValue : Math.abs(trade.net) < filterValue;
+//             case 'gross':
+//                 return comparisonType === 'Greater' ? trade.gross > filterValue : trade.gross < filterValue;
+//             case 'gross (absolute)':
+//                 return comparisonType === 'Greater' ? Math.abs(trade.gross) > filterValue : Math.abs(trade.gross) < filterValue;
+//             case 'time opened':
+//                 // Implement time comparison logic here
+//                 break;
+//             case 'time closed':
+//                 // Implement time comparison logic here
+//                 break;
+//             case 'duration held':
+//                 // Implement duration comparison logic here
+//                 break;
+//             case 'entry price':
+//                 return comparisonType === 'Greater' ? trade.entry_price > filterValue : trade.entry_price < filterValue;
+//             case 'quantity':
+//                 return comparisonType === 'Greater' ? trade.quantity > filterValue : trade.quantity < filterValue;
+//             default:
+//                 return true; // No filter applied if the variable is not recognized
+//         }
+//     });
+// }
+function applyFilters(data, filterVariable, comparisonType, filterValue) {
+    filterValue = parseFloat(filterValue)
+    return data.map(trade => {
+        switch (filterVariable) {
+            case 'net':
+                const isHigher = trade.net > filterValue;
+                trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
+                console.log(trade.ticker, trade.net, trade.filtered, 'arewe')
+                return trade
+            case 'net (absolute)':
+                return comparisonType === 'Greater' ? Math.abs(trade.net) > filterValue : Math.abs(trade.net) < filterValue;
+            case 'gross':
+                return comparisonType === 'Greater' ? trade.gross > filterValue : trade.gross < filterValue;
+            case 'gross (absolute)':
+                return comparisonType === 'Greater' ? Math.abs(trade.gross) > filterValue : Math.abs(trade.gross) < filterValue;
+            case 'time opened':
+                // Implement time comparison logic here
+                break;
+            case 'time closed':
+                // Implement time comparison logic here
+                break;
+            case 'duration held':
+                // Implement duration comparison logic here
+                break;
+            case 'entry price':
+                return comparisonType === 'Greater' ? trade.entry_price > filterValue : trade.entry_price < filterValue;
+            case 'quantity':
+                return comparisonType === 'Greater' ? trade.quantity > filterValue : trade.quantity < filterValue;
+            default:
+                return true; // No filter applied if the variable is not recognized
+        }
+    });
+}
+
+
+export function applySelectedFilters(data, selectedFilters) {
+    let filteredData = [...data];
+
+    selectedFilters.forEach(filter => {
+        const [filterVariable, comparisonType, filterValue] = filter;
+        filteredData = applyFilters(filteredData, filterVariable, comparisonType, filterValue);
+    });
+
+    return filteredData;
+}

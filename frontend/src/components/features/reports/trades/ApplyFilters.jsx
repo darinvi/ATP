@@ -37,7 +37,7 @@ export default function ApplyFilters() {
                 setFilters(newFilters)
             }}
         >
-            <p>{e[0]}</p>
+            <p>{e[0]}</p>   
             <p>{e[1]}</p>
             <p>{e[2]}</p>
         </div>
@@ -117,7 +117,8 @@ export default function ApplyFilters() {
 
     // The way this works is once filtered, the original data is lost so it would require a new request to obtain it.
     function handleApplyButton() {
-        dispatch(setFiltered(applySelectedFilters(trades, filters)))
+        // dispatch(setFiltered(applySelectedFilters(trades, filters)))
+        dispatch(setFiltered(filters))
     }
     
     function inputFilterButtons() {
