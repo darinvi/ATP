@@ -154,6 +154,7 @@ export default function ApplyFilters() {
                     className="bg-green-300 px-4 rounded transform hover:scale-105"
                     onClick={() => setShowFilters(true)}
                 >Show Filters</button>
+                <p>Having the same filter type (e.g. absolute net) removes all tags on click.</p>
             </>
             :
             <div className="flex gap-4 border-2 py-4 px-2">

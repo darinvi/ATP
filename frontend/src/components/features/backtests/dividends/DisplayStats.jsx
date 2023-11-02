@@ -1,11 +1,13 @@
+import TickerInput from "./TickerInput";
 import { useSelector } from "react-redux"
+import StatsBarChart from "./StatsBarChart";
 
 export default function DisplayStats(){
 
     const stats = useSelector(state => state.entities.backtests.dividends);
     
     function displayStatsClose(){
-        return <div className="flex flex-col gap-6 mt-6 border border-gray-200 px-8 py-2 transform hover:scale-105 rounded-xl hover:rounded-none">
+        return <div className="flex flex-col gap-3 mt-6 border border-gray-200 px-8 py-2 transform hover:scale-105 rounded-xl hover:rounded-none">
             <div className="flex flex-col mx-auto bg-gray-200 w-full items-center rounded-md">
                 <p>Close Relative To Flat:</p>
             </div>
@@ -20,7 +22,7 @@ export default function DisplayStats(){
 
     function displaStatsOpen(){
         // <p></p>
-        return <div className="flex flex-col gap-6 mt-6 border border-gray-200 px-8 py-2 transform hover:scale-105 rounded-xl hover:rounded-none">
+        return <div className="flex flex-col gap-3 mt-6 border border-gray-200 px-8 py-2 transform hover:scale-105 rounded-xl hover:rounded-none">
             <div className="flex flex-col mx-auto bg-gray-200 w-full items-center rounded-md">
                 <p>Close Relative To Open:</p>
             </div>
@@ -34,7 +36,7 @@ export default function DisplayStats(){
     }
 
     function displayStatsFlat(){
-        return <div className="flex flex-col gap-6 mt-6 border border-gray-200 px-8 py-2 transform hover:scale-105 rounded-xl hover:rounded-none">
+        return <div className="flex flex-col gap-3 mt-6 border border-gray-200 px-8 py-2 transform hover:scale-105 rounded-xl hover:rounded-none">
             <div className="flex flex-col mx-auto bg-gray-200 w-full items-center rounded-md">
                 <p>Open Relative To Flat:</p>
             </div>
@@ -48,17 +50,23 @@ export default function DisplayStats(){
     }
 
     return <>
-        {stats ? 
-            <div className="flex flex-col gap-2 border px-8 pb-4">
-                <p
-                    className="bg-gray-200 mx-auto px-12 font-medium text-lg"
-                >Data For Past {stats.positive + stats.negative} Ex-Dates</p>
-                <div className="flex gap-8">
-                    {displayStatsFlat()} 
-                    {displaStatsOpen()}
-                    {displayStatsClose()}
+        {stats ?
+            <div className="flex flex-col items-center">
+                <div className="flex flex-col gap-2 border px-8 pb-4">
+                    <div className="flex ">
+                        <TickerInput />
+                        <p
+                            className="bg-gray-200 mx-auto px-12 font-medium text-lg"
+                        >Data For Past {stats.positive + stats.negative} Ex-Dates</p>
+                    </div>
+                    <div className="flex gap-8">
+                        {displayStatsFlat()} 
+                        {displaStatsOpen()}
+                        {displayStatsClose()}
+                    </div>
                 </div>
-            </div>
-        : <></>}
+                <StatsBarChart />
+            </div> 
+        : <TickerInput /> }
     </>
 }

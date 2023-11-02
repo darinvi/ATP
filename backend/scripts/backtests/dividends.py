@@ -19,10 +19,10 @@ def get_stats(ticker):
     diffs = get_differences(ex_dates, candles, dividend_amount) 
     pos, neg, pct = get_positive_negative_percentage(diffs)
     avg_pos, avg_neg, avg = get_averages(diffs)   
-    open_pos, open_neg = get_positive_negative_open(candles, ex_dates)
+    open_pos, open_neg, closes_against_open = get_positive_negative_open(candles, ex_dates)
     avg_pos_open, avg_neg_open, avg_open = get_averages_open(open_pos, open_neg)
     # Was lazy above, but have to separate the func a bit.
-    data_close = get_stats_close_against_flat(candles, ex_dates, dividend_amount)
+    data_close, closes_against_flat = get_stats_close_against_flat(candles, ex_dates, dividend_amount)
     return {
         'positive': pos,
         'negative': neg,
@@ -37,7 +37,13 @@ def get_stats(ticker):
         'avg_open': avg_open,
         'percentage_open': len(open_pos) / ( len(open_pos) + len(open_neg) ) * 100,
         'average_open': sum([*open_pos, *open_neg]) / len([*open_pos, *open_neg]),
-        **data_close
+        **data_close,
+        'chartData':{
+            'open_against_flat':[d['delta'] for d in diffs][::-1],
+            'closes_against_open': closes_against_open[::-1],
+            'closes_against_flat': closes_against_flat[::-1],
+            'ex_dates': []
+        }
     }
 
 # returns an array of ex-dates
@@ -91,7 +97,7 @@ def get_dividend_amount(ticker):
 
 def get_positive_negative_open(candles, indexes):
     changes = list(map(lambda x: candles['4. close'].iloc[x] - candles['1. open'].iloc[x], indexes))
-    return [c for c in changes if c >= 0], [c for c in changes if c < 0] 
+    return [c for c in changes if c >= 0], [c for c in changes if c < 0], changes
 
 def get_averages_open(pos, neg):
     avg_pos = sum(pos) / len(pos)
@@ -117,4 +123,4 @@ def get_stats_close_against_flat(df, indexes, amount):
         'avg_green': sum(green) / len(green),
         'avg_red': sum(red) / len(red),
         'avg_close': sum(changes) / len(changes)
-    }
+    }, changes

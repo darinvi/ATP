@@ -1,34 +1,12 @@
-import { useDispatch } from "react-redux";
-import { getDividendStats } from "../../../../store/backtests";
-import { useState } from "react";
+
 import DisplayStats from "./DisplayStats";
 
 export default function DividendStats() {
 
-    const dispatch = useDispatch();
-    const [ticker, setTicker] = useState("");
-
-    function handleButtonClick() {
-        dispatch(getDividendStats(ticker))
-    }
-
-    return <div className="flex flex-col items-center w-full mt-8 gap-8">
-        <div className="flex gap-4 mx-auto mb-4">
-            <label>Ticker:</label>
-            <input
-                type="text"
-                className="shadow hover:bg-gray-100 focus:bg-gray-200"
-                onChange={e => setTicker(e.target.value)}
-                value={ticker}
-            ></input>
-            <button
-                onClick={handleButtonClick}
-                disabled={!ticker}
-                className="bg-green-200 hover:bg-green-300 transform hover:scale-105 px-2 rounded disabled:bg-gray-100 disabled:scale-100"
-            >Get</button>
-        </div>
+    return <div className="flex flex-col w-full mt-2 gap-8 items-center">
+        
         <DisplayStats />
-        <p>VISUALIZE THE DIV DATA AS BARCHARTS</p>
-        <p>DIV STATS/BARCHART (RVOL/ATR) FOR EACH LAST DAY OF MONTH</p>
+        {/* <p>VISUALIZE THE DIV DATA AS BARCHARTS</p>
+        <p>DIV STATS/BARCHART (RVOL/ATR) FOR EACH LAST DAY OF MONTH</p> */}
     </div>
 }
