@@ -16,6 +16,7 @@ export default function FormFeatureSelect(props){
         'Ticker Technicals',
         'Trade Management',
         'Tape Reading',
+        // 'Comment'
         // 'Ticker Metrics',
     ]
     

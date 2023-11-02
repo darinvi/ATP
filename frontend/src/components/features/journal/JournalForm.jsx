@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import journal, { loadTags, submitDailyJournal } from "../../../store/journal"
 
+// very poorly written chunk of code, first form I wrote in the project, can't reuse components now.
 export default function JournalForm() {
 
     const [selectedTags, setSelectedTags] = useState({});
@@ -154,8 +155,9 @@ export default function JournalForm() {
         setPreparation(null)
         setRiskManagement(null)
         setEmotionalManagement(null)
-        setSelectedTags([])
         setCurrentComment("")
+        setComments({})
+        setSelectedTags({})
     }
 
     // ToDo: check whether daily report already created.
@@ -235,11 +237,6 @@ export default function JournalForm() {
                 className="mt-12 bg-blue-300 rounded px-4 transform hover:scale-105 rounded disabled:scale-100 disabled:bg-gray-100"
                 disabled={!(patience && discipline && preparation && riskManagement && emotionalManagement)}
             >Submit Daily Journal</button>
-            <p>{patience}</p>
-            <p>{discipline}</p>
-            <p>{preparation}</p>
-            <p>{riskManagement}</p>
-            <p>{emotionalManagement}</p>
         </form>
     </>
 

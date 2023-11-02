@@ -5,7 +5,8 @@ const slice = createSlice({
     name: 'playbooks',
     initialState: {
         selectedFeatures: [],
-        selectedTags: [],
+        selectedTags: {},
+        // comments: {},
         playbook: {}
     },
     reducers: {
@@ -16,10 +17,12 @@ const slice = createSlice({
             playbooks.selectedFeatures = playbooks.selectedFeatures.filter( feature => feature !== action.payload);
         },
         selectTag: (playbooks, action) => {
-            playbooks.selectedTags.push(action.payload);
+            playbooks.selectedTags[action.payload.id] = action.payload.name;
+            playbooks.playbook['tags'] = Object.keys(playbooks.selectedTags);
         },
         removeTag: (playbooks, action) => {
-            playbooks.selectedTags = playbooks.selectedTags.filter( tag => tag !== action.payload);
+            delete playbooks.selectedTags[action.payload];
+            playbooks.playbook['tags'] = Object.keys(playbooks.selectedTags);
         },
         addFeatureText: (playbook, action) => {
             const [key, value] = action.payload;
@@ -41,13 +44,12 @@ export const {
 } = slice.actions;
 export default slice.reducer;
 
-export const createPlaybook = (data) => (dispatch, getState) => {
+export const createPlaybook = () => (dispatch, getState) => {
     const playbook = getState().entities.playbooks.playbook;
-    console.log(playbook)
-    // dispatch(apiCallBegan({
-    //     url: 'playbooks/',
-    //     method: 'POST',
-    //     data: data,
-    //     headers: {},
-    // }))
+    dispatch(apiCallBegan({
+        url: 'playbooks/',
+        method: 'POST',
+        data: playbook,
+        headers: {},
+    }))
 }

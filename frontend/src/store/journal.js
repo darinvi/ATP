@@ -28,9 +28,6 @@ const slice = createSlice({
             journal.error['errorTime'] = Date.now();
             journal.error['message'] = `Create failed. Please contact dev with error: \n "${action.payload}"`;
         },
-        clearError: (journal, action) => {
-            // How do I indicate whether created succesfully?
-        },
         journalCreated: (journal, action) => {
             console.log('success')
         },
@@ -67,8 +64,8 @@ const {
     clearTraineeTags,
     setTraineeTags
 } = slice.actions;
-
 export default slice.reducer;
+
 
 export const clearJournalList = clearJournals;
 export const clearTraineeTagList = clearTraineeTags;

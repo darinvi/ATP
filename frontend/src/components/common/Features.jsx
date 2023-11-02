@@ -48,7 +48,7 @@ export default function Features() {
                 <div className="flex items-center" onClick={() => setInquiriesOpen(prev => !prev)}>
                     <p
                         className="cursor-pointer"  
-                    >Inquiries</p>
+                    >Journals</p>
                     {!inquiriesOpen ?  (
                         <AiOutlineCaretRight className='h-4' />
                         ) : (
@@ -64,7 +64,7 @@ export default function Features() {
                         <div><Link 
                             to='/journal'
                             className="text-sm hover:text-gray-500"
-                            >Journal</Link></div>
+                            >Daily Journal</Link></div>
                         {/* <div><Link 
                             to='#'
                             className="text-sm hover:text-gray-500"
@@ -76,9 +76,9 @@ export default function Features() {
     }
 
     return <div>
-        <div className={className}><Link to="/filings">Filings</Link></div>
         <div className={className}>{backtestsSubNav()}</div>
         <div className={className}>{inquiriesSubNav()}</div>
+        <div className={className}><Link to="/filings">Filings</Link></div>
         <div className={className}><Link to="/tables">Tables</Link></div>
         <div className={className}><Link to="/reports">Reports</Link></div>
     </div>

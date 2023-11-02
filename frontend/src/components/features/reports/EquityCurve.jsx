@@ -3,7 +3,7 @@ import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement
 
 
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement)
+// ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement)
 
 export default function EquityCurve(props){
 
@@ -39,8 +39,7 @@ export default function EquityCurve(props){
             }
         }
     }
-    return <div className="w-96 h-96">
-        <Line data={data} options={options} className="h-96 w-96" />
-        <p>ADD SOME STATS HERE (WIN RATE AND STUFF)</p>
+    return <div className="bg-green-300 h-fit">
+        <Line data={data} options={options} />
     </div>
 }

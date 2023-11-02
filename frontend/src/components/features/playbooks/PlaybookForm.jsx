@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import FormFeatureSelect from "./FormFeatureSelect"
 import FormTagSelect from "./FromTagSelect"
 import VariableInput from "./VariableInput"
+import { createPlaybook } from "../../../store/playbooks"
 
 export default function PlaybookForm() {
 
@@ -10,6 +11,7 @@ export default function PlaybookForm() {
     const [ticker, setTicker] = useState("")
     const [playName, setPlayName] = useState("")
 
+    const dispatch = useDispatch();
     const playbook = useSelector(state => state.entities.playbooks.playbook )
 
     const selectedFeatures = useSelector(state => state.entities.playbooks.selectedFeatures)
@@ -17,6 +19,7 @@ export default function PlaybookForm() {
 
     function handleFormSubmit(e) {
         e.preventDefault();
+        dispatch(createPlaybook());
     }
 
     return (

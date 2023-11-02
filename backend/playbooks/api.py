@@ -11,9 +11,10 @@ class PlayBookViewset(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         playbook = serializer.save(user=self.request.user)
         comments = self.request.data.get('comments')
-        for comment in comments:
-            PlayBookComment.objects.create(
-                user=self.request.user,
-                comment=comment,
-                playbook=playbook
-            )
+        if comments:
+            for comment in comments:
+                PlayBookComment.objects.create(
+                    user=self.request.user,
+                    comment=comment,
+                    playbook=playbook
+                )
