@@ -17,13 +17,12 @@ export default function Trades() {
 
     return <div className="flex flex-col items-center gap-4">
         <ApplyFilters />
-        <p>Add 'filtered':true/false to the state, map only for fitlered. Move filtering to reducers.</p>
         <div className="flex gap-4">
             {<div className="flex flex-col gap-2 overflow-y-auto h-96">
                 {renderTrades}
             </div>}
             <ShowTradeDetails trade={tradeInfo} />
-            <TradeChart />
+            {trades && <TradeChart />}
         </div>
         {/* {!showTags
             ?

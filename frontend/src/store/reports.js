@@ -66,8 +66,14 @@ const slice = createSlice({
             reports.loading = true;
         },
         setFiltered: (reports, action) => {
-            reports.currentData = applySelectedFilters(reports.currentData, action.payload)
-        }
+            reports.currentData = resetFiltered(reports.currentData);
+            reports.currentData = applySelectedFilters(reports.currentData, action.payload);
+        },
+        clearFiltered: (reports) => {
+            reports.currentData.map( e => {
+                return {...e, filtered:true}
+            })
+        },
     }
 });
 
@@ -84,7 +90,8 @@ const {
 } = slice.actions;
 
 export const {
-    setFiltered
+    setFiltered,
+    clearFiltered
 } = slice.actions
 
 export default slice.reducer;
@@ -166,55 +173,30 @@ export const clearReportState = clearState;
 export const clearReportData = clearData;
 export const setCalledType = setCurrentType;
 
-
-// function applyFilters(data, filterVariable, comparisonType, filterValue) {
-//     filterValue = parseFloat(filterValue)
-//     return data.filter(trade => {
-//         console.log(trade.net)
-//         switch (filterVariable) {
-//             case 'net':
-//                 return comparisonType === 'Greater' ? trade.net > filterValue : trade.net < filterValue;
-//             case 'net (absolute)':
-//                 return comparisonType === 'Greater' ? Math.abs(trade.net) > filterValue : Math.abs(trade.net) < filterValue;
-//             case 'gross':
-//                 return comparisonType === 'Greater' ? trade.gross > filterValue : trade.gross < filterValue;
-//             case 'gross (absolute)':
-//                 return comparisonType === 'Greater' ? Math.abs(trade.gross) > filterValue : Math.abs(trade.gross) < filterValue;
-//             case 'time opened':
-//                 // Implement time comparison logic here
-//                 break;
-//             case 'time closed':
-//                 // Implement time comparison logic here
-//                 break;
-//             case 'duration held':
-//                 // Implement duration comparison logic here
-//                 break;
-//             case 'entry price':
-//                 return comparisonType === 'Greater' ? trade.entry_price > filterValue : trade.entry_price < filterValue;
-//             case 'quantity':
-//                 return comparisonType === 'Greater' ? trade.quantity > filterValue : trade.quantity < filterValue;
-//             default:
-//                 return true; // No filter applied if the variable is not recognized
-//         }
-//     });
-// }
 function applyFilters(data, filterVariable, comparisonType, filterValue) {
     filterValue = parseFloat(filterValue)
     return data.map(trade => {
+        if (trade.filtered === false) return trade;
+        let isHigher;
         switch (filterVariable) {
             case 'net':
-                const isHigher = trade.net > filterValue;
+                isHigher = trade.net > filterValue;
                 trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
-                console.log(trade.ticker, trade.net, trade.filtered, 'arewe')
                 return trade
             case 'net (absolute)':
-                return comparisonType === 'Greater' ? Math.abs(trade.net) > filterValue : Math.abs(trade.net) < filterValue;
+                isHigher = Math.abs(trade.net) > filterValue
+                trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
+                return trade
             case 'gross':
-                return comparisonType === 'Greater' ? trade.gross > filterValue : trade.gross < filterValue;
+                isHigher = trade.gross > filterValue
+                trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
+                return trade
             case 'gross (absolute)':
-                return comparisonType === 'Greater' ? Math.abs(trade.gross) > filterValue : Math.abs(trade.gross) < filterValue;
-            case 'time opened':
-                // Implement time comparison logic here
+                isHigher = Math.abs(trade.gross > filterValue)
+                trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
+                return trade
+                case 'time opened':
+                    // Implement time comparison logic here
                 break;
             case 'time closed':
                 // Implement time comparison logic here
@@ -223,9 +205,13 @@ function applyFilters(data, filterVariable, comparisonType, filterValue) {
                 // Implement duration comparison logic here
                 break;
             case 'entry price':
-                return comparisonType === 'Greater' ? trade.entry_price > filterValue : trade.entry_price < filterValue;
+                isHigher = trade.entry_price > filterValue
+                trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
+                return trade
             case 'quantity':
-                return comparisonType === 'Greater' ? trade.quantity > filterValue : trade.quantity < filterValue;
+                isHigher = trade.quantity > filterValue
+                trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
+                return trade
             default:
                 return true; // No filter applied if the variable is not recognized
         }
@@ -233,7 +219,7 @@ function applyFilters(data, filterVariable, comparisonType, filterValue) {
 }
 
 
-export function applySelectedFilters(data, selectedFilters) {
+function applySelectedFilters(data, selectedFilters) {
     let filteredData = [...data];
 
     selectedFilters.forEach(filter => {
@@ -242,4 +228,11 @@ export function applySelectedFilters(data, selectedFilters) {
     });
 
     return filteredData;
+}
+
+function resetFiltered(data){
+    for (let d of data) {
+        d['filtered'] = true;
+    }
+    return data
 }

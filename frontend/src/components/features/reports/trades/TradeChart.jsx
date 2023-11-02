@@ -40,7 +40,7 @@ export default function TradeChart() {
         },
     };
 
-    const labels = trades && trades.map(t => t.net)
+    const labels = trades.map(t => t.net)
 
     const data = {
         labels: labels.map(e => ""),
@@ -53,7 +53,7 @@ export default function TradeChart() {
             },
             {
                 label: 'Filtered',
-                data: getCumSums(trades.filter(t => t.filtered !== false )),
+                data: getCumSums(trades.filter(t => t.filtered !== false)),
                 borderColor: 'blue',
                 backgroundColor: 'blue',
             }
@@ -62,19 +62,16 @@ export default function TradeChart() {
 
     function getCumSums(data) {
         let cumSum = 0;
-        const cumulativeSums = data && data.map(e => e.net).map((num) => {
+        const cumulativeSums = data.map(e => e.net).map((num) => {
             cumSum += num;
             return cumSum;
         });
         return cumulativeSums
     }
 
-    return (<>
-        {trades &&
-            <div style={{ width: "800px", height: "400px" }}>
-                <Line options={options} data={data} />
-            </div>}
-        <button onClick={()=>console.log()}>are we</button>
-    </>
+    return (
+        <div style={{ width: "800px", height: "400px" }}>
+            <Line options={options} data={data} />
+        </div>
     )
 }
