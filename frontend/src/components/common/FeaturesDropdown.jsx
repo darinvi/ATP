@@ -6,8 +6,8 @@ export default function FeaturesDropdown(){
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="relative flex flex-col items-center rounded">
-            <button onClick={()=>setIsOpen(prev => !prev)} className="w-full flex items-center justify-between rounded">
+        <div className="relative flex flex-col items-center rounded h-full">
+            <button onClick={()=>setIsOpen(prev => !prev)} className="w-full flex items-center justify-between rounded h-full hover:bg-cyan-700 hover:text-white list-none px-6">
                 Features
                 {!isOpen ?  (
                     <AiOutlineCaretRight className='h-4' />
@@ -17,7 +17,7 @@ export default function FeaturesDropdown(){
             </button>
             {isOpen && (
                 <div 
-                    className="bg-cyan-800 absolute top-12 rounded flex flex-col gap-2 items-center z-50"
+                    className="bg-cyan-800 absolute top-14 rounded-b flex flex-col gap-2 items-center z-50"
                     onMouseLeave={()=>setIsOpen(false)}
                 >
                     <Features />

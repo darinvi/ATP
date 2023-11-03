@@ -46,17 +46,17 @@ export default function StatsBarChart() {
         labels,
         datasets: [
             {
-                label: 'Open',
+                label: 'Open(vsFlat)',
                 data: divData.chartData.open_against_flat,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
             {
-                label: 'Close(Open)',
+                label: 'Close(vsOpen)',
                 data:  divData.chartData.closes_against_open,
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
             },
             {
-                label: 'Close(Flat)',
+                label: 'Close(vsFlat)',
                 data: divData.chartData.closes_against_flat,
                 backgroundColor: 'orange',
             },

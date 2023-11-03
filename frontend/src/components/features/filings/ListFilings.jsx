@@ -12,7 +12,7 @@ export default function ListFilings() {
     return (
         <div className='list-filings scroll w-fit overflow-y-auto h-[80vh] border border-gray-900'>
                 <table className='table-fixed'>
-                    <thead className='grid grid-cols-3 space-x-3 items-stretch m-auto border-b border-gray-900 sticky top-0 bg-gray-100'>
+                    <thead className='grid grid-cols-3 space-x-3 items-stretch m-auto border-b border-gray-900 sticky top-0 bg-gray-200 z-10'>
                         <th>File</th>
                         <th>Ticker</th>
                         <th>Time</th>

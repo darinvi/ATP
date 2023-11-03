@@ -10,6 +10,7 @@ import Tables from './components/features/tables/Tables'
 import MentorPanel from './components/features/mentor/MentorPanel'
 import DividendStats from './components/features/backtests/dividends/DividendStats'
 import PlaybookForm from './components/features/playbooks/PlaybookForm'
+import MarketProfile from './components/features/backtests/market/MarketProfile'
 
 export default function AppRoutes() {
     return (
@@ -23,6 +24,7 @@ export default function AppRoutes() {
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/journal" element={<Journal />} />
                 <Route path="/backtests/dividends" element={<DividendStats />} />
+                <Route path="/backtests/market-profile" element={<MarketProfile />} />
                 <Route path="/tables" element={<Tables />} />
                 <Route path="/mentor-panel" element={<MentorPanel />} />
                 <Route path="/playbook" element={<PlaybookForm />} />

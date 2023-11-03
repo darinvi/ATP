@@ -7,14 +7,18 @@ export default function Features() {
     const [backtestsOpen, setBacktestsOpen] = useState(false)
     const [inquiriesOpen, setInquiriesOpen] = useState(false)
 
-    const className = "hover:bg-cyan-300 w-full px-4 py-2 hover:text-black"
+    const className = "hover:bg-cyan-300 w-full hover:text-black flex items-center py-2"
+    const nestedLinksClassName = "text-sm hover:text-gray-500 w-full"
 
     function backtestsSubNav() {
         return (
             <div className="flex flex-col">
-                <div className="flex items-center" onClick={() => setBacktestsOpen(prev => !prev)}>
+                <div 
+                    className="flex items-center px-4 cursor-pointer" 
+                    onClick={() => setBacktestsOpen(prev => !prev)}
+                >
                     <p
-                        className="cursor-pointer"  
+                        className="cursor-pointer w-full"  
                     >Backtests</p>
                     {!backtestsOpen ?  (
                         <AiOutlineCaretRight className='h-4' />
@@ -23,18 +27,18 @@ export default function Features() {
                     )}
                 </div>
                 {backtestsOpen && (
-                    <div className="flex flex-col pl-2 w-full">
-                        <div><Link 
+                    <div className="flex flex-col pl-6 w-full">
+                        <div className="w-full"><Link 
                             to='/backtests/dividends'
-                            className="text-sm hover:text-gray-500"
+                            className={nestedLinksClassName}
                         >Dividends</Link></div>
                         <div><Link 
-                            to='#'
-                            className="text-sm hover:text-gray-500"
+                            to='/backtests/market-profile'
+                            className={nestedLinksClassName}
                             >Market Profile</Link></div>
                         <div><Link 
                             to='#'
-                            className="text-sm hover:text-gray-500"
+                            className={nestedLinksClassName}
                         >Backtest2</Link></div>
                     </div>
                 )}
@@ -44,10 +48,13 @@ export default function Features() {
 
     function inquiriesSubNav() {
         return (
-            <div className="flex flex-col">
-                <div className="flex items-center" onClick={() => setInquiriesOpen(prev => !prev)}>
+            <div className="flex flex-col w-full">
+                <div 
+                    className="flex items-center px-4 w-full cursor-pointer"
+                    onClick={() => setInquiriesOpen(prev => !prev)}
+                >
                     <p
-                        className="cursor-pointer"  
+                        className="cursor-pointer w-full"  
                     >Journals</p>
                     {!inquiriesOpen ?  (
                         <AiOutlineCaretRight className='h-4' />
@@ -56,18 +63,18 @@ export default function Features() {
                     )}
                 </div>
                 {inquiriesOpen && (
-                    <div className="flex flex-col pl-2 w-full">
+                    <div className="flex flex-col pl-6 w-full">
                         <div><Link 
                             to='/playbook'
-                            className="text-sm hover:text-gray-500"
+                            className={nestedLinksClassName}
                         >PlayBooks</Link></div>
                         <div><Link 
                             to='/journal'
-                            className="text-sm hover:text-gray-500"
+                            className={nestedLinksClassName}
                             >Daily Journal</Link></div>
                         {/* <div><Link 
                             to='#'
-                            className="text-sm hover:text-gray-500"
+                            className={nestedLinksClassName}
                         >Trade Idea</Link></div> */}
                     </div>
                 )}
@@ -75,11 +82,11 @@ export default function Features() {
         )
     }
 
-    return <div>
-        <div className={className}>{backtestsSubNav()}</div>
-        <div className={className}>{inquiriesSubNav()}</div>
-        <div className={className}><Link to="/filings">Filings</Link></div>
-        <div className={className}><Link to="/tables">Tables</Link></div>
-        <div className={className}><Link to="/reports">Reports</Link></div>
-    </div>
+    return <ul className="border border-cyan-900">
+        <li className={className}>{backtestsSubNav()}</li>
+        <li className={className}>{inquiriesSubNav()}</li>
+        <li className={className}><Link to="/filings" className="w-full px-4 py-1">Filings</Link></li>
+        <li className={className}><Link to="/tables" className="w-full px-4 py-1">Tables</Link></li>
+        <li className={className}><Link to="/reports" className="w-full px-4 py-1">Reports</Link></li>
+    </ul> 
 }

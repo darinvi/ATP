@@ -5,7 +5,7 @@ import { loadUser } from "../../store/auth"
 import { useDispatch, useSelector } from "react-redux"
 
 // 
-import MarketStats from "./FeaturesDropdown"
+import FeaturesDropdown from "./FeaturesDropdown"
 // 
 export default function Headers() {
 
@@ -25,12 +25,12 @@ export default function Headers() {
             <ul className="flex items-center">
                 
                 <li
-                    className="hover:bg-cyan-700 hover:text-white px-6 list-none h-full flex items-center"
-                ><Link to="/">Home</Link></li>
+                    className="h-full"
+                ><Link className="h-full text-center px-6 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center" to="/">Home</Link></li>
                 
                 <li
-                    className="hover:bg-cyan-700 hover:text-white px-6 list-none h-full flex items-center"
-                ><MarketStats /></li>
+                    className="h-full"
+                ><FeaturesDropdown /></li>
 
             </ul>
 
@@ -38,13 +38,13 @@ export default function Headers() {
                 {/* this should also be protected inside the component */}
                 { isMentor && <>
                     <li
-                        className="hover:bg-cyan-700 hover:text-white px-6 list-none h-full flex items-center"
-                    ><Link to="/mentor-panel">Mentor Panel</Link></li>
+                        className="h-full"
+                    ><Link to="/mentor-panel" className="h-full text-center px-6 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center">Mentor Panel</Link></li>
                 </> }
                 
                 <li 
-                    className="hover:bg-cyan-700 hover:text-white px-6 list-none h-full flex items-center"
-                ><Link to="/profile">Profile</Link></li>
+                    className="h-full"
+                ><Link className="h-full text-center px-6 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center" to="/profile">Profile</Link></li>
                 
                 <Logout />
             
