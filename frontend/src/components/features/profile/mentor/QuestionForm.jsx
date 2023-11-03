@@ -17,6 +17,12 @@ export default function QuestionForm(props) {
         props.setShowForm(false)
     }
 
+
+    function handleEnterPress(e){
+    //    setQuestion(e.target.value+"dfdn")
+       console.log(question)
+    }
+
     return <form className="flex flex-col gap-6">
         <div className="flex flex-col items-center gap-2">
             <label htmlFor="description">Description:</label>
@@ -48,6 +54,7 @@ export default function QuestionForm(props) {
                 id="question"
                 className="shadow rounded border border-gray-100 hover:bg-gray-200 h-48 w-96 max-h-48"
                 onChange={e => setQuestion(e.target.value)}
+                onKeyDown={handleEnterPress}
             ></textarea>
         </div>
         <div className="flex justify-around">

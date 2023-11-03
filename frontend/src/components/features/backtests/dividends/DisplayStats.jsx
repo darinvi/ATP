@@ -59,6 +59,7 @@ export default function DisplayStats(){
                             className="bg-gray-200 mx-auto px-12 font-medium text-lg"
                         >Data For Past {stats.positive + stats.negative} Ex-Dates</p>
                     </div>
+                    <p className="mx-auto">ADD EX DATES AS LABELS</p>
                     <div className="flex gap-8">
                         {displayStatsFlat()} 
                         {displaStatsOpen()}

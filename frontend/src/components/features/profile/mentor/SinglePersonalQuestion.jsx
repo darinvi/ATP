@@ -15,9 +15,10 @@ export default function SinglePersonalQuestion(props) {
         return <p className="break-words border-b border-gray-400"><span className="font-medium">{a.username}:</span> {a.answer}</p>
     })
 
-    return <div className="bg-gray-200 w-96 px-6 py-2 rounded-lg hover:rounded-none hover:bg-gray-300 break-words flex flex-col gap-4">
+    return <div className="bg-gray-200 w-96 rounded-lg hover:rounded-none hover:bg-gray-300 break-words flex flex-col gap-4">
         
         <div
+            className="w-full px-6 py-2"
             onClick={() => setHidden(prev => !prev)}
         >
             
