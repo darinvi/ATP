@@ -27,9 +27,9 @@ export default function Headers() {
                 <li
                     className="h-full"
                 ><Link
-                    className="h-full text-center px-2 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center"
+                    className="h-full text-center hover:bg-cyan-700 hover:text-white list-none h-full flex items-center"
                     to="/"
-                ><img src={require("./logo.png")} alt="" className="h-full cursor-pointer hover:bg-cyan-700" /></Link></li>
+                ><img src={require("../../assets/logo.png")} alt="" className="h-full cursor-pointer hover:bg-cyan-700 px-2" /></Link></li>
 
                 <li
                     className="h-full"

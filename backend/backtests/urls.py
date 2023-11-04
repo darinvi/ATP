@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('api/get-dividend-stats/<str:ticker>', views.get_dividend_stats),
-    path('api/get-spy-compaies', views.get_spy)
+    path('api/get-close-diffs', views.get_spy)
 ]

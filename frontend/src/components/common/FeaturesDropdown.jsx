@@ -7,6 +7,7 @@ export default function FeaturesDropdown(){
 
     return (
         <div className="relative flex flex-col items-center rounded h-full">
+            
             <button onClick={()=>setIsOpen(prev => !prev)} className="w-full flex items-center justify-between rounded h-full hover:bg-cyan-700 hover:text-white list-none px-6">
                 Features
                 {!isOpen ?  (
@@ -15,6 +16,10 @@ export default function FeaturesDropdown(){
                     <AiOutlineCaretDown className='h-4' />
                 )}
             </button>
+            {/* <img src={require("../../assets/features.png")} alt="" className="h-full cursor-pointer hover:bg-cyan-700 px-2" /> */}
+
+
+
             {isOpen && (
                 <div 
                     className="bg-cyan-800 absolute top-14 rounded-b flex flex-col gap-2 items-center z-50"
