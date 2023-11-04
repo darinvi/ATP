@@ -10,7 +10,7 @@ export default function SingleTrade(props) {
         >
             <input type="checkbox"></input>
             <p>{trade.ticker}</p>
-            <p>{trade.type}</p>
+            <p>{trade.type}</p> 
             <p>{parseFloat(trade.net).toFixed(2)}</p>
         </div >}
     </>

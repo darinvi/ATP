@@ -14,7 +14,8 @@ def get_candles(ticker):
 def get_stats(ticker):
     candles = pd.DataFrame([{'date':x[0], **x[1]} for x in get_candles(ticker).items()])
     candles = convert_to_proper_types(candles)
-    ex_dates = get_indexes_of_ex_dates(candles, get_ex_dates(ticker))
+    dates = get_ex_dates(ticker)
+    ex_dates = get_indexes_of_ex_dates(candles, dates)
     dividend_amount = get_dividend_amount(ticker)
     diffs = get_differences(ex_dates, candles, dividend_amount) 
     pos, neg, pct = get_positive_negative_percentage(diffs)
@@ -42,7 +43,7 @@ def get_stats(ticker):
             'open_against_flat':[d['delta'] for d in diffs][::-1],
             'closes_against_open': closes_against_open[::-1],
             'closes_against_flat': closes_against_flat[::-1],
-            'ex_dates': []
+            'ex_dates': [date.strftime("%Y-%m-%d") for date in dates][::-1]
         }
     }
 

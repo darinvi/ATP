@@ -13,21 +13,24 @@ export default function Headers() {
     const user = useSelector(state => state.auth.user)
     const isMentor = useSelector(state => state.auth.mentor)
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!user) {
             dispatch(loadUser());
         }
-    },[])
+    }, [])
 
     return (
         <header className="flex justify-between bg-cyan-800 text-2xl h-14 select-none w-full tracking-wider">
-            
+
             <ul className="flex items-center">
-                
+
                 <li
                     className="h-full"
-                ><Link className="h-full text-center px-6 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center" to="/">Home</Link></li>
-                
+                ><Link
+                    className="h-full text-center px-2 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center"
+                    to="/"
+                ><img src={require("./logo.png")} alt="" className="h-full cursor-pointer hover:bg-cyan-700" /></Link></li>
+
                 <li
                     className="h-full"
                 ><FeaturesDropdown /></li>
@@ -36,18 +39,18 @@ export default function Headers() {
 
             <ul className="flex items-center">
                 {/* this should also be protected inside the component */}
-                { isMentor && <>
+                {isMentor && <>
                     <li
                         className="h-full"
                     ><Link to="/mentor-panel" className="h-full text-center px-6 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center">Mentor Panel</Link></li>
-                </> }
-                
-                <li 
+                </>}
+
+                <li
                     className="h-full"
                 ><Link className="h-full text-center px-6 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center" to="/profile">Profile</Link></li>
-                
+
                 <Logout />
-            
+
             </ul>
         </header>
     )

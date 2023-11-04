@@ -40,7 +40,7 @@ export default function StatsBarChart() {
         },
     };
 
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    const labels = divData.chartData.ex_dates;
 
     const data = {
         labels,
@@ -62,10 +62,6 @@ export default function StatsBarChart() {
             },
         ],
     };
-
-    function getLabels(){
-
-    }
 
     return (
         <div style={{ width: '500px' }}>
