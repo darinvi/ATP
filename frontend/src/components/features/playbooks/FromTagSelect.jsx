@@ -27,19 +27,26 @@ export default function FormTagSelect() {
                 >
                     <option disabled={tagChosen}>---choose tag---</option>
                     {tags && tags.map(tag => {
-                        return <option disabled={false} value={tag.id}>{tag.name}</option>
+                        return (
+                            <option 
+                                disabled={Object.values(selectedTags).includes(tag.name)}
+                                value={tag.id}
+                                className="disabled:hidden"
+                            >{tag.name}</option>
+
+                        )
                     })}
                 </select>
                 <button
                     disabled={!tagChosen}
                     className="bg-green-200 hover:bg-green-300 transform hover:scale-105 active:scale-100 rounded px-2 border border-green-500 disabled:bg-gray-100 disabled:scale-100 disabled:border-gray-300"
-                    onClick={()=>{
-                        dispatch(selectTag(tagChosen))
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        dispatch(selectTag(tagChosen));
                     }}
                 >Add Tag</button>
             </div>
             <DisplayTags />
-            <p>MOVE TICKER TO REDUX STATE SO I CAN PUT IT AUTOMATICALLY FROM THE TABLES</p>
             <p>IF ALL VARS ARE EMPTY, SUBMIT IS STILL ACTIVE</p>
             <p>NOT RESETING FORM</p>
         </div>

@@ -11,6 +11,8 @@ class PlayBookSerializer(serializers.ModelSerializer):
         fields = (
             'id', 
             'user',
+            'ticker',
+            'play',
             'tags',
             'date',
             'market_fundamentals',
@@ -26,6 +28,7 @@ class PlayBookSerializer(serializers.ModelSerializer):
         tags = validated_data.pop('tags',[])
         user = validated_data.pop('user', None)
         playbook = PlayBook.objects.create(user=user, **validated_data)
-        for tag in tags:
-            playbook.tags.add(tag)
+        if tags:
+            for tag in tags:
+                playbook.tags.add(tag)
         return playbook

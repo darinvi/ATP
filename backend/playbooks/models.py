@@ -5,9 +5,10 @@ from journals.models import Tag
 
 class PlayBook(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(to=Tag, related_name='playbook_tags')
+    tags = models.ManyToManyField(to=Tag, blank=True)
     date = models.DateTimeField(auto_now_add=True)
-
+    ticker = models.CharField(max_length=10)
+    play = models.CharField(max_length=100)
     market_fundamentals = models.TextField(null=True, blank=True)
     market_technicals = models.TextField(null=True, blank=True)
     ticker_fundamentals = models.TextField(null=True, blank=True)

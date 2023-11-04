@@ -69,7 +69,7 @@ export default function StatsBarChart() {
 
     return (
         <div style={{ width: '500px' }}>
-            <Bar options={options} data={data} />;
+            <Bar options={options} data={data} />
         </div>
     )
 }

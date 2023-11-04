@@ -7,7 +7,8 @@ const slice = createSlice({
         selectedFeatures: [],
         selectedTags: {},
         // comments: {},
-        playbook: {}
+        playbook: {},
+        ticker: null,
     },
     reducers: {
         selectFeature: (playbooks, action) => {
@@ -30,26 +31,30 @@ const slice = createSlice({
         },
         removeFeatureText: (playbook, action) => {
             delete playbook.playbook[action.payload];
-        }
+        },
+        inputTicker: (playbook, action) => {
+            playbook.ticker = action.payload;
+        },
     }
 });
-
+ 
 export const {
     selectFeature,
     removeFeature,
     selectTag,
     removeTag,
     addFeatureText,
-    removeFeatureText
+    removeFeatureText,
+    inputTicker
 } = slice.actions;
 export default slice.reducer;
 
-export const createPlaybook = () => (dispatch, getState) => {
+export const createPlaybook = (ticker, play, isPublic) => (dispatch, getState) => {
     const playbook = getState().entities.playbooks.playbook;
     dispatch(apiCallBegan({
         url: 'playbooks/',
         method: 'POST',
-        data: playbook,
+        data: {...playbook, ticker, play, public: isPublic},
         headers: {},
     }))
 }

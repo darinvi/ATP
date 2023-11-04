@@ -9,6 +9,15 @@ export default function FormFeatureSelect(props){
     const selectedFeatures = useSelector(state => state.entities.playbooks.selectedFeatures);
     const dispatch = useDispatch();
 
+    const mapFeatures = {
+        'Market Fundamentals': 'market_fundamentals',
+        'Market Technicals': 'market_technicals',
+        'Ticker Fundamentals': 'ticker_fundamentals',
+        'Ticker Technicals': 'ticker_technicals',
+        'Trade Management': 'trade_management',
+        'Tape Reading': 'tape_reading',
+    }
+
     const features = [
         'Market Fundamentals',
         'Market Technicals',
@@ -24,7 +33,7 @@ export default function FormFeatureSelect(props){
         return (
             <option
                 className="disabled:hidden"
-                disabled={selectedFeatures.includes(feature)}
+                disabled={selectedFeatures.includes(mapFeatures[feature])}
             >{feature}</option>
         )
     })
@@ -48,7 +57,7 @@ export default function FormFeatureSelect(props){
                 className="bg-green-200 hover:bg-green-300 transform hover:scale-105 active:scale-100 rounded px-2 border border-green-500 disabled:bg-gray-100 disabled:scale-100 disabled:border-gray-300"
                 onClick={(e)=>{
                     e.preventDefault();
-                    dispatch(selectFeature(props.feature));
+                    dispatch(selectFeature(mapFeatures[props.feature]));
                     props.setFeature("");
                 }}
             >Add Variable</button>

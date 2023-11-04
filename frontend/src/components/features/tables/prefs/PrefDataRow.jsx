@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { getDividendStats } from "../../../../store/backtests"
+import { inputTicker } from "../../../../store/playbooks"
 
 export default function PrefDataRow(props) {
     
@@ -40,6 +41,14 @@ export default function PrefDataRow(props) {
                         onClick={ () => {
                         }}
                     >Trade Idea</Link>  
+
+                    <Link 
+                        className="bg-gray-200 hover:bg-green-300 hover:text-white px-2 rounded"
+                        to='/playbook'
+                        onClick={ () => {
+                            dispatch(inputTicker(data.ticker));
+                        }}
+                    >PlayBook</Link>  
                 </div>
             </div>
         </>

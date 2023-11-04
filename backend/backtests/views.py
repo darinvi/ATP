@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from knox.auth import TokenAuthentication
 from django.http import JsonResponse
 from scripts.backtests.dividends import get_stats
+from scripts.backtests.spy_companies import get_spy_companies
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
@@ -10,6 +11,8 @@ from scripts.backtests.dividends import get_stats
 def get_dividend_stats(request, ticker):
     return JsonResponse(get_stats(ticker.upper()))
 
+def get_spy(request):
+    print(get_spy_companies())
 
 
 # EX-div green (allow for filtering on PFF/TLT/SPY up for past x days / above/below a certain MA).

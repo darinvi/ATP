@@ -23,7 +23,7 @@ export default function SingleFiling(props) {
     return (
         <>
             <tr
-                className="grid grid-cols-3 space-x-3 items-stretch m-auto border-b border-gray-300 text-center cursor-pointer hover:bg-gray-300 transform active:scale-95"
+                className="grid grid-cols-3 space-x-3 items-stretch m-auto border-b border-gray-300 text-center cursor-pointer hover:bg-gray-300 transform active:scale-95 hover:border hover:border-gray-500"
                 onClick={handleFilingClick}
             >
                 <td>{props.content.formType}</td>
