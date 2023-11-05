@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import PlayBook, PlayBookComment
-from .serializers import PlayBookSerializer
+from .serializers import PlayBookSerializer, PublicPlayBookSerializer
 
 class PlayBookViewset(viewsets.ModelViewSet):
     serializer_class = PlayBookSerializer
@@ -23,8 +23,9 @@ class PlayBookViewset(viewsets.ModelViewSet):
 
 
 class PublicPlayBookViewset(viewsets.ModelViewSet):
-    serializer_class = PlayBookSerializer
+    serializer_class = PublicPlayBookSerializer
     permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
-        return PlayBook.objects.filter(user=self.request.user)
+        return [playbook for playbook in PlayBook.objects.all() if playbook.public==True]
+         

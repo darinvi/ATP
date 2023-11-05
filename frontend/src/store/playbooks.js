@@ -9,6 +9,7 @@ const slice = createSlice({
         // comments: {},
         playbook: {},
         ticker: null,
+        playbookList: null,
     },
     reducers: {
         selectFeature: (playbooks, action) => {
@@ -35,6 +36,9 @@ const slice = createSlice({
         inputTicker: (playbook, action) => {
             playbook.ticker = action.payload;
         },
+        setPlaybookList: (playbook, action) => {
+            playbook.playbookList = action.payload
+        }
     }
 });
  
@@ -45,7 +49,8 @@ export const {
     removeTag,
     addFeatureText,
     removeFeatureText,
-    inputTicker
+    inputTicker,
+    setPlaybookList
 } = slice.actions;
 export default slice.reducer;
 
@@ -56,5 +61,15 @@ export const createPlaybook = (ticker, play, isPublic) => (dispatch, getState) =
         method: 'POST',
         data: {...playbook, ticker, play, public: isPublic},
         headers: {},
+    }))
+}
+
+export const loadPublicPlaybooks = () => (dispatch) => {
+    dispatch(apiCallBegan({
+        url: 'playbooks-all',
+        method: "GET",
+        data:{},
+        headers: {},
+        onSuccess: setPlaybookList.type
     }))
 }
