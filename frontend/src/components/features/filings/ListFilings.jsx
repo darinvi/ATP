@@ -23,9 +23,9 @@ export default function ListFilings(props) {
 
     return (
             <table className={`table-fixed ${props.additionalClass}`}>
-                <thead className={`grid grid-cols-${showTime ? "3" : "2"} space-x-3 items-stretch m-auto border-b border-gray-900 sticky top-0 bg-gray-200 z-10`}>
-                    <th>File</th>
-                    <th>Ticker</th>
+                <thead className={`grid grid-cols-${showTime ? "3" : "2"} space-x-3 items-stretch m-auto border-b border-gray-900 sticky top-0 bg-cyan-700 z-10 text-gray-300`}>
+                    <th className='px-1'>File</th>
+                    <th className='px-1'>Ticker</th>
                     {showTime && <th>Time</th>}
                 </thead>
                 <tbody>

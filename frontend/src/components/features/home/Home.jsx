@@ -1,8 +1,8 @@
-import ListFilings from "../../features/filings/ListFilings"
+import ListFilings from "../filings/ListFilings"
 import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { hideTime } from "../../../store/filings"
-import RenderPlaybooks from "../../features/playbooks/renderPlaybooks/RenderPlaybooks"
+import PostsFeed from "./feed/PostsFeed"
 
 export default function Home() {
 
@@ -14,16 +14,10 @@ export default function Home() {
 
     return (
         <div className="flex">
-                <div className="overflow-y-auto h-[91.5vh] border border-gray-900 flex-1/4">
+                <div className="overflow-y-auto h-[92vh] border border-gray-900 overflow-x-hidden">
                     <ListFilings additionalClass={"w-fit "} />
                 </div>
-                <div className="overflow-y-auto h-[91.5vh] border border-gray-900 w-[50vw]">
-                    <div className="flex bg-gray-300 sticky top-0 border-b border-gray-900">
-                        <button className="bg-cyan-200 flex-1 border border-gray-800">Playbooks</button>
-                        <button className="bg-cyan-200 flex-1 border border-gray-800">Trade Ideas</button>
-                    </div>
-                    <RenderPlaybooks />
-                </div>
+                <PostsFeed />
             {/* <h1>Add market holidays</h1>
             <h1>Trade ideas (with dinamic variables), can be commented by the mentors</h1>
             <h1>Add some components that summarize the other pages (filings list, mentor panel, etc)</h1> 
