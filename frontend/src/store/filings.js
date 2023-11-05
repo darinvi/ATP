@@ -12,7 +12,8 @@ const slice = createSlice({
         // prefix: 'https://www.sec.gov/Archives/edgar/data/',
         filings: [],
         currentHTML: "",
-        filters: []
+        filters: [],
+        showTime: false,
     },
     reducers:{
         populateFilings: (filings, action) => {
@@ -24,6 +25,12 @@ const slice = createSlice({
         resetFilings: (filings, action) => {
             filings.filings = [];
             filings.currentHTML = "";
+        },
+        showTime: (filings) => {
+            filings.showTime = true;
+        },
+        hideTime: (filings) => {
+            filings.showTime = false;
         }
     }
 });
@@ -32,6 +39,10 @@ const {
     populateFilings,
     setCurrentHTML,
     resetFilings,
+} = slice.actions;
+export const {
+    showTime,
+    hideTime
 } = slice.actions;
 
 export default slice.reducer;
