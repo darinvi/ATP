@@ -18,7 +18,7 @@ export default function TickerInput() {
                 type="text"
                 className="shadow hover:bg-gray-100 focus:bg-gray-200"
                 onChange={e => setTicker(e.target.value)}
-                // onKeyDown={e => }
+                onKeyDown={e => e.code == 'Enter' && handleButtonClick()}
                 value={ticker}
             ></input>
             <button

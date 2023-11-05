@@ -21,7 +21,7 @@ export default function MarketProfile(){
             <div className="flex gap-8">
                 <button onClick={()=>dispatch(loadCloseDiffs())}>Load</button>
             </div>
-            <ClosesChart data={diffs} label={"Percentage of stocks closing green"} />
+            {diffs && <ClosesChart data={diffs} label={"Percentage of stocks closing green"} />}
         </div>
     )
 }

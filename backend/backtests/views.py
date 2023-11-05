@@ -38,3 +38,9 @@ def get_spy(request):
 # Overall RVOL of the market to explain the chance of next day/week being a second day(week) play? 
 
 # Expected range today based on number of stocks above/below ATR. Average ATR for the market.
+
+# Can divergence between market close and percentage green be an indicator for D2 or something? Market close red & more than 50% of stocks up in a naive bayees?
+
+# Extreme in percentage and small diff/ATR for the day as reversal signal?
+
+# First red/green day after +75/-25 reading to be followed for D2?

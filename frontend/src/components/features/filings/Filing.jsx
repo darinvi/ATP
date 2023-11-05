@@ -5,18 +5,18 @@ import ListFilings from "./ListFilings";
 import ExternalHTMLViewer from "./ExternalHTMLViewer";
 
 
-export default function WTF(){
+export default function WTF() {
 
     const dispatch = useDispatch();
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(loadFilings())
 
         return () => {
             dispatch(cleanFilings());
         }
-            
-    },[])
+
+    }, [])
 
     return (
         <div className="flex mt-4 w-full">

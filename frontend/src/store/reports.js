@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, findNonSerializableValue } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
 
 
@@ -70,8 +70,8 @@ const slice = createSlice({
             reports.currentData = applySelectedFilters(reports.currentData, action.payload);
         },
         clearFiltered: (reports) => {
-            reports.currentData.map( e => {
-                return {...e, filtered:true}
+            reports.currentData.map(e => {
+                return { ...e, filtered: true }
             })
         },
     }
@@ -195,9 +195,39 @@ function applyFilters(data, filterVariable, comparisonType, filterValue) {
                 isHigher = Math.abs(trade.gross > filterValue)
                 trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
                 return trade
-                case 'time opened':
-                    // Implement time comparison logic here
-                break;
+            case 'time opened':
+                // Make sure to have a vlaidator in the front end, always send hh:mm:ss even if only hh:mm provided.
+                console.log(filterValue)
+                console.log(typeof filterValue)
+                const [h, m, s] = trade.time_open.split(":") // hour, minute, seconds
+                const [fvh, fvm, fvs] = filterValue.split(":") // filter value h, m, s
+                isHigher = (
+                    h > fvh
+                        ?
+                        true
+                        :
+                        ( 
+                            h == fvh
+                                ?
+                                (
+                                    m > fvm
+                                        ?
+                                        true
+                                        :
+                                        (
+                                            m == fvm
+                                                ?
+                                                (s > fvs ? true : false)
+                                                :
+                                                false
+                                        )
+                                )
+                                :
+                                false
+                        )
+                )
+                trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
+                return trade
             case 'time closed':
                 // Implement time comparison logic here
                 break;
@@ -230,7 +260,7 @@ function applySelectedFilters(data, selectedFilters) {
     return filteredData;
 }
 
-function resetFiltered(data){
+function resetFiltered(data) {
     for (let d of data) {
         d['filtered'] = true;
     }
