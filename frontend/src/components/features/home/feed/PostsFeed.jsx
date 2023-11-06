@@ -2,7 +2,7 @@ import PostTypeButton from "./PostTypeButton"
 import PostButton from "./PostButton"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { loadAllPosts } from "../../../../store/home"
+import { loadAllPosts, resetPosts } from "../../../../store/home"
 import RenderPosts from "./RenderPosts"
 
 export default function PostsFeed() {
@@ -11,6 +11,9 @@ export default function PostsFeed() {
 
     useEffect(() => {
         dispatch(loadAllPosts());
+        return ()=>{
+            dispatch(resetPosts());
+        }
     }, [])
 
     return (

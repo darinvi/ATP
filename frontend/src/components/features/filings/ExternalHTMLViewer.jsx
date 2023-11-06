@@ -5,6 +5,7 @@ export default function ExternalHTMLViewer() {
 
   const content = useSelector(state => state.entities.filings.currentHTML)
   const [active, setActive] = useState(false);
+  const loading = useSelector(state => state.entities.filings.loading)
 
   return ( <>
       { content && 

@@ -17,6 +17,9 @@ const slice = createSlice({
         removeFiltered: (home, action) => { 
             home.filteredPosts = home.filteredPosts.filter( type => type != action.payload)
         },
+        resetPosts: (home) => {
+            home.allPosts = [];
+        }
     }
 });
 
@@ -26,7 +29,8 @@ const {
 
 export const {
     filterPostType,
-    removeFiltered
+    removeFiltered,
+    resetPosts
 } = slice.actions;
 
 export default slice.reducer;

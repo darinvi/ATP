@@ -11,10 +11,6 @@ export default function ListFilings(props) {
 
     useEffect(() => {
         dispatch(loadFilings());
-
-        return () => {
-            dispatch(cleanFilings());
-        }
     }, [])
 
     const renderFilings = filings.map(f => {

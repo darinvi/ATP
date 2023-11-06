@@ -14,24 +14,35 @@ const slice = createSlice({
         currentHTML: "",
         filters: [],
         showTime: false,
+        lastPage: "",
+        loading: false,
     },
     reducers:{
         populateFilings: (filings, action) => {
             filings.filings = action.payload.filings
         },  
         setCurrentHTML: (filings, action) => {
+            filings.loading = false;
             filings.currentHTML = action.payload.text
         },
         resetFilings: (filings, action) => {
             filings.filings = [];
-            filings.currentHTML = "";
+            if (filings.lastPage !== "home") {
+                filings.currentHTML = "";
+            }
         },
         showTime: (filings) => {
             filings.showTime = true;
         },
         hideTime: (filings) => {
             filings.showTime = false;
-        }
+        },
+        setLastPage: (filings, action) => {
+            filings.lastPage = action.payload;
+        },
+        setLoading: (filings) => {
+            filings.loading = true;
+        },
     }
 });
 
@@ -39,10 +50,12 @@ const {
     populateFilings,
     setCurrentHTML,
     resetFilings,
+    setLoading
 } = slice.actions;
 export const {
     showTime,
-    hideTime
+    hideTime,
+    setLastPage  
 } = slice.actions;
 
 export default slice.reducer;
@@ -59,6 +72,17 @@ export const loadFilings  = () => (dispatch, getState) => {
     }))
 }
 
-export const setHTML = setCurrentHTML;
+export const getFiling = (url) => (dispatch) => {
+    dispatch(setLoading());
+    dispatch(apiCallBegan({
+        url: 'filings',
+        method: 'POST',
+        data: {
+            url
+        },
+        headers: {},
+        onSuccess: setCurrentHTML.type,
+    }))
+}
 
 export const cleanFilings = resetFilings;

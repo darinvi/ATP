@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { hideTime } from "../../../store/filings"
 import PostsFeed from "./feed/PostsFeed"
+import { setLastPage } from "../../../store/filings"
 
 export default function Home() {
 
@@ -10,6 +11,7 @@ export default function Home() {
 
     useEffect(()=>{
         dispatch(hideTime());
+        dispatch(setLastPage("home"));
     },[])
 
     // FilingRow clicked form the Home page to go to Filing page and render the html cliced. <------------- 1
@@ -24,7 +26,7 @@ export default function Home() {
     return (
         <div className="flex">
                 <div className="overflow-y-auto h-[92vh] border border-gray-900 overflow-x-hidden">
-                    <ListFilings additionalClass={"w-fit "} />
+                    <ListFilings additionalClass={"w-fit"} />
                 </div>
                 <PostsFeed />
         </div>)

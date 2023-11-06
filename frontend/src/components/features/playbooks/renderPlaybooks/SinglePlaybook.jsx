@@ -12,8 +12,8 @@ export default function SinglePlaybook(props) {
         return (
             <div className="flex items-center gap-4 w-full pr-4" onClick={()=>setIsActive(prev => !prev)}>
                 <div className="flex flex-col w-full h-full py-3 items-center">
-                    <Link to={'/playbook'} className="font-medium hover:text-cyan-700 pb-2 w-fit">PlayBook</Link>
-                    <div className="flex gap-2 pb-4">
+                    <Link to={'/playbook'} className="font-medium hover:text-cyan-700 pb-1 w-fit border-b-2 border-gray-300">PlayBook</Link>
+                    <div className="flex gap-2 pb-4 pt-2">
                         <p
                             className="border-r border-gray-800 pr-2"
                         ><span className="font-medium text-sm mr-1">By:</span> <span className="underline">{play.user.username}</span></p>
