@@ -1,11 +1,6 @@
 import { createSlice, findNonSerializableValue } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
 
-
-const errorMessages = [
-    'Invalid token'
-]
-
 const slice = createSlice({
     name: 'reports',
     initialState: {
