@@ -6,6 +6,7 @@ import mentorReducer from './mentor.js'
 import backtestsReducer from './backtests.js'
 import tablesReducer from './tables.js'
 import playbooksReducer from './playbooks.js'
+import homeReducer from './home.js'
 
 export default combineReducers({
     filings: filingsReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
     backtests: backtestsReducer,
     tables: tablesReducer,
     playbooks: playbooksReducer,
+    home: homeReducer,
 })

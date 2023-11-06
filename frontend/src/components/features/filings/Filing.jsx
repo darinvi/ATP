@@ -16,7 +16,7 @@ export default function WTF() {
         <div className="flex mt-4 w-full h-full">
             <div className="flex w-full justify-center gap-16">
                 <div className='scroll w-fit overflow-y-auto h-[80vh] border border-gray-900'>
-                    <ListFilings additionalClass={""} />
+                    <ListFilings/>
                 </div>
                 <ExternalHTMLViewer />
             </div>

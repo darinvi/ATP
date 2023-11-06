@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'mentor',
     'backtests',
     'playbooks',
+    'home',
 ]
 
 MIDDLEWARE = [

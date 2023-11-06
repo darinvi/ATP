@@ -10,5 +10,6 @@ urlpatterns = [
     path('', include('mentor.urls')),
     path('', include('backtests.urls')),
     path('', include('playbooks.urls')),
+    path('', include('home.urls')),
 ]
 
