@@ -7,6 +7,12 @@ export default function SinglePlaybook(props) {
     const play = props.play;
     
     const [isActive, setIsActive] = useState(false);
+    const [element, setElement] = useState("");
+    const [elementClicked, setElementClicked] = useState(false);
+
+    function handleMouseEnter(e){
+        setElement(e.target.innerText);
+    }
 
     function notActive() {
         return (
@@ -16,16 +22,47 @@ export default function SinglePlaybook(props) {
                     <div className="flex gap-2 pb-4 pt-2">
                         <p
                             className="border-r border-gray-800 pr-2"
-                        ><span className="font-medium text-sm mr-1">By:</span> <span className="underline">{play.user.username}</span></p>
+                        >
+                            <span 
+                                className="font-medium text-sm mr-1"
+                            >By:</span> 
+                            <span 
+                                className="underline"
+                                onMouseEnter={handleMouseEnter}
+                            >{play.user.username}</span></p>
+                        
                         <p
                             className="border-r border-gray-800 pr-2"
-                        ><span className="font-medium text-sm mr-1">Ticker:</span> <span className="underline">{play.ticker}</span></p>
+                        >
+                            <span 
+                                className="font-medium text-sm mr-1"
+                            >Ticker:</span> 
+                            <span 
+                                className="underline"
+                                onMouseEnter={handleMouseEnter}
+                            >{play.ticker}</span></p>
+                        
                         <p
                             className="border-r border-gray-800 pr-2"
-                        ><span className="font-medium text-sm mr-1">Play:</span> <span className="underline">{play.play}</span></p>
+                        >
+                            <span 
+                                className="font-medium text-sm mr-1"
+                            >Play:</span> 
+                            <span 
+                                className="underline"
+                                onMouseEnter={handleMouseEnter}
+                            >{play.play}</span></p>
+                        
                         <p
                             className="border-r border-gray-800 pr-2"
-                        ><span className="font-medium text-sm mr-1">Created:</span><span className="underline">{play.date.split("T")[0]}</span></p>
+                        >
+                            <span 
+                                className="font-medium text-sm mr-1"
+                            >Created:</span>
+                            <span 
+                                className="underline"
+                                onMouseEnter={handleMouseEnter}
+                            >{play.date.split("T")[0]}</span></p>
                     </div>
                 </div>
                     {!isActive ?  (
@@ -40,7 +77,7 @@ export default function SinglePlaybook(props) {
 
     return (
         <div
-            className={`border border-gray-300 flex flex-col my-4 gap-1 items-center hover:bg-gray-100 ${isActive && "border-2 border-gray-900 bg-gray-200 my-8 pb-4"} w-full`}
+            className={`border border-gray-300 flex flex-col my-4 gap-1 items-center hover:bg-gray-200 ${isActive && "border-2 border-gray-900 bg-gray-200 my-8 pb-4"} w-full`}
         >
             {notActive()}
             {isActive && <PlaybookActive play={play} />}
