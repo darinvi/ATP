@@ -16,7 +16,7 @@ export default function DeleteTags() {
     }
 
     return <div>
-        <p>Deleting a tag that is currently selected will cause err 500</p>
+        {/* <p>Deleting a tag that is currently selected will cause err 500</p> */}
         {
 
             showForm

@@ -7,18 +7,9 @@ export default function Tables(){
 
     const [prefsOpen, setPrefsOpen] = useState(false);
     const [cefsOpen, setCefsOpen] = useState(false);
-
-    const dispatch = useDispatch();
-
-    // useEffect(()=>{
-    //     return () => {
-    //         dispatch(clearTablesData());
-    //     }
-    // },[])
     
-
-    return <div className="flex flex-col w-full mt-2">
-        <div className="flex gap-1 mx-auto">
+    return <div className="flex flex-col w-full overflow-y-auto h-[92vh]">
+        <div className="flex gap-1 mx-auto py-2 items-center">
             <button
                 onClick={()=>{
                     if (cefsOpen) {
@@ -26,7 +17,7 @@ export default function Tables(){
                     }
                     setPrefsOpen(true);
                 }}
-                className={`bg-gray-200 hover:bg-green-300 px-6 py-2 border border-black transform ${prefsOpen && "bg-green-200 scale-110 rounded"}`}
+                className={`bg-gray-200 hover:bg-green-300 px-6 border border-black transform ${prefsOpen && "bg-green-200 scale-110 rounded"}`}
                 >Prefs</button>
             <button
                 onClick={()=>{
@@ -35,9 +26,11 @@ export default function Tables(){
                     }
                     setCefsOpen(true);
                 }}
-                className={`bg-gray-200 hover:bg-green-300 px-6 py-2 border border-black transform ${cefsOpen && "bg-green-200 scale-110 rounded"}`}
+                className={`bg-gray-200 hover:bg-green-300 px-6 border border-black transform ${cefsOpen && "bg-green-200 scale-110 rounded"}`}
             >Cefs</button>
         </div>
+        {/* MOVE TABLE OPEN STATE TO REDUX, CREATE A SEPARATE COMPONENT FOR BUTTONS. ADD TICKER COMMONS TABLE AS WELL */}
+        {/* MAKE THE TABLES RESPONSIVE, EASY TO USE ON MOBILE. */}
         {prefsOpen && <TablePrefs />}
     </div>
 }

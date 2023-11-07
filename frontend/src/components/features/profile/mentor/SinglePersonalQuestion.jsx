@@ -36,7 +36,7 @@ export default function SinglePersonalQuestion(props) {
             
         </div>
         {<button
-            className={`${hidden ? "hidden" : ""} mx-auto bg-red-200 rounded px-2 transform hover:scale-105 hover:bg-red-300`}
+            className={`${hidden ? "hidden" : ""} mx-auto bg-red-200 rounded px-2 mb-2 transform hover:scale-105 hover:bg-red-300`}
             onClick={()=>{
                 dispatch(deleteAnsweredQuestion(question.id));
             }}

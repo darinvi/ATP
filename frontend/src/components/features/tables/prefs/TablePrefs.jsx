@@ -18,20 +18,18 @@ export default function TablePrefs() {
 
     function getTableHeaders() {
         return (
-            <thead className="items-center bg-gray-100 border-b sticky top-0">
-                <tr>
+            <div className="flex w-full bg-gray-200 sticky top-0 border-b border-gray-500">
                     <PrefColnames text="Ticker" reducer={sortByTicker} sorted={sorted} setSorted={setSorted}/>
                     <PrefColnames text="AVG.Volume" reducer={sortByAvgVolume} sorted={sorted} setSorted={setSorted}/>
                     <PrefColnames text="Div.Amount" reducer={sortByDivAmount} sorted={sorted} setSorted={setSorted}/>
                     <PrefColnames text="Ex Date" reducer={sortByDate} sorted={sorted} setSorted={setSorted}/>
                     <PrefColnames text="ATR" reducer={sortByATR} sorted={sorted} setSorted={setSorted}/>
                     <PrefColnames text="Industry" reducer={sortByIndustry} sorted={sorted} setSorted={setSorted}/>
-                </tr>
-            </thead>
+            </div>
         )
     }
 
-    function getTableData() {
+    function getTableData(){
         return (
             <tbody>
                 {prefsData && prefsData.map(e => <PrefDataRow data={e} />)}
@@ -40,11 +38,11 @@ export default function TablePrefs() {
     }
 
     return (
-        <table
-            className="table-fixed items-center mt-4"
+        <div
+            className="flex flex-col"
         >
             {getTableHeaders()}
             {getTableData()}
-        </table>
+        </div>
     )
 }

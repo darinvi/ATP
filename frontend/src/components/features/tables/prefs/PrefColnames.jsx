@@ -5,11 +5,10 @@ export default function PrefColnames(props){
     
     const [isAscending, setIsAscending] = useState(true)
     const dispatch = useDispatch();
-    const [isActive, setIsActive] = useState(false);
 
     return (
         <th 
-            className="text-center transform hover:scale-105 text-xl cursor-pointer"
+            className="text-center transform hover:scale-105 text-xl cursor-pointer flex-1"
             onClick={()=>{
                 props.setSorted(props.text);
                 console.log(props.sorted)

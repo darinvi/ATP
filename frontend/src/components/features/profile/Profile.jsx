@@ -18,12 +18,12 @@ export default function Profile() {
     return <div className="flex justify-around w-full my-8">
         <ListJournals />
         <AskMentor />
-        <div>
+        {/* <div>
             <button>Share Trade Idea</button>
             <p>display backtests here</p>
             <p>In the home page, display all public playbooks / trade ideas </p>
             <p>In profile only display personal playbooks / trade ideas / journals</p>
-        </div>
+        </div> */}
         {/* <div className="flex flex-col justify-between w-64 text-sm h-96">
             <h1>Get CEFs and show NAV change</h1>
             <h1 className="font-bold">A group chat where anyone can post a comment, an others in the mentor group can respond</h1>

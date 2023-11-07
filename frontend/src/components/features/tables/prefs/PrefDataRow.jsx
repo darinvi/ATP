@@ -15,17 +15,17 @@ export default function PrefDataRow(props) {
     return (
         <>
             <tr 
-                className={`hover:bg-gray-200 ${isActive && "bg-gray-200" } border-b cursor-pointer`}
+                className={`hover:bg-gray-200 ${isActive && "bg-gray-200" } border-b cursor-pointer flex`}
                 onClick={()=>setIsActive(prev => !prev)}
             >
-                <td className="text-center">{data.ticker}</td>
-                <td className="text-center">{parseFloat(data.avg_volume).toFixed(2)}</td>
-                <td className="text-center">{parseFloat(data.amount).toFixed(2)}</td>
-                <td className="text-center">{data.max_ex_date}</td>
-                <td className="text-center">{parseFloat(data.atr).toFixed(2)}</td>
-                <td className="text-center">{data.industry}</td>
+                <td className="text-center flex-1">{data.ticker}</td>
+                <td className="text-center flex-1">{parseFloat(data.avg_volume).toFixed(2)}</td>
+                <td className="text-center flex-1">{parseFloat(data.amount).toFixed(2)}</td>
+                <td className="text-center flex-1">{data.max_ex_date}</td>
+                <td className="text-center flex-1">{parseFloat(data.atr).toFixed(2)}</td>
+                <td className="text-center flex-1">{data.industry}</td>
             </tr>
-            <div className={`${!isActive && "hidden" } flex items-center absolute items-center z-50 bg-gray-100 w-full py-2`}>
+            <div className={`${!isActive && "hidden" } flex items-center items-center z-50 bg-gray-100 w-full py-2`}>
                 <div className="mx-auto flex gap-2">
                     <Link 
                         className="bg-gray-200 hover:bg-green-300 hover:text-white px-2 rounded"

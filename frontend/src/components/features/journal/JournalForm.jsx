@@ -162,7 +162,7 @@ export default function JournalForm() {
 
     // ToDo: check whether daily report already created.
     return <>
-        <h1>SUBMITING DOES NOT RESET THE FORM</h1>
+        {/* <h1>SUBMITING DOES NOT RESET THE FORM</h1> */}
         <form className="flex flex-col items-center" onSubmit={handleFormSubmit}>
             <div className="flex items-center h-12 gap-4">
                 <label htmlFor="tags-select">Select tags: </label>

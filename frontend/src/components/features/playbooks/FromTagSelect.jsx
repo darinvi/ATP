@@ -47,8 +47,8 @@ export default function FormTagSelect() {
                 >Add Tag</button>
             </div>
             <DisplayTags />
-            <p>IF ALL VARS ARE EMPTY, SUBMIT IS STILL ACTIVE</p>
-            <p>NOT RESETING FORM</p>
+            {/* <p>IF ALL VARS ARE EMPTY, SUBMIT IS STILL ACTIVE</p>
+            <p>NOT RESETING FORM</p> */}
         </div>
     )
 }

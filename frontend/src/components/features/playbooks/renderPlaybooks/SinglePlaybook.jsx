@@ -10,7 +10,7 @@ export default function SinglePlaybook(props) {
 
     function notActive() {
         return (
-            <div className="flex items-center gap-4 w-full pr-4" onClick={()=>setIsActive(prev => !prev)}>
+            <div className="flex items-center gap-4 w-full pr-4 cursor-pointer" onClick={()=>setIsActive(prev => !prev)}>
                 <div className="flex flex-col w-full h-full py-3 items-center">
                     <Link to={'/playbook'} className="font-medium hover:text-cyan-700 pb-1 w-fit border-b-2 border-gray-300">PlayBook</Link>
                     <div className="flex gap-2 pb-4 pt-2">
@@ -40,7 +40,7 @@ export default function SinglePlaybook(props) {
 
     return (
         <div
-            className={`border border-gray-300 flex flex-col gap-1 items-center hover:bg-gray-100 ${isActive && "border-2 border-gray-900 bg-gray-200"} w-full`}
+            className={`border border-gray-300 flex flex-col my-4 gap-1 items-center hover:bg-gray-100 ${isActive && "border-2 border-gray-900 bg-gray-200 my-8 pb-4"} w-full`}
         >
             {notActive()}
             {isActive && <PlaybookActive play={play} />}

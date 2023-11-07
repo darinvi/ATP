@@ -5,7 +5,8 @@ const slice = createSlice({
     name: 'tables',
     initialState: {
         prefs: null,
-        cefs: null
+        cefs: null,
+        activePrefColname: null,
     },
     reducers: {
         populatePrefsData: (tables, action) => {
@@ -62,7 +63,10 @@ const slice = createSlice({
                 const sorted = table.prefs.sort((a, b) => a.industry.localeCompare(b.industry));
                 table.prefs = sorted.reverse();
             }
-        }
+        },
+        setActiveColname: (table, action) => {
+            table.activePrefColname = action.payload;
+        },
     }
 });
 

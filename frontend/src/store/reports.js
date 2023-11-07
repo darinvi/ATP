@@ -187,7 +187,7 @@ function applyFilters(data, filterVariable, comparisonType, filterValue) {
                 trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
                 return trade
             case 'gross (absolute)':
-                isHigher = Math.abs(trade.gross > filterValue)
+                isHigher = Math.abs(trade.gross) > filterValue
                 trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
                 return trade
             case 'time opened':
