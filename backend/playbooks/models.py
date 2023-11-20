@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from journals.models import Tag
 
-
 class PlayBook(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     tags = models.ManyToManyField(to=Tag, blank=True)
@@ -21,3 +20,9 @@ class PlayBookComment(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     playbook = models.ForeignKey(to=PlayBook, on_delete=models.CASCADE)
     comment = models.TextField()
+
+class PlayBookSeen(models.Model):
+    playbook = models.ForeignKey(PlayBook, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ('playbook', 'user')

@@ -13,7 +13,7 @@ const slice = createSlice({
         },
         filterPostType: (home, action) => {
             home.filteredPosts.push(action.payload)
-            localStorage.setItem('feedFilters', home.filteredPosts)
+            localStorage.getItem('feedFilters', home.filteredPosts)
         },
         removeFiltered: (home, action) => { 
             home.filteredPosts = home.filteredPosts.filter( type => type != action.payload)
@@ -38,8 +38,7 @@ export const {
 export default slice.reducer;
 
 export const loadAllPosts = (data) => (dispatch) => {
-    for (let endpoint of ['/playbooks-all']) {
-        console.log(endpoint, 'endpooint')
+    for (let endpoint of ['/playbooks-unseen']) {
         dispatch(apiCallBegan({
             url: endpoint,
             method: "GET",

@@ -73,3 +73,16 @@ export const loadPublicPlaybooks = () => (dispatch) => {
         onSuccess: setPlaybookList.type
     }))
 }
+
+export const managePlaybookSeen = (id, action) => (dispatch) => {
+    dispatch(apiCallBegan({
+        url: 'playbooks-manage-seen',
+        method: "POST",
+        data:{
+            id,
+            action
+        },
+        headers: {},
+        onSuccess: setPlaybookList.type
+    }))
+}

@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .models import PlayBook, PlayBookComment
+from .models import PlayBook, PlayBookComment, PlayBookSeen
 from .serializers import PlayBookSerializer, PublicPlayBookSerializer
 
 class PlayBookViewset(viewsets.ModelViewSet):
@@ -22,10 +22,21 @@ class PlayBookViewset(viewsets.ModelViewSet):
         return PlayBook.objects.filter(user=self.request.user)
 
 
-class PublicPlayBookViewset(viewsets.ModelViewSet):
+class UnseenPlayBookViewset(viewsets.ModelViewSet):
     serializer_class = PublicPlayBookSerializer
     permission_classes = [IsAuthenticated]
     
+    # only get the playbooks that are not already seen.
     def get_queryset(self):
-        return [playbook for playbook in PlayBook.objects.all() if playbook.public==True]
-         
+        seen_playbooks = [seen.playbook.id for seen in PlayBookSeen.objects.filter(user=self.request.user)]
+        queryset = PlayBook.objects.filter(public=True).exclude(pk__in=seen_playbooks)
+        return queryset
+    
+class PublicPlayBookViewset(viewsets.ModelViewSet):
+    serializer_class = PublicPlayBookSerializer
+    permission_classes = [IsAuthenticated]
+
+
+    def get_queryset(self):
+        return PlayBook.objects.filter(public=True)
+
