@@ -15,16 +15,24 @@ export default function SinglePlaybook(props) {
     }
 
     function notActive() {
+
+        const playbookOverview = "font-medium text-sm mr-2"
+
         return (
-            <div className="flex items-center gap-4 w-full pr-4 cursor-pointer" onClick={()=>setIsActive(prev => !prev)}>
+            <div 
+                className="flex items-center gap-4 w-full pr-4 cursor-pointer bg-white" 
+                onClick={()=>{
+                    setIsActive(prev => !prev)
+                }}
+            >
                 <div className="flex flex-col w-full h-full py-3 items-center">
                     <Link to={'/playbook'} className="font-medium hover:text-cyan-700 pb-1 w-fit border-b-2 border-gray-300">PlayBook</Link>
-                    <div className="flex gap-2 pb-4 pt-2">
+                    <div className="flex w-full justify-around pb-4 pt-2">
                         <p
                             className="border-r border-gray-800 pr-2"
                         >
                             <span 
-                                className="font-medium text-sm mr-1"
+                                className={playbookOverview}
                             >By:</span> 
                             <span 
                                 className="underline"
@@ -35,7 +43,7 @@ export default function SinglePlaybook(props) {
                             className="border-r border-gray-800 pr-2"
                         >
                             <span 
-                                className="font-medium text-sm mr-1"
+                                className={playbookOverview}
                             >Ticker:</span> 
                             <span 
                                 className="underline"
@@ -46,7 +54,7 @@ export default function SinglePlaybook(props) {
                             className="border-r border-gray-800 pr-2"
                         >
                             <span 
-                                className="font-medium text-sm mr-1"
+                                className={playbookOverview}
                             >Play:</span> 
                             <span 
                                 className="underline"
@@ -57,7 +65,7 @@ export default function SinglePlaybook(props) {
                             className="border-r border-gray-800 pr-2"
                         >
                             <span 
-                                className="font-medium text-sm mr-1"
+                                className={playbookOverview}
                             >Created:</span>
                             <span 
                                 className="underline"
@@ -77,7 +85,7 @@ export default function SinglePlaybook(props) {
 
     return (
         <div
-            className={`border border-gray-300 flex flex-col my-4 gap-1 items-center hover:bg-gray-200 ${isActive && "border-2 border-gray-900 bg-gray-200 my-8 pb-4"} w-full`}
+            className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-2 border-gray-900 bg-gray-200 my-8"} w-full`}
         >
             {notActive()}
             {isActive && <PlaybookActive play={play} />}

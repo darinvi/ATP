@@ -15,6 +15,12 @@ export default function PostTypeButton(props){
     function handleButtonClick(){
         if (isActive) {
             dispatch(filterPostType(props.postType))
+            // if (localStorage.getItem('feedFilters')) {
+
+            //     localStorage.setItem('feedFilters', [localStorage.getItem('feedFilters'), props.postType])
+            // } else {
+            //     localStorage.setItem('feedFilters', [props.postType])
+            // }
         } else {
             dispatch(removeFiltered(props.postType))
         }

@@ -13,9 +13,11 @@ const slice = createSlice({
         },
         filterPostType: (home, action) => {
             home.filteredPosts.push(action.payload)
+            localStorage.setItem('feedFilters', home.filteredPosts)
         },
         removeFiltered: (home, action) => { 
             home.filteredPosts = home.filteredPosts.filter( type => type != action.payload)
+            localStorage.setItem('feedFilters', home.filteredPosts)
         },
         resetPosts: (home) => {
             home.allPosts = [];
