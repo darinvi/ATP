@@ -4,7 +4,6 @@ import PlaybookActive from "./PlaybookActive";
 import {AiOutlineCaretRight, AiOutlineCaretDown}from 'react-icons/ai';
 import { useDispatch } from "react-redux";
 import { managePlaybookSeen } from "../../../../store/playbooks";
-import { setMaximized } from "../../../../store/home";
 
 export default function SinglePlaybook(props) {
 
@@ -77,7 +76,6 @@ export default function SinglePlaybook(props) {
     return (
         <div
             className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-y-4 border-gray-500 bg-gray-200"} w-full`}
-            onDoubleClick={() => dispatch(setMaximized())}
         >
             {notActive()}
             <PlaybookActive play={play} active={isActive}/>

@@ -45,19 +45,24 @@ export default function PlaybookActive(props) {
         )
     }
 
+    function handleMaximized(){
+        dispatch(setMaximized(play.id));
+    }
+
     function maximize() {
         return (
             <button
                 className="bg-green-200 hover:bg-green-300 w-fit mx-auto px-2 rounded border border-green-900 transform hover:scale-105 active:scale-100 select-none"
-                onClick={()=>{ //id will be passed
-                    dispatch(setMaximized(play.id));
-                }}
+                onClick={handleMaximized}
             >Maximize</button>
         )
     }
 
     return (
-        <div className={`flex flex-col px-6 border-t border-black w-full gap-6 pt-4 pb-6 select-text bg-white ${!props.active && "hidden"}`}>
+        <div 
+            className={`flex flex-col px-6 border-t border-black w-full gap-6 pt-4 pb-6 select-text bg-white ${!props.active && "hidden"}`}
+            onDoubleClick={handleMaximized}
+        >
             {play.market_fundamentals && <p className={rowClass}><span className={spanClassTitle}>Market Fundamentals:</span> <span className={spanClassVar}>{play.market_fundamentals}</span></p>}
             {play.market_technicals && <p className={rowClass}><span className={spanClassTitle}>Market Technicals:</span> <span className={spanClassVar}>{play.market_technicals}</span></p>}
             {play.ticker_technicals && <p className={rowClass}><span className={spanClassTitle}>Ticker Technicals:</span> <span className={spanClassVar}>{play.ticker_technicals}</span></p>}
