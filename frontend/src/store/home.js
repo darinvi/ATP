@@ -6,6 +6,8 @@ const slice = createSlice({
     initialState: {
         allPosts : [],
         filteredPosts : [],
+        maximized: false,
+        maximizedData: null, // the post type will be added to the posts so I will get the type from here
     },
     reducers: {
         addPosts: (home, action) => {
@@ -21,7 +23,12 @@ const slice = createSlice({
         },
         resetPosts: (home) => {
             home.allPosts = [];
-        }
+        },
+        // next, modify this to be a onSuccess function when minimized pressed after a fetch of the comments of a given playbook.
+        setMaximized: (playbook, action) => { 
+            playbook.maximized = !playbook.maximized; 
+            playbook.maximizedId = action.payload;
+        },
     }
 });
 
@@ -32,7 +39,8 @@ const {
 export const {
     filterPostType,
     removeFiltered,
-    resetPosts
+    resetPosts,
+    setMaximized
 } = slice.actions;
 
 export default slice.reducer;

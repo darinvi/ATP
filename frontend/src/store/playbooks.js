@@ -38,7 +38,7 @@ const slice = createSlice({
         },
         setPlaybookList: (playbook, action) => {
             playbook.playbookList = action.payload
-        }
+        },
     }
 });
  
@@ -50,7 +50,7 @@ export const {
     addFeatureText,
     removeFeatureText,
     inputTicker,
-    setPlaybookList
+    setPlaybookList,
 } = slice.actions;
 export default slice.reducer;
 

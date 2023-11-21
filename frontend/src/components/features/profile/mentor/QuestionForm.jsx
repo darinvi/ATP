@@ -54,7 +54,7 @@ export default function QuestionForm(props) {
                 id="question"
                 className="shadow rounded border border-gray-100 hover:bg-gray-200 h-48 w-96 max-h-48"
                 onChange={e => setQuestion(e.target.value)}
-                onKeyDown={handleEnterPress}
+                // onKeyDown={handleEnterPress}
             ></textarea>
         </div>
         <div className="flex justify-around">

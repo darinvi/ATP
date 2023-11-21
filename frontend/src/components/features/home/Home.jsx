@@ -1,13 +1,15 @@
 import ListFilings from "../filings/ListFilings"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { hideTime } from "../../../store/filings"
 import PostsFeed from "./feed/PostsFeed"
 import { setLastPage } from "../../../store/filings"
+import MaximizedPage from "./feed/maximizedPages/MaximizedPage"
 
 export default function Home() {
 
     const dispatch = useDispatch();
+    const maximized = useSelector(state => state.entities.home.maximized)
 
     useEffect(()=>{
         dispatch(hideTime());
@@ -29,5 +31,6 @@ export default function Home() {
                     <ListFilings additionalClass={"w-fit"} />
                 </div>
                 <PostsFeed />
+                {maximized && <MaximizedPage />}
         </div>)
 }

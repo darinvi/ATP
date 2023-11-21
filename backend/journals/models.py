@@ -9,12 +9,12 @@ class Tag(models.Model):
 
 class DailyJournal(models.Model):
     CHOICES = (
-            (1, '1'),
-            (2, '2'),
-            (3, '3'),
-            (4, '4'),
-            (5, '5'),
-        )
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
 
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)

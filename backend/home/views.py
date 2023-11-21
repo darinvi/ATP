@@ -2,9 +2,10 @@ from knox.auth import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from journals.models import JournalComment
 from playbooks.models import PlayBook
-from playbooks.serializers import PublicPlayBookSerializer
 from journals.models import DailyJournal
+from playbooks.serializers import PublicPlayBookSerializer
 from journals.serializers import DailyJournalSerializer
 # from django.http import JsonResponse
 from rest_framework.response import Response
@@ -33,8 +34,10 @@ def load_all_posts(request, model_types):
 
         if t == 'playbook':
             playbooks = current_serializer(current_model.objects.all(), many=True).data
-        # elif
-
-        results = [*results, ]
+        elif t == 'idea':
+            pass
+        elif t == 'generic':
+            pass
+        results = [*results, *current_serializer(current_model.objects.all(), many=True).data]
 
     return Response(results)
