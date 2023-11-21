@@ -7,23 +7,20 @@ from accounts.models import Mentors
 from .serializers import TraineeQuestionSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from backend.custom_auth import isMentor
 
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, isMentor]) 
 def get_unanswered_questions(request):
-    try:
-        Mentors.objects.get(user=request.user)
-        questions = TraineeQuestion.objects.filter(answered=False).exclude(answered_by=request.user)
-        serializer = TraineeQuestionSerializer(questions, many=True)
-        return Response(serializer.data)
-    except Mentors.DoesNotExist:
-        return JsonResponse({'response': 'Not a mentor!'})
+    questions = TraineeQuestion.objects.filter(answered=False).exclude(answered_by=request.user)
+    serializer = TraineeQuestionSerializer(questions, many=True)
+    return Response(serializer.data)
     
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, isMentor])
 def add_mentor_answer(request):
     question_id = request.data.get('question_id')
     try:

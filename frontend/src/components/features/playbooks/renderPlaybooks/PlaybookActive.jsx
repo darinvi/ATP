@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { managePlaybookSeen } from "../../../../store/playbooks";
+import RenderPlaybookTags from "./RenderPlaybookTags";
 
 export default function PlaybookActive(props) {
     const play = props.play;
     const dispatch = useDispatch();
 
     const rowClass = ""
-    const spanClassTitle = "font-medium underline"
+    const spanClassTitle = "font-medium underline select-none"
     const spanClassVar = ""
 
     const [favorite, setFavorite] = useState(false);
@@ -20,20 +21,20 @@ export default function PlaybookActive(props) {
 
     function checkBoxes() {
         return (
-            <div className="mx-auto flex gap-6 select-none">
+            <div className="mx-auto flex gap-6 select-none border-t-2 border-gray-300 pt-2">
                 <div className="flex gap-1 transform hover:scale-105">
-                    <label htmlFor="fav">Favorite</label>
+                    <label htmlFor={`fav-pb-${play.id}`}>Favorite</label>
                     <input
-                        id="fav"
+                        id={`fav-pb-${play.id}`}
                         type="checkbox"
                         checked={favorite}
                         onChange={() => setFavorite(prev => !prev)}
                     />
                 </div>
                 <div className="flex gap-1 transform hover:scale-105">
-                    <label htmlFor="seen">Seen</label>
+                    <label htmlFor={`seen-pb-${play.id}`}>Seen</label>
                     <input
-                        id="seen"
+                        id={`seen-pb-${play.id}`}
                         type="checkbox"
                         checked={seen}
                         onChange={handleSeenClick}
@@ -51,6 +52,7 @@ export default function PlaybookActive(props) {
             {play.ticker_fundamentals && <p className={rowClass}><span className={spanClassTitle}>Ticker Fundamentals:</span> <span className={spanClassVar}>{play.ticker_fundamentals}</span></p>}
             {play.trade_management && <p className={rowClass}><span className={spanClassTitle}>Trade Management:</span> <span className={spanClassVar}>{play.trade_management}</span></p>}
             {play.tape_reading && <p className={rowClass}><span className={spanClassTitle}>Tape Reading:</span> <span className={spanClassVar}>{play.tape_reading}</span></p>}
+            <RenderPlaybookTags tags={play.tags} />
             {checkBoxes()}
         </div>
     )

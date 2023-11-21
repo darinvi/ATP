@@ -73,7 +73,6 @@ export default function PlaybookForm() {
                 className="bg-green-200 hover:bg-green-300 transform hover:scale-105 active:scale-100 px-2 rounded border border-green-400 disabled:bg-gray-100 disabled:scale-100 disabled:border-gray-300"
                 type="submit"
             >Save Playbook</button>
-            <p>{isPublic ? "true" : "false"}</p>
         </form>
     )
 }

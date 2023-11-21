@@ -75,7 +75,7 @@ export default function SinglePlaybook(props) {
 
     return (
         <div
-            className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-2 border-gray-900 bg-gray-200 my-8"} w-full`}
+            className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-y-4 border-gray-500 bg-gray-200 my-8"} w-full`}
         >
             {notActive()}
             <PlaybookActive play={play} active={isActive}/>

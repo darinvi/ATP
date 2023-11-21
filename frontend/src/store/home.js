@@ -37,7 +37,7 @@ export const {
 
 export default slice.reducer;
 
-export const loadAllPosts = (data) => (dispatch) => {
+export const loadAllPosts = () => (dispatch) => {
     for (let endpoint of ['/playbooks-unseen']) {
         dispatch(apiCallBegan({
             url: endpoint,
