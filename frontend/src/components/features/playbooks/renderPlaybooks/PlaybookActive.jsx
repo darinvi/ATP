@@ -46,7 +46,7 @@ export default function PlaybookActive(props) {
     }
 
     function handleMaximized(){
-        dispatch(setMaximized(play.id));
+        dispatch(setMaximized(play));
     }
 
     function maximize() {

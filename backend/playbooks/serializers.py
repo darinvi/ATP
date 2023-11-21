@@ -42,7 +42,12 @@ class PublicPlayBookSerializer(serializers.ModelSerializer):
     # Using a serializer like that, returns the whole tags representation (with its fields) instead of only returning the pk
     tags = TagSerializer(many=True, read_only=True)
     user = UserSerializer()
+    # add additional field
+    post_type = serializers.SerializerMethodField()
 
     class Meta:
         model = PlayBook
         fields = '__all__'
+
+    def get_post_type(self, obj):
+        return "playbook"

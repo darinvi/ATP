@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { setMaximized } from "../../../../../store/home";
+import MaximizedPlaybook from "./MaximizedPlaybook";
 
 export default function MaximizedPage() {
 
@@ -7,7 +8,7 @@ export default function MaximizedPage() {
     const currentPost = useSelector(state => state.entities.home.maximizedData)
 
     const pages = {
-        // 'playbook': 
+        'playbook': <MaximizedPlaybook data={currentPost} />
     }
 
     function handleMinimize() {
@@ -33,7 +34,7 @@ export default function MaximizedPage() {
                     }}
                 >Minimize</button>
             </div>
-            {/* {currentPost && pages[currentPost.type]} */}
+            {currentPost && pages[currentPost.post_type]}
         </div>
     )
 }

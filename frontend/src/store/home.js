@@ -27,7 +27,7 @@ const slice = createSlice({
         // next, modify this to be a onSuccess function when minimized pressed after a fetch of the comments of a given playbook.
         setMaximized: (playbook, action) => { 
             playbook.maximized = !playbook.maximized; 
-            playbook.maximizedId = action.payload;
+            playbook.maximizedData = action.payload;
         },
     }
 });
