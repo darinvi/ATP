@@ -6,7 +6,7 @@ export default function RenderPlaybookTags(props){
 
     return (
         <div
-            className="border-t-2 border-gray-300 select-none text-sm flex flex-col gap-3"
+            className="border-t-2 border-gray-300 text-sm flex flex-col gap-3"
         >
             <p 
                 className="mx-auto bg-gray-300 px-2 rounded-b-sm"

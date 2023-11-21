@@ -9,7 +9,7 @@ export default function PlaybookActive(props) {
     const dispatch = useDispatch();
 
     const rowClass = ""
-    const spanClassTitle = "font-medium underline select-none"
+    const spanClassTitle = "font-medium underline"
     const spanClassVar = ""
 
     const [favorite, setFavorite] = useState(false);
@@ -20,24 +20,34 @@ export default function PlaybookActive(props) {
         setSeen(prev => !prev)
     }
 
+    // MOVE TO SEPARATE COMPONENT
     function checkBoxes() {
         return (
             <div className="mx-auto flex gap-6 select-none border-t-2 border-gray-300 pt-2">
                 <div className="flex gap-1 transform hover:scale-105">
-                    <label htmlFor={`fav-pb-${play.id}`}>Favorite</label>
+                    <label 
+                        htmlFor={`fav-pb-${play.id}`}
+                        onClick={e => e.stopPropagation()}
+                        >Favorite</label>
                     <input
                         id={`fav-pb-${play.id}`}
                         type="checkbox"
                         checked={favorite}
+                        onClick={e => e.stopPropagation()}
                         onChange={() => setFavorite(prev => !prev)}
-                    />
+                        />
                 </div>
+
                 <div className="flex gap-1 transform hover:scale-105">
-                    <label htmlFor={`seen-pb-${play.id}`}>Seen</label>
+                    <label 
+                        htmlFor={`seen-pb-${play.id}`}
+                        onClick={e => e.stopPropagation()}
+                        >Seen</label>
                     <input
                         id={`seen-pb-${play.id}`}
                         type="checkbox"
                         checked={seen}
+                        onClick={e => e.stopPropagation()}
                         onChange={handleSeenClick}
                     />
                 </div>
@@ -51,7 +61,7 @@ export default function PlaybookActive(props) {
 
     return (
         <div 
-            className={`flex flex-col px-6 border-t border-black w-full gap-6 pt-4 pb-6 select-text bg-white ${!props.active && "hidden"}`}
+            className={`flex flex-col px-6 border-t border-black w-full gap-6 pt-4 pb-6 bg-white ${!props.active && "hidden"} `}
             onClick={handleMaximized}
         >
             {play.market_fundamentals && <p className={rowClass}><span className={spanClassTitle}>Market Fundamentals:</span> <span className={spanClassVar}>{play.market_fundamentals}</span></p>}
