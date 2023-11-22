@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PlaybookActive from "./PlaybookActive";
-import {AiOutlineCaretRight, AiOutlineCaretDown}from 'react-icons/ai';
+import { AiOutlineCaretRight, AiOutlineCaretDown } from 'react-icons/ai';
 import { useDispatch } from "react-redux";
 import { managePlaybookSeen } from "../../../../store/playbooks";
 
@@ -9,17 +9,28 @@ export default function SinglePlaybook(props) {
 
     const play = props.play;
     const dispatch = useDispatch();
-    const [isActive, setIsActive] = useState(false);
     const [firstClick, setFirstClick] = useState(true);
+    const [isActive, setIsActive] = useState(false);
+    const [bgColor, setBgColor] = useState(" border-4 bg-white");
+
+    useEffect(() => {
+        if (isActive) setBgColor("bg-gray-200");
+        const timeoutId = setTimeout(() => {
+            if (!isActive) {
+                setBgColor("bg-white")
+            }
+        }, 500);
+        return () => clearTimeout(timeoutId);
+    }, [isActive])
 
     function notActive() {
 
         const playbookOverview = "font-medium text-sm mr-2"
 
         return (
-            <div 
-                className="flex items-center gap-4 w-full pr-4 cursor-pointer bg-white" 
-                onClick={()=>{
+            <div
+                className={`flex items-center gap-4 w-full pr-4 cursor-pointer ${bgColor}`}
+                onClick={() => {
                     setIsActive(prev => !prev)
                     if (firstClick) {
                         setFirstClick(false);
@@ -31,43 +42,43 @@ export default function SinglePlaybook(props) {
                     <Link to={'/playbook'} className="font-medium hover:text-cyan-700 pb-1 w-fit border-b-2 border-gray-300">PlayBook</Link>
                     <div className="flex w-full justify-around pb-4 pt-2">
                         <p>
-                            <span 
+                            <span
                                 className={playbookOverview}
-                            >By:</span> 
-                            <span 
+                            >By:</span>
+                            <span
                                 className="underline"
                             >{play.user.username}</span></p>
-                        
+
                         <p>
-                            <span 
+                            <span
                                 className={playbookOverview}
-                            >Ticker:</span> 
-                            <span 
+                            >Ticker:</span>
+                            <span
                                 className="underline"
                             >{play.ticker}</span></p>
-                        
+
                         <p>
-                            <span 
+                            <span
                                 className={playbookOverview}
-                            >Play:</span> 
-                            <span 
+                            >Play:</span>
+                            <span
                                 className="underline"
                             >{play.play}</span></p>
-                        
+
                         <p>
-                            <span 
+                            <span
                                 className={playbookOverview}
                             >Created:</span>
-                            <span 
+                            <span
                                 className="underline"
                             >{play.date.split("T")[0]}</span></p>
                     </div>
                 </div>
-                    {!isActive ?  (
-                        <AiOutlineCaretRight className='h-4' />
-                        ) : (
-                        <AiOutlineCaretDown className='h-4' />
-                    )}
+                {!isActive ? (
+                    <AiOutlineCaretRight className='h-4' />
+                ) : (
+                    <AiOutlineCaretDown className='h-4' />
+                )}
             </div>
         )
     }
@@ -75,10 +86,10 @@ export default function SinglePlaybook(props) {
 
     return (
         <div
-            className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-y-4 border-gray-500 bg-gray-200"} w-full`}
+            className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-y-2 border-gray-200 shadow-2xl"} w-full`}
         >
             {notActive()}
-            <PlaybookActive play={play} active={isActive}/>
+            <PlaybookActive play={play} active={isActive} />
         </div>
     )
 }
