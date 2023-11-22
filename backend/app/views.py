@@ -35,9 +35,9 @@ def get_filings(request):
     serialized_filings = serializer.data
     return JsonResponse({'filings': serialized_filings})
 
-# @api_view(['GET'])
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def load_table_data(request):
     tickers = {ticker.pk:[ticker.ticker, ticker.dividend_amount] for ticker in Tickers.objects.all()}
     ex_dates = ExDates.objects.values('ticker').annotate(max_ex_date=Max('ex_date')).distinct()

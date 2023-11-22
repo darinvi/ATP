@@ -28,12 +28,14 @@ export default function PlaybookActive(props) {
                     <label 
                         htmlFor={`fav-pb-${play.id}`}
                         onClick={e => e.stopPropagation()}
+                        onDoubleClick={e => e.stopPropagation()}
                         >Favorite</label>
                     <input
                         id={`fav-pb-${play.id}`}
                         type="checkbox"
                         checked={favorite}
                         onClick={e => e.stopPropagation()}
+                        onDoubleClick={e => e.stopPropagation()}
                         onChange={() => setFavorite(prev => !prev)}
                         />
                 </div>
@@ -41,6 +43,7 @@ export default function PlaybookActive(props) {
                 <div className="flex gap-1 transform hover:scale-105">
                     <label 
                         htmlFor={`seen-pb-${play.id}`}
+                        onDoubleClick={e => e.stopPropagation()}
                         onClick={e => e.stopPropagation()}
                         >Seen</label>
                     <input
@@ -48,6 +51,7 @@ export default function PlaybookActive(props) {
                         type="checkbox"
                         checked={seen}
                         onClick={e => e.stopPropagation()}
+                        onDoubleClick={e => e.stopPropagation()}
                         onChange={handleSeenClick}
                     />
                 </div>
