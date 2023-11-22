@@ -19,7 +19,7 @@ def manage_playbook_seen(request):
         playbook_seen = PlayBookSeen.objects.get(user=request.user, playbook=playbook_id)
     except ObjectDoesNotExist:
         playbook_seen = None
-        
+
     if action:
         if not playbook_seen:
             try:

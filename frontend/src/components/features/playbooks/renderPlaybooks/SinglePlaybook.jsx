@@ -11,7 +11,7 @@ export default function SinglePlaybook(props) {
     const dispatch = useDispatch();
     const [firstClick, setFirstClick] = useState(true);
     const [isActive, setIsActive] = useState(false);
-    const [bgColor, setBgColor] = useState(" border-4 bg-white");
+    const [bgColor, setBgColor] = useState("bg-white");
 
     useEffect(() => {
         if (isActive) setBgColor("bg-gray-200");
@@ -86,7 +86,7 @@ export default function SinglePlaybook(props) {
 
     return (
         <div
-            className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-y-2 border-gray-200 shadow-2xl"} w-full`}
+            className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-y-2 border-gray-200 shadow-2xl mb-8"} w-full`}
         >
             {notActive()}
             <PlaybookActive play={play} active={isActive} />
