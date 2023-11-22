@@ -61,8 +61,8 @@ export default function PlaybookActive(props) {
 
     return (
         <div 
-            className={`flex flex-col px-6 border-t border-black w-full gap-6 pt-4 pb-6 bg-white ${!props.active && "hidden"} `}
-            onClick={handleMaximized}
+        className={`flex flex-col px-6 border-t border-black w-full gap-6 pt-4 pb-6 bg-white ${!props.active && "hidden"} `}
+            onDoubleClick={handleMaximized}
         >
             {play.market_fundamentals && <p className={rowClass}><span className={spanClassTitle}>Market Fundamentals:</span> <span className={spanClassVar}>{play.market_fundamentals}</span></p>}
             {play.market_technicals && <p className={rowClass}><span className={spanClassTitle}>Market Technicals:</span> <span className={spanClassVar}>{play.market_technicals}</span></p>}

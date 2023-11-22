@@ -34,7 +34,6 @@ export default function Headers() {
                 <li
                     className="h-full"
                 ><FeaturesDropdown /></li>
-
             </ul>
 
             <ul className="flex items-center">

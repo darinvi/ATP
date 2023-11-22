@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { setMaximized } from "../../../../../store/home";
-import MaximizedPlaybook from "./MaximizedPlaybook";
+import MaximizedPlaybook from "./playbook/MaximizedPlaybook";
 
 export default function MaximizedPage() {
 
@@ -8,7 +8,7 @@ export default function MaximizedPage() {
     const currentPost = useSelector(state => state.entities.home.maximizedData)
 
     const pages = {
-        'playbook': <MaximizedPlaybook data={currentPost} />
+        'playbook': <MaximizedPlaybook />
     }
 
     function handleMinimize() {
@@ -18,7 +18,7 @@ export default function MaximizedPage() {
     function maximizedPost() {
         return (
             <div
-                className="h-[90%] w-[85%] bg-white mx-auto z-30 rounded p-2"
+                className="h-[90%] w-[85%] bg-white mx-auto z-30 rounded p-2 border-2 border-black"
                 tabIndex="0"
                 onKeyDown={e => {
                     if (e.code == 'Escape') {
