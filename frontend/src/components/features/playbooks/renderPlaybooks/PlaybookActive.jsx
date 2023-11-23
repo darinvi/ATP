@@ -4,16 +4,12 @@ import { managePlaybookSeen } from "../../../../store/playbooks";
 import RenderPlaybookTags from "./RenderPlaybookTags";
 import { setMaximized } from "../../../../store/home";
 
-export default function PlaybookActive(props) {
-    const play = props.play;
+export default function PlaybookActive({seen, setSeen, favorite, setFavorite, play, active}) {
     const dispatch = useDispatch();
 
     const rowClass = ""
     const spanClassTitle = "font-medium underline"
     const spanClassVar = ""
-
-    const [favorite, setFavorite] = useState(false);
-    const [seen, setSeen] = useState(true);
 
     function handleSeenClick() {
         dispatch(managePlaybookSeen(play.id, !seen))
@@ -24,34 +20,34 @@ export default function PlaybookActive(props) {
     function checkBoxes() {
         return (
             <div className="mx-auto flex gap-6 select-none border-t-2 border-gray-300 pt-2">
-                <div className="flex gap-1 transform hover:scale-105">
+                <div 
+                    className="flex gap-1 transform hover:scale-105"
+                    onClick={e => e.stopPropagation()}
+                    onDoubleClick={e => e.stopPropagation()}
+                >
                     <label 
                         htmlFor={`fav-pb-${play.id}`}
-                        onClick={e => e.stopPropagation()}
-                        onDoubleClick={e => e.stopPropagation()}
                         >Favorite</label>
                     <input
                         id={`fav-pb-${play.id}`}
                         type="checkbox"
                         checked={favorite}
-                        onClick={e => e.stopPropagation()}
-                        onDoubleClick={e => e.stopPropagation()}
                         onChange={() => setFavorite(prev => !prev)}
                         />
                 </div>
 
-                <div className="flex gap-1 transform hover:scale-105">
+                <div 
+                    className="flex gap-1 transform hover:scale-105"
+                    onClick={e => e.stopPropagation()}
+                    onDoubleClick={e => e.stopPropagation()}
+                >
                     <label 
                         htmlFor={`seen-pb-${play.id}`}
-                        onDoubleClick={e => e.stopPropagation()}
-                        onClick={e => e.stopPropagation()}
                         >Seen</label>
                     <input
                         id={`seen-pb-${play.id}`}
                         type="checkbox"
                         checked={seen}
-                        onClick={e => e.stopPropagation()}
-                        onDoubleClick={e => e.stopPropagation()}
                         onChange={handleSeenClick}
                     />
                 </div>
@@ -65,7 +61,7 @@ export default function PlaybookActive(props) {
 
     return (
         <div 
-        className={`flex flex-col px-6 border-t border-black w-full gap-6 pt-4 pb-6 bg-white ${!props.active && "hidden"} `}
+        className={`flex flex-col px-6 border-t border-black w-full gap-6 pt-4 pb-6 bg-white ${!active && "hidden"} `}
             onDoubleClick={handleMaximized}
         >
             {play.market_fundamentals && <p className={rowClass}><span className={spanClassTitle}>Market Fundamentals:</span> <span className={spanClassVar}>{play.market_fundamentals}</span></p>}

@@ -12,11 +12,13 @@ export default function SinglePlaybook(props) {
     const [firstClick, setFirstClick] = useState(true);
     const [isActive, setIsActive] = useState(false);
     const [bgColor, setBgColor] = useState("bg-white");
+    const [favorite, setFavorite] = useState(false);
+    const [seen, setSeen] = useState(true);
 
     useEffect(() => {
         if (isActive) setBgColor("bg-gray-200");
         const timeoutId = setTimeout(() => {
-            if (!isActive) {
+            if (!isActive && !seen) {
                 setBgColor("bg-white")
             }
         }, 500);
@@ -89,7 +91,14 @@ export default function SinglePlaybook(props) {
             className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-y-2 border-gray-200 shadow-2xl mb-8"} w-full`}
         >
             {notActive()}
-            <PlaybookActive play={play} active={isActive} />
+            <PlaybookActive
+                play={play}
+                active={isActive}
+                seen={seen}
+                setSeen={setSeen}
+                favorite={favorite}
+                setFavorite={setFavorite}
+            />
         </div>
     )
 }
