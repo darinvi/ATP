@@ -58,10 +58,10 @@ export default function Reports() {
                     className="shadow bg-yellow-200 px-2 mt-12 mb-6 rounded transform hover:scale-105"
                 >Change Report Criteria</button>
             }
-            {!loading ? mapTypeToComponent[lastTypeCalled] : <p className="text-2xl text-black pulse animate-ping">Loading...</p>}
+            {!loading ? mapTypeToComponent[lastTypeCalled] : <p className="text-2xl text-black animate-ping">Loading...</p>}
         </div>
 
         :
-
+        
         <ReportTokenForm />
 }

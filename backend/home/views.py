@@ -9,6 +9,8 @@ from playbooks.serializers import PublicPlayBookSerializer
 from journals.serializers import DailyJournalSerializer
 # from django.http import JsonResponse
 from rest_framework.response import Response
+from scripts.backtests.stock_metrics import compute_metrics
+import json
 
 MODELS = {
     'playbook': PlayBook, 
@@ -41,3 +43,13 @@ def load_all_posts(request, model_types):
         results = [*results, *current_serializer(current_model.objects.all(), many=True).data]
 
     return Response(results)
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_stock_metric(request):
+    data = json.loads(request.body)
+    ticker = data.get('ticker')
+    date = data.get('date')
+    return Response(compute_metrics(ticker, date))

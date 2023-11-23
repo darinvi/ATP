@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from scripts.backtests.dividends import get_stats
 from scripts.backtests.spy_companies import get_spy_companies
 
+from scripts.backtests.stock_metrics import compute_metrics
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])

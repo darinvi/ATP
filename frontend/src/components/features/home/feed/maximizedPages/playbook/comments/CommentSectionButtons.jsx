@@ -4,9 +4,8 @@ import { useState } from 'react';
 export default function CommentSectionButtons() {
     const [isActive, setIsActive] = useState(false);
     return (
-        <div className="flex justify-around w-full">
             <button
-                className="bg-red-200 hover:bg-red-300 border border-orange-900 px-3 py-1 rounded transform hover:scale-105 active:scale-100 text-xl flex items-center"
+                className="bg-red-200 hover:bg-red-300 border border-orange-900 px-3 rounded transform hover:scale-105 active:scale-100 flex items-center h-fit"
                 onDoubleClick={e => e.stopPropagation()}
                 onClick={()=>setIsActive(prev => !prev)}
             >Backtests {!isActive ?  (
@@ -14,7 +13,6 @@ export default function CommentSectionButtons() {
                 ) : (
                 <AiOutlineCaretDown className='h-4' />
             )}</button>
-        </div>
     )
 }
 
