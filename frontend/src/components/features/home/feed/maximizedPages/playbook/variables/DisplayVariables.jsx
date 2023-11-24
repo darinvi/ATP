@@ -18,7 +18,7 @@ export default function DisplayVariables() {
 
     // var components that are 
     return (
-        < div className="flex flex-col flex-1 border-x-2 w-full pl-2">
+        < div className="flex flex-col flex-1 border-x-2 w-full pt-2">
             {variables.map( e => {
                 return (
                     <MaximizedVariable 

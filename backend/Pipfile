@@ -15,6 +15,7 @@ bs4 = "*"
 pyarrow = "*"
 fastparquet = "*"
 pymongo = "*"
+django-environ = "*"
 
 [dev-packages]
 

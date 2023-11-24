@@ -14,18 +14,19 @@ export default function MaximizedPage() {
     function handleMinimize() {
         dispatch(setMaximized())
     }
-
+    
     function maximizedPost() {
         return (
             <div
-                className="h-[90%] w-[85%] bg-white mx-auto z-30 rounded p-2 border-2 border-black"
+                className="h-[90%] w-[85%] bg-white mx-auto z-30 rounded border-2 border-black"
                 tabIndex="0"
                 onKeyDown={e => {
                     if (e.code == 'Escape') {
-                        handleMinimize()
+                        dispatch(setMaximized())
                     }
                 }}
-                onDoubleClick={handleMinimize}
+                // onDoubleClick={handleMinimize} //too easy to close it when clicking aorund and is annoying.
+                onDoubleClick={e => e.stopPropagation()} 
                 onClick={e => e.stopPropagation()}
             >
                 {currentPost && pages[currentPost.post_type]}

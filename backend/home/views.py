@@ -11,6 +11,7 @@ from journals.serializers import DailyJournalSerializer
 from rest_framework.response import Response
 from scripts.backtests.stock_metrics import compute_metrics
 import json
+from scripts.mongo.client import mongo_client
 
 MODELS = {
     'playbook': PlayBook, 
@@ -44,7 +45,6 @@ def load_all_posts(request, model_types):
 
     return Response(results)
 
-
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -52,4 +52,15 @@ def get_stock_metric(request):
     data = json.loads(request.body)
     ticker = data.get('ticker')
     date = data.get('date')
+    print(request.user.pk)
     return Response(compute_metrics(ticker, date))
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def leave_playbook_comment(request):
+    data = json.loads(request.body)
+    comment = data.get('comment')
+    playbook = data.get('playbook')
+    user_id = request.user.pk
+    db = mongo_client()['testdb'].get_collection('playbook_comments')
