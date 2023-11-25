@@ -7,7 +7,7 @@ export default function MaximizedPlaybook(){
 
     return (
         <div
-            className="flex justify-between pr-8 h-full"
+            className="flex justify-between h-full"
         >
             <DisplayMetrics />
             <DisplayVariables />
