@@ -47,7 +47,7 @@ export default function MaximizedVariable(props) {
                 className="border-b-2 shadow-lg mb-2 py-2"
             >
                 <p
-                    className="pl-2 select-text"
+                    className="pl-2 select-text break-words"
                     onDoubleClick={e => e.stopPropagation()}
                 >{props.v}</p>
             </div>

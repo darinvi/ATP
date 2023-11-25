@@ -9,7 +9,7 @@ export default function PlaybookActive({seen, setSeen, favorite, setFavorite, pl
 
     const rowClass = ""
     const spanClassTitle = "font-medium underline"
-    const spanClassVar = ""
+    const spanClassVar = "break-words"
 
     function handleSeenClick() {
         dispatch(managePlaybookSeen(play.id, !seen))
