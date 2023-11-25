@@ -9,7 +9,7 @@ export default function CommentTextArea() {
 
     return (
         <div
-            className="flex w-full px-4 gap-2 pt-2 border-t-2 flex-1"
+            className="flex w-full px-4 gap-2 pt-2 border-t-2 flex-1 h-fit"
         >
             <div className="w-full">
                 <textarea

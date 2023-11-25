@@ -1,6 +1,6 @@
 export default function MaximizedPlaybookComments(){
     return (
-        <div className="overflow-y-auto bg-green-300 h-[50%]">
+        <div className="overflow-y-auto w-full h-full px-2">
             <p>Comment</p>
             <p>Comment</p>
             <p>Comment</p>
