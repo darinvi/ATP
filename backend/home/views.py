@@ -104,3 +104,21 @@ def delete_playbook_comment(request):
     query = {'_id': ObjectId(id)}
     collection.delete_one(query)
     return Response(id)
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def edit_playbook_comment(request):
+    data = json.loads(request.body)
+    collection = mongo_client()['testdb'].get_collection(data.get('collection'))
+    id = data.get('id')
+    comment = data.get('comment')
+    update = {
+        '$set': {'comment': comment}
+    }
+    query = {'_id': ObjectId(id)}
+    collection.update_one(query, update)
+    if collection.find_one(query)['comment'] == comment:
+        return Response([id, comment])
+    else:
+        return Response(status=500)

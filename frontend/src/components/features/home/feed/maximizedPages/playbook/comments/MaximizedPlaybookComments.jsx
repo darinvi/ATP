@@ -27,7 +27,7 @@ export default function MaximizedPlaybookComments() {
                         {renderComments.length === 0 && <p className="mx-auto w-fit mt-5">No Comments Yet!</p>}
                     </>
             }
-            {createLoading && <p className="absolute bottom-0 bg-yellow-100 border border-yellow-300 w-full text-center animate-pulse">Creating Comment!</p>}
+            {createLoading && <p className="absolute bottom-0 bg-green-100 border border-green-300 w-full text-center animate-pulse">Creating Comment!</p>}
             {err && (
                 <div className="absolute bottom-0 bg-red-100 border border-red-300 w-full flex justify-between px-2">
                     <p className="text-center">Error Creating Comment!</p>

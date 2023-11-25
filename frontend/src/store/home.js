@@ -14,6 +14,7 @@ const slice = createSlice({
             commentsLoading: false,
             commentCreateLoading: false,
             deletingId: null,
+            editingId: null,
             commentType: "General",
             collection: 'general_comments',
             comments: [],
@@ -61,6 +62,9 @@ const slice = createSlice({
         setCommentDeleteLoading: (home, action) => {
             home.playbooks.deletingId = action.payload;
         },
+        setCommentEditLoading: (home, action) => {
+            home.playbooks.editingId = action.payload;
+        },
         handleComments: (home, action) => {
             home.playbooks.commentType = action.payload[1];
             home.playbooks.collection = `${action.payload[0]}_comments`;
@@ -89,6 +93,11 @@ const slice = createSlice({
         handlePBDelete: (home, action) => {
             home.playbooks.comments = home.playbooks.comments.filter(e => e._id != action.payload);
             home.playbooks.deletingId = null;
+        },
+        handlePBEdit: (home, action) => {
+            const comment = home.playbooks.comments.find(e => e._id == action.payload[0]);
+            comment.comment = action.payload[1];
+            home.playbooks.editingId = null;
         }
     }
 });
@@ -103,7 +112,9 @@ const {
     handlePBCommentCreate,
     handlePBError,
     handlePBDelete,
-    setCommentDeleteLoading
+    setCommentDeleteLoading,
+    handlePBEdit,
+    setCommentEditLoading
 } = slice.actions;
 
 export const {
@@ -180,5 +191,17 @@ export const deletePBComment = (id) => (dispatch, getState) => {
         data:{id, collection},
         headers: {},
         onSuccess: handlePBDelete.type,   
+    }))
+}
+
+export const editPBComment = (id, comment) => (dispatch, getState) => {
+    const collection = getState().entities.home.playbooks.collection;
+    dispatch(setCommentEditLoading(id))
+    dispatch(apiCallBegan({
+        url: 'edit-playbook-comment',
+        method: "post",
+        data:{id, collection, comment},
+        headers: {},
+        onSuccess: handlePBEdit.type,   
     }))
 }

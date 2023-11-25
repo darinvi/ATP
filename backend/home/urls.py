@@ -7,4 +7,5 @@ urlpatterns = [
     path("api/create-playbook-comment", views.leave_playbook_comment),
     path("api/load-playbook-comments", views.load_playbook_comments),
     path("api/delete-playbook-comment", views.delete_playbook_comment),
+    path("api/edit-playbook-comment", views.edit_playbook_comment),
 ]
