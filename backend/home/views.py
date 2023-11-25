@@ -20,6 +20,7 @@ SERIALIZERS = {
     'playbook': PublicPlayBookSerializer,
     'journal': DailyJournalSerializer 
 }
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -69,7 +70,6 @@ def leave_playbook_comment(request):
     }
     response_to = data.get('to')
     if response_to: comment_body['to'] = response_to
-    db = mongo_client()['testdb']
-    collection = db.get_collection(data.get('collection'))
+    collection = mongo_client()['testdb'].get_collection(data.get('collection'))
     collection.insert_one(comment_body)
     return Response()

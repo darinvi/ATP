@@ -51,11 +51,7 @@ const slice = createSlice({
         },
         clearComments: (home, action) => {
             home.playbooks.commentType = "General"
-            if (action.payload) {
-
-            } else {
-                home.playbooks.comments = [];
-            }
+            home.playbooks.comments = [];
         }
     }
 });
@@ -100,4 +96,8 @@ export const getStockMetrics = (ticker, date) => (dispatch) => {
         onSuccess: setTableData.type,
         onError: clearTableData.type
     }))
+}
+
+export const loadPlaybookComments = (playbook_id, collection) => (dispatch) => {
+
 }

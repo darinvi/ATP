@@ -1,15 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import { handleComments, clearComments } from "../../../../../../../store/home";
-import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { handleComments } from "../../../../../../../store/home";
+
 
 export default function MaximizedVariable(props) {
 
     const dispatch = useDispatch();
     const commentType = useSelector(state => state.entities.home.playbooks.commentType);
-
-    useEffect(()=>{
-        return () => dispatch(clearComments());
-    },[])
 
     function handleCommentClick(){
         dispatch(handleComments([props.k,mapFeatures[props.k]]))
