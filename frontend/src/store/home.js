@@ -13,6 +13,7 @@ const slice = createSlice({
             tableLoading: false,
             commentsLoading: false,
             commentCreateLoading: false,
+            deletingId: null,
             commentType: "General",
             collection: 'general_comments',
             comments: [],
@@ -57,6 +58,9 @@ const slice = createSlice({
         setCommentCreateLoading: (home) => {
             home.playbooks.commentCreateLoading = true;
         },
+        setCommentDeleteLoading: (home, action) => {
+            home.playbooks.deletingId = action.payload;
+        },
         handleComments: (home, action) => {
             home.playbooks.commentType = action.payload[1];
             home.playbooks.collection = `${action.payload[0]}_comments`;
@@ -82,6 +86,10 @@ const slice = createSlice({
             home.playbooks.error = false;
             home.playbooks.commentCreateLoading = false;
         },
+        handlePBDelete: (home, action) => {
+            home.playbooks.comments = home.playbooks.comments.filter(e => e._id != action.payload);
+            home.playbooks.deletingId = null;
+        }
     }
 });
 
@@ -93,7 +101,9 @@ const {
     setCommentsLoading,
     setCommentCreateLoading,
     handlePBCommentCreate,
-    handlePBError
+    handlePBError,
+    handlePBDelete,
+    setCommentDeleteLoading
 } = slice.actions;
 
 export const {
@@ -163,12 +173,12 @@ export const leavePlaybookComment = (comment) => (dispatch, getState) => {
 
 export const deletePBComment = (id) => (dispatch, getState) => {
     const collection = getState().entities.home.playbooks.collection;
+    dispatch(setCommentDeleteLoading(id))
     dispatch(apiCallBegan({
         url: 'delete-playbook-comment',
         method: "post",
         data:{id, collection},
         headers: {},
-        // onSuccess: ,    
-        // onError:
+        onSuccess: handlePBDelete.type,   
     }))
 }

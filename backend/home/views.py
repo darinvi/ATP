@@ -8,9 +8,11 @@ from journals.serializers import DailyJournalSerializer
 # from django.http import JsonResponse
 from rest_framework.response import Response
 from scripts.backtests.stock_metrics import compute_metrics
-import json
 from scripts.mongo.client import mongo_client
-import time
+from bson import ObjectId
+import json, time
+
+# X7W
 
 MODELS = {
     'playbook': PlayBook, 
@@ -98,5 +100,7 @@ def load_playbook_comments(request):
 def delete_playbook_comment(request):
     data = json.loads(request.body)
     collection = mongo_client()['testdb'].get_collection(data.get('collection'))
-    comment = collection.find({'_id': data.get('id')})
-    print(comment)
+    id = data.get('id')
+    query = {'_id': ObjectId(id)}
+    collection.delete_one(query)
+    return Response(id)
