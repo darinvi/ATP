@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { handleComments } from "../../../../../../../store/home";
-
+import { loadPlaybookComments } from "../../../../../../../store/home";
 
 export default function MaximizedVariable(props) {
 
@@ -9,6 +9,7 @@ export default function MaximizedVariable(props) {
 
     function handleCommentClick(){
         dispatch(handleComments([props.k,mapFeatures[props.k]]))
+        dispatch(loadPlaybookComments())
     }
 
     const mapFeatures = {

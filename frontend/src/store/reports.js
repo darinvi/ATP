@@ -202,7 +202,7 @@ function applyFilters(data, filterVariable, comparisonType, filterValue) {
                         true
                         :
                         ( 
-                            h == fvh
+                            h === fvh
                                 ?
                                 (
                                     m > fvm
@@ -210,7 +210,7 @@ function applyFilters(data, filterVariable, comparisonType, filterValue) {
                                         true
                                         :
                                         (
-                                            m == fvm
+                                            m === fvm
                                                 ?
                                                 (s > fvs ? true : false)
                                                 :

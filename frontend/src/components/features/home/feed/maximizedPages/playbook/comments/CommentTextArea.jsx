@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
+import { leavePlaybookComment } from "../../../../../../../store/home";
 
 export default function CommentTextArea() {
 
@@ -8,7 +9,7 @@ export default function CommentTextArea() {
 
     return (
         <div
-            className="flex w-full px-4 gap-2 pt-2 border-t-2"
+            className="flex w-full px-4 gap-2 pt-2 border-t-2 flex-1"
         >
             <div className="w-full">
                 <textarea
@@ -22,7 +23,8 @@ export default function CommentTextArea() {
                     disabled={!comment}
                     className="px-2 bg-green-200 hover:bg-green-300 rounded border border-green-900 disabled:bg-gray-200 transform active:scale-95 disabled:scale-100"
                     onClick={()=>{
-                        // dispatch();
+                        // validate that the comment is not spaces only here
+                        dispatch(leavePlaybookComment(comment));
                     }}
                 >Comment</button>
                 <button

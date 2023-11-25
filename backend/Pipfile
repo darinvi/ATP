@@ -14,8 +14,8 @@ pandas = "*"
 bs4 = "*"
 pyarrow = "*"
 fastparquet = "*"
-pymongo = "*"
 django-environ = "*"
+pymongo = "*"
 
 [dev-packages]
 

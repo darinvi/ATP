@@ -31,7 +31,7 @@ export default function MaximizedPage() {
     function maximizedPost() {
         return (
             <div
-                className="h-[90%] w-[85%] bg-white mx-auto z-30 rounded border-2 border-black"
+                className="h-[90%] w-[85%] bg-white mx-auto z-30 rounded border-2 border-black relative"
                 // ref={myElementRef}
                 // tabIndex="0"
                 // onKeyDown={e => {
@@ -54,11 +54,11 @@ export default function MaximizedPage() {
             ref={myElementRef}
             tabIndex="0"
             onKeyDown={e => {
-                if (e.code == 'Escape') {
+                if (e.code === 'Escape') {
                     dispatch(setMaximized())
-                } else if (e.code == 'ArrowUp') {
+                } else if (e.code === 'ArrowUp') {
                     // dispatch data is previous post
-                } else if (e.code == 'ArrowDown') {
+                } else if (e.code === 'ArrowDown') {
                     // dispatch data is next post
                 }
             }}

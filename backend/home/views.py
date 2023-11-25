@@ -72,4 +72,13 @@ def leave_playbook_comment(request):
     if response_to: comment_body['to'] = response_to
     collection = mongo_client()['testdb'].get_collection(data.get('collection'))
     collection.insert_one(comment_body)
+    # try to fetch the newly created comment, on success return it.
     return Response()
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def load_playbook_comments(request):
+    data = json.loads(request.body)
+    collection = mongo_client()['testdb'].get_collection(data.get('collection'))
+    return Response([{**c, '_id':str(c["_id"])} for c in collection.find({'playbook':data.get('playbook_id')})])

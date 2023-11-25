@@ -52,6 +52,9 @@ const slice = createSlice({
         clearComments: (home, action) => {
             home.playbooks.commentType = "General"
             home.playbooks.comments = [];
+        },
+        setComments: (home, action) => {
+            home.playbooks.comments = action.payload;
         }
     }
 });
@@ -59,7 +62,8 @@ const slice = createSlice({
 const {
     addPosts,
     setTableData,
-    setTableLoading
+    setTableLoading,
+    setComments
 } = slice.actions;
 
 export const {
@@ -98,6 +102,28 @@ export const getStockMetrics = (ticker, date) => (dispatch) => {
     }))
 }
 
-export const loadPlaybookComments = (playbook_id, collection) => (dispatch) => {
+export const loadPlaybookComments = () => (dispatch, getState) => {
+    const collection = getState().entities.home.playbooks.commentType;
+    const playbook_id = getState().entities.home.maximizedData.id;
+    dispatch(apiCallBegan({
+        url: 'load-playbook-comments',
+        method: "post",
+        data:{playbook_id, collection},
+        headers: {},
+        onSuccess: setComments.type,
+        // onError: 
+    }))
+}
 
+export const leavePlaybookComment = (comment) => (dispatch, getState) => {
+    const collection = getState().entities.home.playbooks.commentType;
+    const playbook = getState().entities.home.maximizedData.id;
+    dispatch(apiCallBegan({
+        url: 'leave-playbook-comment',
+        method: "post",
+        data:{playbook, comment, collection},
+        headers: {},
+        // onSuccess: ,
+        // onError: 
+    }))
 }
