@@ -11,8 +11,12 @@ const slice = createSlice({
         playbooks: {
             table: null,
             tableLoading: false,
+            commentsLoading: false,
+            commentCreateLoading: false,
             commentType: "General",
-            comments: []
+            collection: 'general_comments',
+            comments: [],
+            error: false
         }
     },
     reducers: {
@@ -46,16 +50,38 @@ const slice = createSlice({
         setTableLoading: (home) => {
             home.playbooks.tableLoading = true;
         },
+        setCommentsLoading: (home) => {
+            home.playbooks.comments = [];
+            home.playbooks.commentsLoading = true;
+        },
+        setCommentCreateLoading: (home) => {
+            home.playbooks.commentCreateLoading = true;
+        },
         handleComments: (home, action) => {
             home.playbooks.commentType = action.payload[1];
+            home.playbooks.collection = `${action.payload[0]}_comments`;
         },
-        clearComments: (home, action) => {
-            home.playbooks.commentType = "General"
+        clearComments: (home) => {
+            home.playbooks.commentType = "General";
+            home.playbooks.collection = "general_comments";
             home.playbooks.comments = [];
         },
         setComments: (home, action) => {
             home.playbooks.comments = action.payload;
-        }
+            home.playbooks.commentsLoading = false;
+        },
+        handlePBCommentCreate: (home, action) => {
+            home.playbooks.commentCreateLoading = false;
+            home.playbooks.comments.unshift(action.payload);
+        },
+        handlePBError: (home) => {
+            home.playbooks.error = true;
+            home.playbooks.commentCreateLoading = false;
+        },
+        clearPBError: (home) => {
+            home.playbooks.error = false;
+            home.playbooks.commentCreateLoading = false;
+        },
     }
 });
 
@@ -63,7 +89,11 @@ const {
     addPosts,
     setTableData,
     setTableLoading,
-    setComments
+    setComments,
+    setCommentsLoading,
+    setCommentCreateLoading,
+    handlePBCommentCreate,
+    handlePBError
 } = slice.actions;
 
 export const {
@@ -73,7 +103,8 @@ export const {
     setMaximized,
     clearTableData,
     handleComments,
-    clearComments
+    clearComments,
+    clearPBError
 } = slice.actions;
 
 export default slice.reducer;
@@ -103,8 +134,9 @@ export const getStockMetrics = (ticker, date) => (dispatch) => {
 }
 
 export const loadPlaybookComments = () => (dispatch, getState) => {
-    const collection = getState().entities.home.playbooks.commentType;
+    const collection = getState().entities.home.playbooks.collection;
     const playbook_id = getState().entities.home.maximizedData.id;
+    dispatch(setCommentsLoading())
     dispatch(apiCallBegan({
         url: 'load-playbook-comments',
         method: "post",
@@ -116,14 +148,27 @@ export const loadPlaybookComments = () => (dispatch, getState) => {
 }
 
 export const leavePlaybookComment = (comment) => (dispatch, getState) => {
-    const collection = getState().entities.home.playbooks.commentType;
+    dispatch(setCommentCreateLoading());
+    const collection = getState().entities.home.playbooks.collection;
     const playbook = getState().entities.home.maximizedData.id;
     dispatch(apiCallBegan({
-        url: 'leave-playbook-comment',
+        url: 'create-playbook-comment',
         method: "post",
         data:{playbook, comment, collection},
         headers: {},
-        // onSuccess: ,
-        // onError: 
+        onSuccess: handlePBCommentCreate.type,
+        onError: handlePBError.type
+    }));
+}
+
+export const deletePBComment = (id) => (dispatch, getState) => {
+    const collection = getState().entities.home.playbooks.collection;
+    dispatch(apiCallBegan({
+        url: 'delete-playbook-comment',
+        method: "post",
+        data:{id, collection},
+        headers: {},
+        // onSuccess: ,    
+        // onError:
     }))
 }

@@ -8,7 +8,7 @@ export default function MaximizedVariable(props) {
     const commentType = useSelector(state => state.entities.home.playbooks.commentType);
 
     function handleCommentClick(){
-        dispatch(handleComments([props.k,mapFeatures[props.k]]))
+        dispatch(handleComments([props.k, mapFeatures[props.k]]))
         dispatch(loadPlaybookComments())
     }
 
@@ -23,7 +23,7 @@ export default function MaximizedVariable(props) {
 
     function notActive() {
         return (
-            <div className="flex w-full relative items-center border">
+            <div className="flex w-full relative items-center border cursor-pointer">
                 <p
                     className={`text-center hover:bg-gray-200 w-full py-1 ${props.active == props.k && "bg-gray-200"}`}
                     onClick={() => {

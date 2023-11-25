@@ -42,13 +42,6 @@ const api = ({dispatch, getState}) => next => async action => {
         // general
 
         dispatch(actions.apiCallFailed(err.message))
-
-        // I DONT REMEMBER THE PURPOSE OF THIS.
-        // if (err.request.status === 401) {
-        //     dispatch(logout())
-        // }
-        // specific
-
         
         let onErrorMessage;
         if (err.response.data.message) {

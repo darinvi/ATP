@@ -25,6 +25,7 @@ export default function CommentTextArea() {
                     onClick={()=>{
                         // validate that the comment is not spaces only here
                         dispatch(leavePlaybookComment(comment));
+                        setComment("");
                     }}
                 >Comment</button>
                 <button

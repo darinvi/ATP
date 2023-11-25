@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from scripts.backtests.stock_metrics import compute_metrics
 import json
 from scripts.mongo.client import mongo_client
+import time
 
 MODELS = {
     'playbook': PlayBook, 
@@ -62,18 +63,26 @@ def leave_playbook_comment(request):
     comment = data.get('comment')
     playbook = data.get('playbook')
     user = request.user
+    timestamp = time.time()
     comment_body = {
         'comment': comment,
         'playbook': playbook,
-        'by': user.pk,
-        'username': user.username
+        'user_id': user.pk,
+        'username': user.username,
+        'time': timestamp
     }
     response_to = data.get('to')
     if response_to: comment_body['to'] = response_to
     collection = mongo_client()['testdb'].get_collection(data.get('collection'))
     collection.insert_one(comment_body)
-    # try to fetch the newly created comment, on success return it.
-    return Response()
+    try: 
+        created = collection.find_one({'user_id':user.pk, 'time':timestamp})
+        if created:
+            return Response({**created, '_id': str(created['_id'])}, status=200)
+        else:
+            return Response({'message': 'Not created'}, status=500)
+    except Exception as e:
+        return Response({'message': e}, status=500)
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
@@ -82,3 +91,12 @@ def load_playbook_comments(request):
     data = json.loads(request.body)
     collection = mongo_client()['testdb'].get_collection(data.get('collection'))
     return Response([{**c, '_id':str(c["_id"])} for c in collection.find({'playbook':data.get('playbook_id')})])
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def delete_playbook_comment(request):
+    data = json.loads(request.body)
+    collection = mongo_client()['testdb'].get_collection(data.get('collection'))
+    comment = collection.find({'_id': data.get('id')})
+    print(comment)
