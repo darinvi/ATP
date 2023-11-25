@@ -5,16 +5,17 @@ import { hideTime } from "../../../store/filings"
 import PostsFeed from "./feed/PostsFeed"
 import { setLastPage } from "../../../store/filings"
 import MaximizedPage from "./feed/maximizedPages/MaximizedPage"
+import { setMaximized } from "../../../store/home"
 
 export default function Home() {
 
     const dispatch = useDispatch();
     const maximized = useSelector(state => state.entities.home.maximized)
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(hideTime());
         dispatch(setLastPage("home"));
-    },[])
+    }, [])
 
     // FilingRow clicked form the Home page to go to Filing page and render the html cliced. <------------- 1
     // On click of the date to render a bar chart of the ticker for that date.
@@ -27,10 +28,12 @@ export default function Home() {
     // Mark posts as read is a good way to keep the page simple and not have to worry about rendering tons of playbooks (even ones already read)
     return (
         <div className="flex">
-                <div className="overflow-y-auto h-[92vh] border border-gray-900 overflow-x-hidden">
-                    <ListFilings additionalClass={"w-fit"} />
-                </div>
-                <PostsFeed />
-                {maximized && <MaximizedPage />}
+            <div
+                className="overflow-y-auto h-[92vh] border border-gray-900 overflow-x-hidden"
+            >
+                <ListFilings additionalClass={"w-fit"} />
+            </div>
+            <PostsFeed />
+            {maximized && <MaximizedPage />}
         </div>)
 }

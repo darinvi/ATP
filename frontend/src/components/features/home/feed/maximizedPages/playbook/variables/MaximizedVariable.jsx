@@ -1,25 +1,45 @@
+import { useDispatch, useSelector } from "react-redux";
+import { handleComments, clearComments } from "../../../../../../../store/home";
+import { useEffect } from "react";
+
 export default function MaximizedVariable(props) {
 
+    const dispatch = useDispatch();
+    const commentType = useSelector(state => state.entities.home.playbooks.commentType);
+
+    useEffect(()=>{
+        return () => dispatch(clearComments());
+    },[])
+
     function handleCommentClick(){
-        return
+        dispatch(handleComments([props.k,mapFeatures[props.k]]))
+    }
+
+    const mapFeatures = {
+        'market_fundamentals': 'Market Fundamentals',
+        'market_technicals': 'Market Technicals',
+        'ticker_fundamentals': 'Ticker Fundamentals',
+        'ticker_technicals': 'Ticker Technicals',
+        'trade_management': 'Trade Management',
+        'tape_reading': 'Tape Reading',
     }
 
     function notActive() {
         return (
             <div className="flex w-full relative items-center border">
                 <p
-                    className={`text-center py-1 hover:bg-gray-200 w-full ${props.active == props.k && "bg-gray-200"}`}
+                    className={`text-center hover:bg-gray-200 w-full py-1 ${props.active == props.k && "bg-gray-200"}`}
                     onClick={() => {
                         if (props.active == props.k) props.setActive("");
                         else props.setActive(props.k);
                     }}
                     onDoubleClick={e => e.stopPropagation()}
-                    >{props.k}</p>
+                    >{mapFeatures[props.k]}</p>
                 <button
-                    className="h-full text-xs bg-yellow-200 p-2 transform hover:bg-yellow-300 active:scale-95 border border-yellow-600"
+                    className={`h-full px-2 hover:text-yellow-300 active:text-white py-1 ${mapFeatures[props.k] == commentType && "bg-gray-200"}`}
                     onDoubleClick={e => e.stopPropagation()}
                     onClick={handleCommentClick}
-                >C</button>
+                >{'>'}</button>
             </div>
         )
     }

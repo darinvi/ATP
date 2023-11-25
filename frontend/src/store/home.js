@@ -8,8 +8,12 @@ const slice = createSlice({
         filteredPosts : [],
         maximized: false,
         maximizedData: null, // the post type will be added to the posts so I will get the type from here
-        maximizedTable: null,
-        tableLoading: false
+        playbooks: {
+            table: null,
+            tableLoading: false,
+            commentType: "General",
+            comments: []
+        }
     },
     reducers: {
         addPosts: (home, action) => {
@@ -32,15 +36,26 @@ const slice = createSlice({
             home.maximizedData = action.payload;
         },
         setTableData: (home, action, bool) => {
-            home.maximizedTable = action.payload;
-            home.tableLoading = false;
+            home.playbooks.table = action.payload;
+            home.playbooks.tableLoading = false;
         },
         clearTableData: (home) => {
-            home.maximizedTable = null;
-            home.tableLoading = false;
+            home.table = null;
+            home.playbooks.tableLoading = false;
         },
         setTableLoading: (home) => {
-            home.tableLoading = true;
+            home.playbooks.tableLoading = true;
+        },
+        handleComments: (home, action) => {
+            home.playbooks.commentType = action.payload[1];
+        },
+        clearComments: (home, action) => {
+            home.playbooks.commentType = "General"
+            if (action.payload) {
+
+            } else {
+                home.playbooks.comments = [];
+            }
         }
     }
 });
@@ -56,7 +71,9 @@ export const {
     removeFiltered,
     resetPosts,
     setMaximized,
-    clearTableData
+    clearTableData,
+    handleComments,
+    clearComments
 } = slice.actions;
 
 export default slice.reducer;

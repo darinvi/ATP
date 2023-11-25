@@ -1,8 +1,6 @@
 from knox.auth import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
-from journals.models import JournalComment
 from playbooks.models import PlayBook
 from journals.models import DailyJournal
 from playbooks.serializers import PublicPlayBookSerializer
@@ -62,5 +60,16 @@ def leave_playbook_comment(request):
     data = json.loads(request.body)
     comment = data.get('comment')
     playbook = data.get('playbook')
-    user_id = request.user.pk
-    db = mongo_client()['testdb'].get_collection('playbook_comments')
+    user = request.user
+    comment_body = {
+        'comment': comment,
+        'playbook': playbook,
+        'by': user.pk,
+        'username': user.username
+    }
+    response_to = data.get('to')
+    if response_to: comment_body['to'] = response_to
+    db = mongo_client()['testdb']
+    collection = db.get_collection(data.get('collection'))
+    collection.insert_one(comment_body)
+    return Response()

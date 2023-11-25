@@ -27,7 +27,6 @@ export default function DisplayVariables() {
                         active={active}
                         setActive={setActive}
                     />
-
                 )
             })}
         </div>

@@ -5,8 +5,8 @@ import { getStockMetrics, clearTableData } from "../../../../../../../store/home
 export default function MetricsTable({ ticker, date }) {
 
     const dispatch = useDispatch();
-    const tableData = useSelector(state => state.entities.home.maximizedTable);
-    const loading = useSelector(state => state.entities.home.tableLoading);
+    const tableData = useSelector(state => state.entities.home.playbooks.table);
+    const loading = useSelector(state => state.entities.home.playbooks.tableLoading);
 
     useEffect(() => {
         dispatch(getStockMetrics(ticker, date))
