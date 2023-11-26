@@ -105,12 +105,9 @@ const slice = createSlice({
             home.playbooks.editingId = null;
         },
         setNextPost: (home, action) => {
-            try {
-                home.maximizedData = home.allPosts[action.payload];
-            } catch(e) {
-                console.log(e);
-            }
-        }
+            home.maximizedData = home.allPosts[action.payload];
+        },
+
     }
 });
 
@@ -155,7 +152,9 @@ export const loadAllPosts = () => (dispatch) => {
     }
 }
 
-export const getStockMetrics = (ticker, date) => (dispatch) => {
+export const getStockMetrics = () => (dispatch, getState) => {
+    const ticker = getState().entities.home.maximizedData.ticker;
+    const date = getState().entities.home.maximizedData.date.split('T')[0];
     dispatch(setTableLoading())
     dispatch(apiCallBegan({
         url: 'get_stock_metrics',
@@ -217,4 +216,10 @@ export const editPBComment = (id, comment) => (dispatch, getState) => {
         headers: {},
         onSuccess: handlePBEdit.type,   
     }))
+}
+
+export const handleNextPost = (id) => (dispatch, getState) => {
+    dispatch(setNextPost(id));
+    dispatch(getStockMetrics());
+    dispatch(loadPlaybookComments());
 }

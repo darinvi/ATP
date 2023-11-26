@@ -2,14 +2,14 @@ import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getStockMetrics, clearTableData } from "../../../../../../../store/home";
 
-export default function MetricsTable({ ticker, date }) {
+export default function MetricsTable({ ticker}) {
 
     const dispatch = useDispatch();
     const tableData = useSelector(state => state.entities.home.playbooks.table);
     const loading = useSelector(state => state.entities.home.playbooks.tableLoading);
 
     useEffect(() => {
-        dispatch(getStockMetrics(ticker, date))
+        dispatch(getStockMetrics())
         return () => dispatch(clearTableData())
     }, [])
 
