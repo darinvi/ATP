@@ -6,12 +6,12 @@ export default function PostButton() {
     const [isActive, setIsActive] = useState(false)
 
     return (
-        <div>
+        <>
             <button
                 onClick={()=>setIsActive(prev => !prev)} 
-                className={`border-2 ${ isActive ? "bg-red-300 hover:bg-red-400 border-red-900" : "bg-green-300 hover:bg-green-400 border-green-900"} rounded-md px-4 transform active:scale-95`}
-            >{isActive ? "Close" : "Post"}</button>
+                className={`border border-green-900 bg-green-300 hover:bg-green-400 rounded px-2 transform active:scale-95 h-fit text-xs mr-2`}
+            >Post</button>
             { isActive && <PostInput setIsActive={setIsActive} />}
-        </div>
+        </>
     )
 }
