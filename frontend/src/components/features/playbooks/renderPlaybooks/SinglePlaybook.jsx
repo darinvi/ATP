@@ -89,6 +89,16 @@ export default function SinglePlaybook(props) {
     return (
         <div
             className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-y-2 border-gray-200 shadow-2xl mb-8"} w-full`}
+            id={play.counter}
+            onClick={() => {
+                const item = document.getElementById(play.counter);
+                if (!isActive) {
+                    item.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+                }
+            }}
         >
             {notActive()}
             <PlaybookActive
