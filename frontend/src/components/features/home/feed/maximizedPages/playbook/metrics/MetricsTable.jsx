@@ -19,7 +19,7 @@ export default function MetricsTable({ ticker}) {
         const colClass = "flex-1 text-center"
         return (
             <div
-                className="flex w-full border-b-2 border-gray-300"
+                className="flex w-full border-b-2 border-gray-300 sticky top-0 bg-white"
             >
                 <p
                     className={colClass}
@@ -99,7 +99,7 @@ export default function MetricsTable({ ticker}) {
         <div className="pl-2">
             {loading
                 ?
-                <p className="text-3xl text-center animate-ping">Loading...</p>
+                <p className="text-3xl text-center animate-ping w-fit mx-auto">Loading...</p>
                 :
                 <>
                     {tableHead()}

@@ -218,7 +218,7 @@ export const editPBComment = (id, comment) => (dispatch, getState) => {
     }))
 }
 
-export const handleNextPost = (id) => (dispatch, getState) => {
+export const handleNextPost = (id) => (dispatch) => {
     dispatch(setNextPost(id));
     dispatch(getStockMetrics());
     dispatch(loadPlaybookComments());
