@@ -5,7 +5,6 @@ import { hideTime } from "../../../store/filings"
 import PostsFeed from "./feed/PostsFeed"
 import { setLastPage } from "../../../store/filings"
 import MaximizedPage from "./feed/maximizedPages/MaximizedPage"
-import { setMaximized } from "../../../store/home"
 
 export default function Home() {
 

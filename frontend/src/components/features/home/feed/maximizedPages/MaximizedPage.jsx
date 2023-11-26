@@ -1,24 +1,21 @@
 import { useDispatch, useSelector } from "react-redux"
 import { setMaximized } from "../../../../../store/home";
 import MaximizedPlaybook from "./playbook/MaximizedPlaybook";
-
-
+import { setNextPost } from "../../../../../store/home";
 import { useEffect, useRef } from 'react';
-
-
 
 export default function MaximizedPage() {
     const myElementRef = useRef(null);
     
     useEffect(() => {
-      // Focus the element when the component mounts
       if (myElementRef.current) {
         myElementRef.current.focus();
       }
     }, []);
 
     const dispatch = useDispatch();
-    const currentPost = useSelector(state => state.entities.home.maximizedData)
+    const currentPost = useSelector(state => state.entities.home.maximizedData);
+    const counter = useSelector(state => state.entities.home.postCounter);
 
     const pages = {
         'playbook': <MaximizedPlaybook />
@@ -50,9 +47,9 @@ export default function MaximizedPage() {
                 if (e.code === 'Escape') {
                     dispatch(setMaximized())
                 } else if (e.code === 'ArrowUp') {
-                    // dispatch data is previous post
+                    if (currentPost.counter > 0) dispatch(setNextPost(currentPost.counter - 1))
                 } else if (e.code === 'ArrowDown') {
-                    // dispatch data is next post
+                    if (currentPost.counter < counter - 2) dispatch(setNextPost(currentPost.counter + 1))
                 }
             }}
         >

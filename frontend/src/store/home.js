@@ -4,10 +4,11 @@ import { apiCallBegan } from "./api";
 const slice = createSlice({
     name: 'home',
     initialState: {
-        allPosts : [],
+        allPosts : {},
+        postCounter: 0,
         filteredPosts : [],
         maximized: false,
-        maximizedData: null, // the post type will be added to the posts so I will get the type from here
+        maximizedData: null, // the post type will be added to the posts so I will get the type from there
         playbooks: {
             table: null,
             tableLoading: false,
@@ -23,7 +24,10 @@ const slice = createSlice({
     },
     reducers: {
         addPosts: (home, action) => {
-            home.allPosts = [...home.allPosts, ...action.payload];
+            for (let post of action.payload) {
+                post['counter'] = home.postCounter;
+                home.allPosts[home.postCounter++] = post;
+            }
         },
         filterPostType: (home, action) => {
             home.filteredPosts.push(action.payload)
@@ -34,7 +38,8 @@ const slice = createSlice({
             localStorage.setItem('feedFilters', home.filteredPosts)
         },
         resetPosts: (home) => {
-            home.allPosts = [];
+            home.allPosts = {};
+            home.postCounter = 0;
         },
         // next, modify this to be a onSuccess function when minimized pressed after a fetch of the comments of a given playbook.
         setMaximized: (home, action) => { 
@@ -98,6 +103,13 @@ const slice = createSlice({
             const comment = home.playbooks.comments.find(e => e._id == action.payload[0]);
             comment.comment = action.payload[1];
             home.playbooks.editingId = null;
+        },
+        setNextPost: (home, action) => {
+            try {
+                home.maximizedData = home.allPosts[action.payload];
+            } catch(e) {
+                console.log(e);
+            }
         }
     }
 });
@@ -125,7 +137,8 @@ export const {
     clearTableData,
     handleComments,
     clearComments,
-    clearPBError
+    clearPBError,
+    setNextPost
 } = slice.actions;
 
 export default slice.reducer;
