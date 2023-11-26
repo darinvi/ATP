@@ -57,25 +57,28 @@ export default function SinglePlaybookComment({ comment }) {
                     onClick={() => setEdit(prev => !prev)}
                 >{edit ? 'save' : 'edit'}</button>}
 
-                {comment.username == user &&
-                    delActive
-                    ?
-                    <>
-                        <p className="text-xs">proceed?</p>
-                        <button
-                            className="text-xs"
-                            onClick={() => dispatch(deletePBComment(comment._id))}
-                        >yes</button>
+                {comment.username === user &&
+                    (
+                        delActive
+                        ?
+                        <>
+                            <p className="text-xs">proceed?</p>
+                            <button
+                                className="text-xs"
+                                onClick={() => dispatch(deletePBComment(comment._id))}
+                            >yes</button>
+                            <button
+                                className="text-xs"
+                                onClick={() => setDelActive(prev => !prev)}
+                            >no</button>
+                        </>
+                        :
                         <button
                             className="text-xs"
                             onClick={() => setDelActive(prev => !prev)}
-                        >no</button>
-                    </>
-                    :
-                    <button
-                        className="text-xs"
-                        onClick={() => setDelActive(prev => !prev)}
-                    >delete</button>}
+                        >delete</button>
+                    )
+                }
             </div>
         </div>
     )

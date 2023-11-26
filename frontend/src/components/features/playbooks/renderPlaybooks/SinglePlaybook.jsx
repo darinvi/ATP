@@ -16,7 +16,7 @@ export default function SinglePlaybook(props) {
     const [seen, setSeen] = useState(true);
 
     useEffect(() => {
-        if (isActive) setBgColor("bg-gray-200");
+        if (isActive) setBgColor("bg-gray-300");
         const timeoutId = setTimeout(() => {
             if (!isActive && !seen) {
                 setBgColor("bg-white")
@@ -31,7 +31,7 @@ export default function SinglePlaybook(props) {
 
         return (
             <div
-                className={`flex items-center gap-4 w-full pr-4 cursor-pointer ${bgColor}`}
+                className={`flex items-center hover:bg-gray-100 gap-4 w-full pr-4 cursor-pointer ${bgColor}`}
                 onClick={() => {
                     setIsActive(prev => !prev)
                     if (firstClick) {

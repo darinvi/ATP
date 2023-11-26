@@ -1,4 +1,4 @@
-import PostButton from "./PostButton"
+import PostButton from "./createPostForms.jsx/PostButton"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { loadAllPosts, resetPosts } from "../../../../store/home"

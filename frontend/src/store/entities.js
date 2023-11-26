@@ -7,6 +7,7 @@ import backtestsReducer from './backtests.js'
 import tablesReducer from './tables.js'
 import playbooksReducer from './playbooks.js'
 import homeReducer from './home.js'
+import postsReducer from './posts.js'
 
 export default combineReducers({
     filings: filingsReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
     tables: tablesReducer,
     playbooks: playbooksReducer,
     home: homeReducer,
+    posts: postsReducer,
 })

@@ -25,7 +25,7 @@ export default function MaximizedVariable(props) {
         return (
             <div className="flex w-full relative items-center border cursor-pointer">
                 <p
-                    className={`text-center hover:bg-gray-200 w-full py-1 ${props.active == props.k && "bg-gray-200"}`}
+                    className={`text-center hover:bg-gray-200 hover:text-yellow-700 w-full py-1 ${props.active == props.k && "bg-gray-200"}`}
                     onClick={() => {
                         if (props.active == props.k) props.setActive("");
                         else props.setActive(props.k);
@@ -47,7 +47,7 @@ export default function MaximizedVariable(props) {
                 className="border-b-2 shadow-lg mb-2 py-2"
             >
                 <p
-                    className="pl-2 select-text break-words"
+                    className="pl-4 pr-2 select-text break-words"
                     onDoubleClick={e => e.stopPropagation()}
                 >{props.v}</p>
             </div>
