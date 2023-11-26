@@ -19,12 +19,14 @@ export default function PostsFeed() {
     }, [])
 
     return (
-        <div className="overflow-y-auto h-[92vh] border border-gray-900 w-[50vw] bg-gray-100">
-            <div className="flex sticky top-0 border-b border-gray-900 bg-cyan-700 justify-between z-20">
+        <div className="max-h-[92vh] border border-gray-900 w-[50vw] bg-gray-100">
+            <div className="flex border-b border-gray-900 bg-cyan-700 justify-between h-fit">
                 <FilterPosts />
                 <PostButton />
             </div>
-            <RenderPosts />
+            <div className="overflow-y-auto h-[95%]">
+                <RenderPosts />
+            </div>
         </div>
     )
 }
