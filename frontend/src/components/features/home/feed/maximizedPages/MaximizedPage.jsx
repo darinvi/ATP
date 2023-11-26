@@ -32,13 +32,6 @@ export default function MaximizedPage() {
         return (
             <div
                 className="h-[90%] w-[85%] bg-white mx-auto z-30 rounded border-2 border-black relative"
-                // ref={myElementRef}
-                // tabIndex="0"
-                // onKeyDown={e => {
-                //     if (e.code == 'Escape') {
-                //         dispatch(setMaximized())
-                //     }
-                // }}
                 onDoubleClick={e => e.stopPropagation()} 
                 onClick={e => e.stopPropagation()}
             >

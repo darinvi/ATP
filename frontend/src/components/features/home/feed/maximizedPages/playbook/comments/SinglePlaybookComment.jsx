@@ -10,6 +10,7 @@ export default function SinglePlaybookComment({ comment }) {
     const editId = useSelector(state => state.entities.home.playbooks.editingId);
     const dispatch = useDispatch();
     const [edit, setEdit] = useState(false);
+    const [delActive, setDelActive] = useState(false);
 
     function getTime() {
         const date = new Date(comment.time * 1000)
@@ -34,14 +35,14 @@ export default function SinglePlaybookComment({ comment }) {
                     ?
                     <p className="animate-pulse text-center">Deleting...</p>
                     :
-                    <EditableComment 
-                        comment={comment.comment} 
+                    <EditableComment
+                        comment={comment.comment}
                         edit={edit}
                         setEdit={setEdit}
                         id={comment._id}
                     />}
-            </p> 
-            
+            </p>
+
             <div className={`flex gap-2 text-gray-400 pl-2 ${[deleteId, editId].includes(comment._id) && "hidden"}`}>
                 <button
                     className="text-xs"
@@ -49,17 +50,32 @@ export default function SinglePlaybookComment({ comment }) {
 
                 <button
                     className="text-xs"
-                >comment</button>
+                >reply</button>
 
                 {comment.username == user && <button
                     className="text-xs"
-                    onClick={()=>setEdit(prev => !prev)}
+                    onClick={() => setEdit(prev => !prev)}
                 >{edit ? 'save' : 'edit'}</button>}
 
-                {comment.username == user && <button
-                    className="text-xs"
-                    onClick={() => dispatch(deletePBComment(comment._id))}
-                >delete</button>}
+                {comment.username == user &&
+                    delActive
+                    ?
+                    <>
+                        <p className="text-xs">proceed?</p>
+                        <button
+                            className="text-xs"
+                            onClick={() => dispatch(deletePBComment(comment._id))}
+                        >yes</button>
+                        <button
+                            className="text-xs"
+                            onClick={() => setDelActive(prev => !prev)}
+                        >no</button>
+                    </>
+                    :
+                    <button
+                        className="text-xs"
+                        onClick={() => setDelActive(prev => !prev)}
+                    >delete</button>}
             </div>
         </div>
     )

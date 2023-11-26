@@ -27,6 +27,13 @@ export default function EditableComment(props) {
                     value={edited}
                     onChange={e => setEdited(e.target.value)}
                     className="w-full h-auto border-2 px-1"
+                    onKeyDown={ e => {
+                        e.stopPropagation()
+                        if (e.code === 'Escape') {
+                            // setEdited()
+                            // exit without dispatching and editing on escape
+                        }
+                    }}
                 />
             </div>
         )
