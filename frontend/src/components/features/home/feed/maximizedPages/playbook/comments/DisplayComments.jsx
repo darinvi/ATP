@@ -16,11 +16,11 @@ export default function DisplayComments() {
     }, [])
 
     return (
-        <div className="flex flex-col flex-1 items-center w-full py-2">
+        <div className="flex flex-col flex-1 items-center w-full py-2 text-gray-300">
             <div
-                className="border-b-2 w-full text-center flex flex-col"
+                className="border-b-2 border-cyan-800 w-full text-center flex flex-col"
             >
-                <p className="w-fit border-b mx-auto">Comments</p>
+                <p className="w-fit border-b border-cyan-800 mx-auto">Comments</p>
                 <p
                     className={`w-fit mx-auto ${commentType !== 'General' && "hover:text-red-500"}`}
                     onClick={() => {

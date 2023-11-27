@@ -23,9 +23,9 @@ export default function MaximizedVariable(props) {
 
     function notActive() {
         return (
-            <div className="flex w-full relative items-center border cursor-pointer">
+            <div className="flex w-full relative items-center border border-cyan-700 bg-cyan-800 cursor-pointer">
                 <p
-                    className={`text-center hover:bg-gray-200 hover:text-yellow-700 w-full py-1 ${props.active == props.k && "bg-gray-200"}`}
+                    className={`text-center hover:bg-cyan-700 hover:text-white text-gray-400 w-full py-1 ${props.active == props.k && "bg-cyan-700"}`}
                     onClick={() => {
                         if (props.active == props.k) props.setActive("");
                         else props.setActive(props.k);
@@ -33,7 +33,7 @@ export default function MaximizedVariable(props) {
                     onDoubleClick={e => e.stopPropagation()}
                     >{mapFeatures[props.k]}</p>
                 <button
-                    className={`h-full px-2 hover:text-yellow-300 active:text-white py-1 ${mapFeatures[props.k] == commentType && "bg-gray-200"}`}
+                    className={`h-full px-2 hover:text-yellow-300 active:text-white py-1 ${mapFeatures[props.k] == commentType && "bg-cyan-700"}`}
                     onDoubleClick={e => e.stopPropagation()}
                     onClick={handleCommentClick}
                 >{'>'}</button>
@@ -44,10 +44,10 @@ export default function MaximizedVariable(props) {
     function isActive() {
         return (
             <div
-                className="border-b-2 shadow-lg mb-2 py-2"
+                className="border-b-2 border-cyan-800 shadow-lg mb-2 py-2"
             >
                 <p
-                    className="pl-4 pr-2 select-text break-words"
+                    className="pl-4 pr-2 select-text break-words text-gray-300"
                     onDoubleClick={e => e.stopPropagation()}
                 >{props.v}</p>
             </div>

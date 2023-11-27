@@ -27,7 +27,8 @@ export default function SinglePlaybook(props) {
 
     function notActive() {
 
-        const playbookOverview = "font-medium text-sm mr-2"
+        const playbookOverview = "font-medium text-sm mr-2 text-gray-400"
+        const dataClass = ""
 
         return (
             <div
@@ -41,14 +42,14 @@ export default function SinglePlaybook(props) {
                 }}
             >
                 <div className="flex flex-col w-full h-full py-3 items-center">
-                    <Link to={'/playbook'} className="font-medium hover:text-cyan-700 pb-1 w-fit border-b-2 border-gray-300">PlayBook</Link>
+                    <Link to={'/playbook'} className="font-medium hover:text-cyan-200 pb-1 w-fit border-b-2 border-cyan-700">PlayBook</Link>
                     <div className="flex w-full justify-around pb-4 pt-2">
                         <p>
                             <span
                                 className={playbookOverview}
                             >By:</span>
                             <span
-                                className="underline"
+                                className={dataClass}
                             >{play.user.username}</span></p>
 
                         <p>
@@ -56,7 +57,7 @@ export default function SinglePlaybook(props) {
                                 className={playbookOverview}
                             >Ticker:</span>
                             <span
-                                className="underline"
+                                className={dataClass}
                             >{play.ticker}</span></p>
 
                         <p>
@@ -64,7 +65,7 @@ export default function SinglePlaybook(props) {
                                 className={playbookOverview}
                             >Play:</span>
                             <span
-                                className="underline"
+                                className={dataClass}
                             >{play.play}</span></p>
 
                         <p>
@@ -72,7 +73,7 @@ export default function SinglePlaybook(props) {
                                 className={playbookOverview}
                             >Created:</span>
                             <span
-                                className="underline"
+                                className={dataClass}
                             >{play.date.split("T")[0]}</span></p>
                     </div>
                 </div>
@@ -88,7 +89,7 @@ export default function SinglePlaybook(props) {
 
     return (
         <div
-            className={`border border-gray-300 flex flex-col my-4 items-center hover:text-gray-100 ${isActive && "border-y-2 border-gray-200 shadow-2xl mb-8"} w-full text-gray-300`}
+            className={`border border-cyan-700 flex flex-col my-4 items-center text-gray-300 hover:text-white ${isActive && "border-y-2 border-gray-200 shadow-2xl mb-8"} w-full text-gray-300`}
             id={play.counter}
             onClick={() => {
                 const item = document.getElementById(play.counter);

@@ -19,7 +19,7 @@ export default function PlaybookActive({seen, setSeen, favorite, setFavorite, pl
     // MOVE TO SEPARATE COMPONENT
     function checkBoxes() {
         return (
-            <div className="mx-auto flex gap-6 select-none border-t-2 border-gray-300 pt-2">
+            <div className="mx-auto flex gap-6 select-none border-t-2 border-cyan-700 pt-2">
                 <div 
                     className="flex gap-1 transform hover:scale-105"
                     onClick={e => e.stopPropagation()}
@@ -61,7 +61,7 @@ export default function PlaybookActive({seen, setSeen, favorite, setFavorite, pl
 
     return (
         <div 
-        className={`flex flex-col px-6 border-t border-black w-full gap-2 pt-4 pb-6 bg-white ${!active && "hidden"} select-text bg-cyan-900`}
+        className={`flex flex-col px-6 border-t border-black w-full gap-2 pt-4 pb-6 bg-white ${!active && "hidden"} select-text bg-cyan-900 text-white`}
             onDoubleClick={handleMaximized}
         >   
             <div className="overflow-y-auto max-h-[30vh] flex flex-col gap-4">

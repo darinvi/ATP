@@ -19,7 +19,7 @@ export default function MetricsTable({ ticker}) {
         const colClass = "flex-1 text-center"
         return (
             <div
-                className="flex w-full border-b-2 border-gray-300 sticky top-0 bg-white"
+                className="flex w-full border-y-2 border-cyan-700 sticky top-0 bg-cyan-800"
             >
                 <p
                     className={colClass}
@@ -67,10 +67,10 @@ export default function MetricsTable({ ticker}) {
         const renderMetrics = tableData && Object.entries(metrics).map(([k, v]) => {
             return (
                 <div
-                    className="flex w-full hover:bg-gray-300"
+                    className="flex w-full hover:bg-cyan-800 hover:text-white"
                 >
                     <p
-                        className="flex-1 text-cleft border-r-2 border-gray-300"
+                        className="flex-1 border-r-2 border-cyan-700"
                     >{v}</p>
                     <p
                         className={colClass}
@@ -96,7 +96,7 @@ export default function MetricsTable({ ticker}) {
     }
 
     return (
-        <div className="pl-2">
+        <div className="pl-2 text-gray-400">
             {loading
                 ?
                 <p className="text-3xl text-center animate-ping w-fit mx-auto">Loading...</p>

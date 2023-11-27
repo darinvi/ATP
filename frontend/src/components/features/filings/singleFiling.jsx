@@ -13,7 +13,7 @@ export default function SingleFiling({content}) {
         <>
             <Link 
                 to={`${lastPage==="home" ? "/filings" : ""}`}
-                className={`grid grid-cols-${showTime ? '3' : '2'} space-x-3 items-stretch m-auto border-b border-gray-300 text-center cursor-pointer hover:bg-gray-300 transform active:scale-95 hover:border hover:border-gray-500`}
+                className={`grid grid-cols-${showTime ? '3' : '2'} bg-cyan-900 space-x-3 items-stretch m-auto border-b border-cyan-700 text-center cursor-pointer hover:bg-cyan-800 text-gray-300 hover:text-white transform active:scale-95`}
                 onClick={() => dispatch(getFiling(url))}
             >
                 <td>{content.formType}</td>

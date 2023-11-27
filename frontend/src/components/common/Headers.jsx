@@ -20,16 +20,16 @@ export default function Headers() {
     }, [])
 
     return (
-        <header className="flex justify-between bg-cyan-800 text-2xl h-[8vh] select-none w-full tracking-wider sticky top-0 z-50">
+        <header className="flex justify-between bg-cyan-900 text-2xl text-gray-400 h-[8vh] select-none w-full tracking-wider sticky top-0 z-50">
 
             <ul className="flex items-center">
 
                 <li
                     className="h-full"
                 ><Link
-                    className="h-full text-center hover:bg-cyan-700 hover:text-white list-none h-full flex items-center"
+                    className="h-full text-center hover:text-cyan-300 list-none h-full flex items-center"
                     to="/"
-                ><img src={require("../../assets/logo.png")} alt="" className="h-full cursor-pointer hover:bg-cyan-700 px-2" /></Link></li>
+                ><img src={require("../../assets/logo.png")} alt="" className="h-full cursor-pointer px-2" /></Link></li>
 
                 <li
                     className="h-full"
@@ -41,12 +41,12 @@ export default function Headers() {
                 {isMentor && <>
                     <li
                         className="h-full"
-                    ><Link to="/mentor-panel" className="h-full text-center px-6 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center">Mentor Panel</Link></li>
+                    ><Link to="/mentor-panel" className="h-full text-center px-6 hover:text-cyan-300 list-none h-full flex items-center">Mentor Panel</Link></li>
                 </>}
 
                 <li
                     className="h-full"
-                ><Link className="h-full text-center px-6 hover:bg-cyan-700 hover:text-white list-none h-full flex items-center" to="/profile">Profile</Link></li>
+                ><Link className="h-full text-center px-6 hover:text-cyan-300 list-none h-full flex items-center" to="/profile">Profile</Link></li>
 
                 <Logout />
 

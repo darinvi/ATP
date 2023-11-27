@@ -23,8 +23,8 @@ export default function SinglePlaybookComment({ comment }) {
     }
 
     return (
-        <div className={`border-y flex flex-col gap-1 pb-1 ${deleteId === comment._id && "bg-red-100"} ${editId === comment._id && "bg-orange-100"}`}>
-            <div className="text-xs flex gap-2 bg-gray-200 w-fit px-2 rounded-br">
+        <div className={`border-y border-cyan-700 flex flex-col gap-1 pb-1 ${deleteId === comment._id && "bg-red-400"} ${editId === comment._id && "bg-cyan-700"} text-white`}>
+            <div className="text-xs flex gap-2 w-fit px-2 rounded-br text-gray-300 bg-cyan-700">
                 <p>{comment.username}</p>
                 <p>{comment.time && getTime()}</p>
             </div>
@@ -33,7 +33,7 @@ export default function SinglePlaybookComment({ comment }) {
             >
                 {deleteId === comment._id
                     ?
-                    <p className="animate-pulse text-center">Deleting...</p>
+                    <p className="animate-pulse text-center text-black">Deleting...</p>
                     :
                     <EditableComment
                         comment={comment.comment}
@@ -45,15 +45,15 @@ export default function SinglePlaybookComment({ comment }) {
 
             <div className={`flex gap-2 text-gray-400 pl-2 ${[deleteId, editId].includes(comment._id) && "hidden"}`}>
                 <button
-                    className="text-xs"
+                    className="text-xs hover:text-white"
                 >like</button>
 
                 <button
-                    className="text-xs"
+                    className="text-xs hover:text-white"
                 >reply</button>
 
                 {comment.username == user && <button
-                    className="text-xs"
+                    className="text-xs hover:text-white"
                     onClick={() => setEdit(prev => !prev)}
                 >{edit ? 'save' : 'edit'}</button>}
 
@@ -62,19 +62,19 @@ export default function SinglePlaybookComment({ comment }) {
                         delActive
                         ?
                         <>
-                            <p className="text-xs">proceed?</p>
+                            <p className="text-xs hover:text-white">proceed?</p>
                             <button
-                                className="text-xs"
+                                className="text-xs hover:text-white"
                                 onClick={() => dispatch(deletePBComment(comment._id))}
                             >yes</button>
                             <button
-                                className="text-xs"
+                                className="text-xs hover:text-white"
                                 onClick={() => setDelActive(prev => !prev)}
                             >no</button>
                         </>
                         :
                         <button
-                            className="text-xs"
+                            className="text-xs hover:text-white"
                             onClick={() => setDelActive(prev => !prev)}
                         >delete</button>
                     )
