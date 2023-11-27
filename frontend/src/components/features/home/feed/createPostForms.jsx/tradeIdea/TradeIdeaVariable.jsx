@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { modifyName, modifyDescription, removeVariable, activateCancel, deactivateCancel } from "../../../../../../store/posts";
 import { useState } from "react";
+import MinimizedIdea from "./MinimizedVariable";
 
 export default function TradeIdeaVariable({ counter }) {
 
@@ -46,14 +47,15 @@ export default function TradeIdeaVariable({ counter }) {
 
 
     function formButtons() {
-        const sharedClass = 'text-black text-sm px-3 rounded transform hover:scale-105 active:scale-100'
+        const sharedClass = 'text-sm px-3 rounded transform hover:scale-105 active:scale-100 text-gray-300 border border-cyan-900 hover:text-black opacity-70 hover:opacity-100 '
+        const disabledClass = "disabled:opacity-20 disabled:border-2 disabled:border-gray-900 disabled:scale-100 disabled:bg-gray-900 disabled:text-gray-300"
         return (
             <div className="flex gap-2">
                 <button
                     disabled={!(vars[counter].name && vars[counter].description)}
                     onClick={() => setMaximized(false)}
-                    className={`bg-green-200 hover:bg-green-400 ${sharedClass} disabled:bg-gray-100 disabled:scale-100`}
-                >save</button>
+                    className={`hover:bg-green-400 ${sharedClass} disabled:bg-gray-100 disabled:scale-100 ${disabledClass}`}
+                >minimize</button>
                 {validateButton(sharedClass)}
             </div>
         )
@@ -82,7 +84,7 @@ export default function TradeIdeaVariable({ counter }) {
                         </div>
                         :
                         <button
-                            className={`bg-red-200 hover:bg-red-400 ${sharedClass}`}
+                            className={`text-gray-300 border border-cyan-900 hover:bg-red-400 ${sharedClass} px-5`}
                             onClick={() => {
                                 if (vars[counter].name || vars[counter].description) dispatch(activateCancel(counter));
                                 else dispatch(removeVariable(counter));
@@ -103,10 +105,7 @@ export default function TradeIdeaVariable({ counter }) {
                         {formButtons()}
                     </div>
                     :
-                    <p
-                        className="hover:bg-cyan-300"
-                        onClick={() => setMaximized(true)}
-                    >{vars[counter].name}</p>
+                    <MinimizedIdea setMaximized={setMaximized} name={vars[counter].name}/>
             }
         </>
     )

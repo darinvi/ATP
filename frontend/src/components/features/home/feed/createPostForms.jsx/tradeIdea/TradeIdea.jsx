@@ -28,7 +28,7 @@ export default function TradeIdea() {
             <div className="flex justify-between w-full">
                 <div className="flex gap-12">
                     <button
-                        className="bg-orange-200 hover:bg-orange-300 transform hover:scale-105 active:scale-100 rounded px-3 pb-2 pt-1 w-fit text-2xl"
+                        className="border border-orange-900 text-gray-400 hover:text-black hover:bg-orange-300 transform hover:scale-105 active:scale-100 rounded px-3 pb-2 pt-1 w-fit text-2xl"
                         onClick={() => {
                             dispatch(addVariable());
                         }}

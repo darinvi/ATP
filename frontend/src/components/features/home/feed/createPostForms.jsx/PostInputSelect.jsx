@@ -1,12 +1,12 @@
 export default function PostInputSelect(props) {
 
-    const optionClass = "bg-cyan-100"
+    const optionClass = "bg-cyan-600"
 
     return (
         <div className="flex justify-between">
-            <div className="flex gap-8">
+            <div className="flex gap-8 border-b border-cyan-900">
                 <select
-                    className="mx-auto text-sm bg-cyan-200 rounded hover:bg-cyan-300"
+                    className="mx-auto text-gray-300 bg-cyan-700 cursor-pointer rounded-lg"
                     onChange={e => props.setPostType(e.target.value)}
                 >
                     <option className={optionClass}>Trade Idea</option>
