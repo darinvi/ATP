@@ -12,7 +12,7 @@ export default function PostInputSelect(props) {
                 </select>
             </div>
             <button 
-                className="text-white hover:text-red-300 transform hover:scale-105 active:scale-100"
+                className="text-white hover:text-red-300 transform hover:scale-105 active:scale-100 text-2xl"
                 onClick={()=>props.close()}
             >X</button>
         </div>

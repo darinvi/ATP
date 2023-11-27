@@ -1,18 +1,17 @@
+import { addVariable } from "../../../../../../store/posts";
 import PostValidButton from "../PostValidButton";
 import TradeIdeaVariable from "./TradeIdeaVariable";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function TradeIdea() {
 
-    const [counter, setCounter] = useState(0);
-    const [vars, setVars] = useState({}); 
+    const vars = useSelector(state => state.entities.posts.tradeIdeas.variables);
+    const dispatch = useDispatch();
 
     const renderInputs = Object.keys(vars).map( k => {
         return (
             <TradeIdeaVariable 
                 counter={k} 
-                vars={vars} 
-                setVars={setVars}
             />
         ) 
     })
@@ -22,12 +21,10 @@ export default function TradeIdea() {
             <button
                 className="bg-orange-200 hover:bg-orange-300 transform hover:scale-105 active:scale-100 rounded px-3 pb-2 pt-1 w-fit text-2xl"
                 onClick={()=>{
-                    console.log(vars)
-                    setVars({...vars, [counter]: {name: "", description: ""}})
-                    setCounter(prev => prev + 1);
+                    dispatch(addVariable());
                 }}
             >+</button>
-            <div className="flex flex-col w-full overflow-y-auto">
+            <div className="flex flex-col w-full overflow-y-auto border-y-2 border-cyan-900">
                 <div className="flex flex-col gap-2">
                     {renderInputs}
                 </div>

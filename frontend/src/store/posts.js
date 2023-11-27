@@ -16,6 +16,14 @@ const slice = createSlice({
                 'description':'',
             };
         },
+        modifyName: (posts, action) => {
+            const [counter, data] = action.payload;
+            posts.tradeIdeas.variables[counter].name = data ;
+        },
+        modifyDescription: (posts, action) => {
+            const [counter, data] = action.payload;
+            posts.tradeIdeas.variables[counter].description = data ;
+        },
         removeVariable: (posts, action) => {
             delete posts.tradeIdeas.variables[action.payload];
         }
@@ -28,6 +36,8 @@ const {
 
 export const {
     addVariable,
+    modifyName,
+    modifyDescription,
     removeVariable,
 } = slice.actions;
 
