@@ -7,6 +7,7 @@ const slice = createSlice({
         tradeIdeas: {
             counter: 0,
             variables: {},
+            cancelActive: [],
         }
     },
     reducers: {
@@ -26,7 +27,13 @@ const slice = createSlice({
         },
         removeVariable: (posts, action) => {
             delete posts.tradeIdeas.variables[action.payload];
-        }
+        },
+        activateCancel: (posts, action) => {
+            posts.tradeIdeas.cancelActive.push(action.payload);
+        },
+        deactivateCancel: (posts, action) => {
+            posts.tradeIdeas.cancelActive = posts.tradeIdeas.cancelActive.filter(e => e !== action.payload);
+        },
     }
 });
 
@@ -39,6 +46,8 @@ export const {
     modifyName,
     modifyDescription,
     removeVariable,
+    activateCancel,
+    deactivateCancel
 } = slice.actions;
 
 export default slice.reducer;
