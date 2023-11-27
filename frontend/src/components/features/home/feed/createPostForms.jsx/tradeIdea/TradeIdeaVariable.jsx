@@ -1,34 +1,35 @@
 import { useDispatch } from "react-redux"
 
-export default function TradeIdeaVariable(props) {
+export default function TradeIdeaVariable({ counter, vars, setVars}) {
 
     function maximizedInput() {
+        const sharedInputClass="rounded border-2 border-cyan-900 text-black bg-gray-200 hover:bg-white focus:bg-white"
         return (
             <div className="flex flex-col gap-4">
                 <div className="flex flex-col flex-1 w-1/3">
                     <label
                         className="text-xs"
-                        htmlFor={`var-name-${props.counter}`}
+                        htmlFor={`var-name-${counter}`}
                         >variable name</label>
                     <input
-                        id={`var-name-${props.counter}`}
+                        id={`var-name-${counter}`}
                         type="text"
-                        className="rounded border-2 border-cyan-900 text-black"
-                        value={props.vars[props.counter] && props.vars[props.counter].name}
-                        onChange={e => props.setVars({...props.vars, [props.counter]: {name: e.target.value, description: props.vars[props.counter].description}})}
-                        ></input>
+                        className={`${sharedInputClass}`}
+                        value={vars[counter] && vars[counter].name}
+                        onChange={e => setVars({...vars, [counter]: {name: e.target.value, description: vars[counter].description}})}
+                    ></input>
                 </div>
                 <div className="flex flex-col flex-3 w-full">
                     <label
-                        htmlFor={`var-desc-${props.counter}`}
+                        htmlFor={`var-desc-${counter}`}
                         className="text-xs"
                         >variable description</label>
                     <textarea
-                        id={`var-desc-${props.counter}`}
+                        id={`var-desc-${counter}`}
                         type="text"
-                        className="rounded border-2 border-cyan-900 lg:h-20 text-black"
-                        value={props.vars[props.counter] && props.vars[props.counter].description}
-                        onChange={e => props.setVars({...props.vars, [props.counter]: {description: e.target.value, name: props.vars[props.counter].name}})}
+                        className={`${sharedInputClass} lg:h-20`}
+                        value={vars[counter] && vars[counter].description}
+                        onChange={e => setVars({...vars, [counter]: {description: e.target.value, name: vars[counter].name}})}
                     ></textarea>
                 </div>
             </div>
@@ -37,12 +38,17 @@ export default function TradeIdeaVariable(props) {
 
 
     function formButtons() {
+        const sharedClass = 'text-black text-sm px-3 rounded transform hover:scale-105 active:scale-100'
         return (
             <div className="flex gap-2">
-                <button>save</button>
                 <button
+                    className={`bg-green-200 hover:bg-green-400 ${sharedClass}`}
+                >save</button>
+                <button
+                    className={`bg-red-200 hover:bg-red-400 ${sharedClass}`} 
                     onClick={()=> {
-                        // del
+                        // const {[counter], ...rest} = vars;
+                        // setVars({...rest})
                     }}
                 >cancel</button>
             </div>

@@ -20,13 +20,13 @@ export default function TradeIdea() {
     return (
         <>
             <button
-                className="bg-orange-200 hover:bg-orange-300 transform hover:scale-[102%] active:scale-100 rounded px-2 w-fit"
+                className="bg-orange-200 hover:bg-orange-300 transform hover:scale-105 active:scale-100 rounded px-3 pb-2 pt-1 w-fit text-2xl"
                 onClick={()=>{
                     console.log(vars)
                     setVars({...vars, [counter]: {name: "", description: ""}})
                     setCounter(prev => prev + 1);
                 }}
-            >Add variable</button>
+            >+</button>
             <div className="flex flex-col w-full overflow-y-auto">
                 <div className="flex flex-col gap-2">
                     {renderInputs}

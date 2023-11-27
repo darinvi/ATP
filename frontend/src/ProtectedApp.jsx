@@ -18,7 +18,7 @@ export default function ProtectedApp() {
                 <>
                     { isMentor === null && (()=>{
                         dispatch(loadMentorStatus())
-                    })() }
+                    })()}
                     <Headers />
                     <div className="relative h-full flex select-none">
                         <AppRoutes />
