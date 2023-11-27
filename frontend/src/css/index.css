@@ -3,3 +3,4 @@
 @tailwind utilities;
 
 @import url('./scrollbar.css');
+@import url('./select.css');

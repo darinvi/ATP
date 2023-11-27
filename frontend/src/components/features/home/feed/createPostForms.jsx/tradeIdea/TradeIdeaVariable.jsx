@@ -84,7 +84,8 @@ export default function TradeIdeaVariable({ counter }) {
                         <button
                             className={`bg-red-200 hover:bg-red-400 ${sharedClass}`}
                             onClick={() => {
-                                dispatch(activateCancel(counter));
+                                if (vars[counter].name || vars[counter].description) dispatch(activateCancel(counter));
+                                else dispatch(removeVariable(counter));
                             }}
                         >cancel</button>
                 }

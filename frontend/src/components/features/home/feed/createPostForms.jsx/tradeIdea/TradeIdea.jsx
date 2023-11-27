@@ -2,6 +2,9 @@ import { addVariable } from "../../../../../../store/posts";
 import TradeIdeaPostButton from "./TradeIdeaPostButton";
 import TradeIdeaVariable from "./TradeIdeaVariable";
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { clearTradeIdeasState } from "../../../../../../store/posts";
+import TradeIdeaTagSelect from "./TradeIdeaTagSelect";
 
 export default function TradeIdea() {
 
@@ -16,6 +19,10 @@ export default function TradeIdea() {
         )
     })
 
+    useEffect(()=>{
+        return () => dispatch(clearTradeIdeasState());
+    },[])
+
     return (
         <>
             <div className="flex justify-between w-full">
@@ -26,7 +33,7 @@ export default function TradeIdea() {
                             dispatch(addVariable());
                         }}
                     >+</button>
-                    <select className="bg-cyan-300 rounded text-sm"><option>ADD TAGS</option></select>
+                    <TradeIdeaTagSelect />
                 </div>
                 <TradeIdeaPostButton />
             </div>
