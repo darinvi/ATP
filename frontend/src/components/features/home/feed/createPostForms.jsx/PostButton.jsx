@@ -9,7 +9,7 @@ export default function PostButton() {
         <>
             <button
                 onClick={()=>setIsActive(prev => !prev)} 
-                className={`border border-green-900 bg-green-300 hover:bg-green-400 rounded px-2 transform active:scale-95 h-fit text-xs mr-2`}
+                className={`border border-cyan-900 hover:bg-green-300 hover:text-black rounded px-2 transform active:scale-95  text-white text-xs mr-2`}
             >Post</button>
             { isActive && <PostInput setIsActive={setIsActive} />}
         </>

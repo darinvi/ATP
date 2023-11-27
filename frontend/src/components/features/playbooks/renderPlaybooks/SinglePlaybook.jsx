@@ -11,15 +11,15 @@ export default function SinglePlaybook(props) {
     const dispatch = useDispatch();
     const [firstClick, setFirstClick] = useState(true);
     const [isActive, setIsActive] = useState(false);
-    const [bgColor, setBgColor] = useState("bg-white");
+    const [bgColor, setBgColor] = useState("bg-cyan-700");
     const [favorite, setFavorite] = useState(false);
     const [seen, setSeen] = useState(true);
 
     useEffect(() => {
-        if (isActive) setBgColor("bg-gray-300");
+        if (isActive) setBgColor("bg-cyan-900");
         const timeoutId = setTimeout(() => {
             if (!isActive && !seen) {
-                setBgColor("bg-white")
+                setBgColor("bg-cyan-700")
             }
         }, 500);
         return () => clearTimeout(timeoutId);
@@ -31,7 +31,7 @@ export default function SinglePlaybook(props) {
 
         return (
             <div
-                className={`flex items-center hover:bg-gray-100 gap-4 w-full pr-4 cursor-pointer ${bgColor}`}
+                className={`flex items-center gap-4 w-full pr-4 cursor-pointer ${bgColor}`}
                 onClick={() => {
                     setIsActive(prev => !prev)
                     if (firstClick) {
@@ -88,7 +88,7 @@ export default function SinglePlaybook(props) {
 
     return (
         <div
-            className={`border border-gray-300 flex flex-col my-4 items-center hover:bg-gray-200 ${isActive && "border-y-2 border-gray-200 shadow-2xl mb-8"} w-full`}
+            className={`border border-gray-300 flex flex-col my-4 items-center hover:text-gray-100 ${isActive && "border-y-2 border-gray-200 shadow-2xl mb-8"} w-full text-gray-300`}
             id={play.counter}
             onClick={() => {
                 const item = document.getElementById(play.counter);

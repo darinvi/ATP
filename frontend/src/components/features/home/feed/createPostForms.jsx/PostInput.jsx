@@ -17,7 +17,7 @@ export default function PostInput(props) {
     }
 
     return (
-        <div className="absolute w-full inset-x-0 inset-y-0 h-fit bg-cyan-700 border-b-2 border-cyan-900 flex flex-col py-2 px-6 gap-6 w-full z-20 max-h-[100%]">
+        <div className="absolute w-full inset-x-0 inset-y-0 h-fit bg-cyan-700 border-b-2 border-cyan-900 flex flex-col py-2 px-6 gap-6 w-full z-20 h-[100%]">
             <PostInputSelect 
                 close={handlePostButton} 
                 postType={postType}

@@ -19,7 +19,7 @@ export default function PostsFeed() {
     }, [])
 
     return (
-        <div className="relative max-h-[92vh] border border-gray-900 w-[50vw] bg-gray-100">
+        <div className="relative max-h-[92vh] border border-gray-900 w-[50vw] bg-cyan-800">
             <div className="flex border-b border-gray-900 bg-cyan-700 justify-between h-fit py-1 w-full">
                 <FilterPosts />
                 <PostButton />
