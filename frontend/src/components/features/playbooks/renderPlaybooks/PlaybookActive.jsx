@@ -61,8 +61,8 @@ export default function PlaybookActive({seen, setSeen, favorite, setFavorite, pl
 
     return (
         <div 
-        className={`flex flex-col px-6 border-t border-black w-full gap-2 pt-4 pb-6 bg-white ${!active && "hidden"} select-text bg-cyan-900 text-white`}
-            onDoubleClick={handleMaximized}
+        className={`flex flex-col px-6 border-t border-black w-full gap-2 pt-4 pb-6 bg-white ${!active && "hidden"} bg-cyan-900 text-white`}
+            onClick={handleMaximized}
         >   
             <div className="overflow-y-auto max-h-[30vh] flex flex-col gap-4">
                 {play.market_fundamentals && <p className={rowClass}><span className={spanClassTitle}>Market Fundamentals:</span> <span className={spanClassVar}>{play.market_fundamentals}</span></p>}

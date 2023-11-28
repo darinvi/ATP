@@ -20,7 +20,7 @@ export default function Headers() {
     }, [])
 
     return (
-        <header className="flex justify-between bg-cyan-900 text-2xl text-gray-400 h-[8vh] select-none w-full tracking-wider sticky top-0 z-50">
+        <header className="flex justify-between bg-cyan-900 text-2xl text-gray-300 h-[8vh] select-none w-full tracking-wider sticky top-0 z-50">
 
             <ul className="flex items-center">
 

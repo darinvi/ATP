@@ -7,5 +7,5 @@ export default function Logout() {
     function handleLogout(){
         dispatch(logout())
     }
-    return <li  className="hover:bg-cyan-700 hover:text-white px-4 list-none h-full flex items-center cursor-pointer" onClick={handleLogout}>Logout</li>
+    return <li  className="hover:text-cyan-300 px-4 list-none h-full cursor-pointer" onClick={handleLogout}>Logout</li>
 }
