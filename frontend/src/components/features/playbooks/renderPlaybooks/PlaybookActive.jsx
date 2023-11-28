@@ -19,10 +19,12 @@ export default function PlaybookActive({seen, setSeen, favorite, setFavorite, pl
     // MOVE TO SEPARATE COMPONENT
     function checkBoxes() {
         return (
-            <div className="mx-auto flex gap-6 select-none border-t-2 border-cyan-700 pt-2">
+            <div 
+                className="mx-auto flex gap-6 select-none border-t-2 border-cyan-700 pt-2 pb-4 px-4"
+                onClick={e => e.stopPropagation()}
+            >
                 <div 
                     className="flex gap-1 transform hover:scale-105"
-                    onClick={e => e.stopPropagation()}
                     onDoubleClick={e => e.stopPropagation()}
                 >
                     <label 
@@ -61,10 +63,10 @@ export default function PlaybookActive({seen, setSeen, favorite, setFavorite, pl
 
     return (
         <div 
-        className={`flex flex-col px-6 border-t border-black w-full gap-2 pt-4 pb-6 ${!active && "hidden"} bg-cyan-900 text-white`}
+        className={`flex flex-col px-6 border-t border-black w-full gap-2 pt-4 ${!active && "hidden"} bg-cyan-900 text-white`}
             onClick={handleMaximized}
         >   
-            <div className="overflow-y-auto max-h-[30vh] flex flex-col gap-4">
+            <div className="overflow-y-auto max-h-[30vh] flex flex-col gap-4 py-2">
                 {play.market_fundamentals && <p className={rowClass}><span className={spanClassTitle}>Market Fundamentals:</span> <span className={spanClassVar}>{play.market_fundamentals}</span></p>}
                 {play.market_technicals && <p className={rowClass}><span className={spanClassTitle}>Market Technicals:</span> <span className={spanClassVar}>{play.market_technicals}</span></p>}
                 {play.ticker_technicals && <p className={rowClass}><span className={spanClassTitle}>Ticker Technicals:</span> <span className={spanClassVar}>{play.ticker_technicals}</span></p>}

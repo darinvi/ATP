@@ -4,12 +4,13 @@
  
 /* Track */
 ::-webkit-scrollbar-track {
-    background: white;
+    background:#888;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    /* background: #888; */
+    background: #13465e;
     border-radius: 5px;
 }
  

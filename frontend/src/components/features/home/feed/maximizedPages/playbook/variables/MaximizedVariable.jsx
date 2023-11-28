@@ -33,7 +33,7 @@ export default function MaximizedVariable(props) {
                     onDoubleClick={e => e.stopPropagation()}
                     >{mapFeatures[props.k]}</p>
                 <button
-                    className={`h-full px-2 hover:text-yellow-300 active:text-white py-1 ${mapFeatures[props.k] == commentType && "bg-cyan-700"}`}
+                    className={`h-full px-2 hover:text-white py-1 ${mapFeatures[props.k] == commentType && "bg-cyan-700"}`}
                     onDoubleClick={e => e.stopPropagation()}
                     onClick={handleCommentClick}
                 >{'>'}</button>

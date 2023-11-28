@@ -8,7 +8,10 @@ export default function FeaturesDropdown(){
     return (
         <div className="relative flex flex-col items-center rounded h-full">
             
-            <button onClick={()=>setIsOpen(prev => !prev)} className="w-full flex items-center justify-between rounded h-full hover:bg-cyan-700 hover:text-white list-none px-6">
+            <button 
+                onClick={()=>setIsOpen(prev => !prev)} 
+                className={`w-full flex items-center justify-between rounded h-full hover:text-cyan-300 list-none px-6 ${isOpen && 'text-cyan-300'}`}
+            >
                 Features
                 {!isOpen ?  (
                     <AiOutlineCaretRight className='h-4' />

@@ -89,7 +89,7 @@ export default function SinglePlaybook(props) {
 
     return (
         <div
-            className={`border border-cyan-700 flex flex-col my-4 items-center text-gray-300 hover:text-white ${isActive && "border-y-2 border-gray-200 shadow-2xl mb-8"} w-full text-gray-300`}
+            className={`border border-cyan-700 flex flex-col my-4 items-center text-gray-300 hover:text-white ${isActive && "border-y-2 shadow-2xl mb-8"} w-full text-gray-300`}
             id={play.counter}
             onClick={() => {
                 const item = document.getElementById(play.counter);
