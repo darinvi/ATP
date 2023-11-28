@@ -23,6 +23,7 @@ export default function TradeIdeaVariable({ counter }) {
                     <input
                         id={`var-name-${counter}`}
                         type="text"
+                        onClick={e => e.stopPropagation()}
                         className={`${sharedInputClass}`}
                         value={vars[counter].name}
                         onChange={e => dispatch(modifyName([counter, e.target.value]))}
@@ -36,6 +37,7 @@ export default function TradeIdeaVariable({ counter }) {
                     <textarea
                         id={`var-desc-${counter}`}
                         type="text"
+                        onClick={e => e.stopPropagation()}
                         className={`${sharedInputClass} lg:h-20`}
                         value={vars[counter].description}
                         onChange={e => dispatch(modifyDescription([counter, e.target.value]))}
@@ -100,7 +102,10 @@ export default function TradeIdeaVariable({ counter }) {
             {
                 maximized
                     ?
-                    <div className="flex flex-col w-full border-y border-cyan-900 py-1 hover:bg-cyan-800 hover:text-gray-300 px-2 gap-1">
+                    <div 
+                        className="flex flex-col w-full border-y border-cyan-900 py-1 hover:bg-cyan-800 hover:text-gray-300 px-2 gap-1"
+                        onClick={()=>setMaximized(false)}
+                    >
                         {maximizedInput()}
                         {formButtons()}
                     </div>
