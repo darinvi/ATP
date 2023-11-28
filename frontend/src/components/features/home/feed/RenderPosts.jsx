@@ -6,19 +6,19 @@ export default function RenderPosts(){
     const posts = useSelector(state => state.entities.home.allPosts)
     const filteredPosts = useSelector(state => state.entities.home.filteredPosts)
 
-    const mapPostTypes = posts && Object.values(posts).map( post => {
-        if ( Object.keys(post).includes('tape_reading') && !filteredPosts.includes('Playbook') ) {
-            return (
-                <SinglePlaybook 
-                    play={post} 
-                />
-            )
+    const mapPostsTypes = {
+        'Playbook': e => <SinglePlaybook play={e} />
+    }
+
+    const rendePosts = posts && Object.values(posts).map( post => {
+        if (!filteredPosts.includes(post.post_type) ) {
+            return mapPostsTypes[post.post_type](post);
         }
     })
 
     return (
         <>
-            {mapPostTypes}
+            {rendePosts}
         </>
     )
 }

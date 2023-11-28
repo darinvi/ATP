@@ -19,7 +19,7 @@ export default function MaximizedPage() {
     const counter = useSelector(state => state.entities.home.postCounter);
 
     const pages = {
-        'playbook': <MaximizedPlaybook />
+        'Playbook': <MaximizedPlaybook />
     }
 
     function handleMinimize() {

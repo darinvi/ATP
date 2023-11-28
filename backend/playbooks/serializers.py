@@ -50,4 +50,4 @@ class PublicPlayBookSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_post_type(self, obj):
-        return "playbook"
+        return "Playbook"

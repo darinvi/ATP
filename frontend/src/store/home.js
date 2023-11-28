@@ -4,9 +4,10 @@ import { apiCallBegan } from "./api";
 const slice = createSlice({
     name: 'home',
     initialState: {
-        allPosts : {},
+        allPosts: {},
         postCounter: 0,
-        filteredPosts : [],
+        filteredPosts: [],
+        activePost: null,
         maximized: false,
         maximizedData: null, // the post type will be added to the posts so I will get the type from there
         playbooks: {
@@ -33,8 +34,8 @@ const slice = createSlice({
             home.filteredPosts.push(action.payload)
             localStorage.getItem('feedFilters', home.filteredPosts)
         },
-        removeFiltered: (home, action) => { 
-            home.filteredPosts = home.filteredPosts.filter( type => type != action.payload)
+        removeFiltered: (home, action) => {
+            home.filteredPosts = home.filteredPosts.filter(type => type != action.payload)
             localStorage.setItem('feedFilters', home.filteredPosts)
         },
         resetPosts: (home) => {
@@ -42,8 +43,8 @@ const slice = createSlice({
             home.postCounter = 0;
         },
         // next, modify this to be a onSuccess function when minimized pressed after a fetch of the comments of a given playbook.
-        setMaximized: (home, action) => { 
-            home.maximized = !home.maximized; 
+        setMaximized: (home, action) => {
+            home.maximized = !home.maximized;
             home.maximizedData = action.payload;
         },
         setTableData: (home, action, bool) => {
@@ -107,7 +108,11 @@ const slice = createSlice({
         setNextPost: (home, action) => {
             home.maximizedData = home.allPosts[action.payload];
         },
-
+        setActivePost: (home, action) => {
+            const [postId, setType] = action.payload;
+            if (setType) home.activePost = postId;
+            else home.activePost = null;
+        },
     }
 });
 
@@ -135,7 +140,8 @@ export const {
     handleComments,
     clearComments,
     clearPBError,
-    setNextPost
+    setNextPost,
+    setActivePost
 } = slice.actions;
 
 export default slice.reducer;
@@ -145,7 +151,7 @@ export const loadAllPosts = () => (dispatch) => {
         dispatch(apiCallBegan({
             url: endpoint,
             method: "GET",
-            data:{},
+            data: {},
             headers: {},
             onSuccess: addPosts.type
         }))
@@ -159,7 +165,7 @@ export const getStockMetrics = () => (dispatch, getState) => {
     dispatch(apiCallBegan({
         url: 'get_stock_metrics',
         method: "post",
-        data:{ticker, date},
+        data: { ticker, date },
         headers: {},
         onSuccess: setTableData.type,
         onError: clearTableData.type
@@ -173,7 +179,7 @@ export const loadPlaybookComments = () => (dispatch, getState) => {
     dispatch(apiCallBegan({
         url: 'load-playbook-comments',
         method: "post",
-        data:{playbook_id, collection},
+        data: { playbook_id, collection },
         headers: {},
         onSuccess: setComments.type,
         // onError: 
@@ -187,7 +193,7 @@ export const leavePlaybookComment = (comment) => (dispatch, getState) => {
     dispatch(apiCallBegan({
         url: 'create-playbook-comment',
         method: "post",
-        data:{playbook, comment, collection},
+        data: { playbook, comment, collection },
         headers: {},
         onSuccess: handlePBCommentCreate.type,
         onError: handlePBError.type
@@ -200,9 +206,9 @@ export const deletePBComment = (id) => (dispatch, getState) => {
     dispatch(apiCallBegan({
         url: 'delete-playbook-comment',
         method: "post",
-        data:{id, collection},
+        data: { id, collection },
         headers: {},
-        onSuccess: handlePBDelete.type,   
+        onSuccess: handlePBDelete.type,
     }))
 }
 
@@ -212,9 +218,9 @@ export const editPBComment = (id, comment) => (dispatch, getState) => {
     dispatch(apiCallBegan({
         url: 'edit-playbook-comment',
         method: "post",
-        data:{id, collection, comment},
+        data: { id, collection, comment },
         headers: {},
-        onSuccess: handlePBEdit.type,   
+        onSuccess: handlePBEdit.type,
     }))
 }
 
