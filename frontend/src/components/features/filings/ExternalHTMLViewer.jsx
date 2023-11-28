@@ -11,6 +11,10 @@ export default function ExternalHTMLViewer() {
       <div 
         className={`w-1/2 border-2 h-[80vh] overflow-y-auto bg-white cursor-pointer rounded-lg hover:rounded-none ${active ? "absolute top-2 left-0 w-screen pl-6 lr-4 h-[85vh]" : "hover:border-4 hover:border-cyan-600"} z-20 active:scale-100`}
         onClick={()=>setActive(prev => !prev)}
+        onKeyDown={ e => {
+          if (e.code === 'Escape') setActive(false);
+        }}
+        tabIndex="0"
       >
           <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>}

@@ -47,7 +47,7 @@ export default function EditableComment(props) {
                     editForm()
                     :
                     <>
-                        {editId === props.id ? <p className="animate-pulse">Saving Changes...</p> : <p>{props.comment}</p>}
+                        {editId === props.id ? <p className="animate-pulse text-gray-300">Saving Changes...</p> : <p>{props.comment}</p>}
                     </>
             }
         </>

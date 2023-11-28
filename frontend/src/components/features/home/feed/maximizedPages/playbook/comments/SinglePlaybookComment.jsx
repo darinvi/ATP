@@ -23,7 +23,7 @@ export default function SinglePlaybookComment({ comment }) {
     }
 
     return (
-        <div className={`border-y border-cyan-700 flex flex-col gap-1 pb-1 ${deleteId === comment._id && "bg-red-400"} ${editId === comment._id && "bg-cyan-700"} text-white`}>
+        <div className={`border-y border-cyan-700 flex flex-col gap-1 pb-1 ${[deleteId, editId].includes(comment._id) && "bg-cyan-700"} text-white`}>
             <div className="text-xs flex gap-2 w-fit px-2 rounded-br text-gray-300 bg-cyan-700">
                 <p>{comment.username}</p>
                 <p>{comment.time && getTime()}</p>
@@ -33,7 +33,7 @@ export default function SinglePlaybookComment({ comment }) {
             >
                 {deleteId === comment._id
                     ?
-                    <p className="animate-pulse text-center text-black">Deleting...</p>
+                    <p className="animate-pulse text-red-500">Deleting...</p>
                     :
                     <EditableComment
                         comment={comment.comment}

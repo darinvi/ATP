@@ -7,12 +7,12 @@ export default function RenderPosts(){
     const filteredPosts = useSelector(state => state.entities.home.filteredPosts)
 
     const mapPostsTypes = {
-        'Playbook': e => <SinglePlaybook play={e} />
+        'Playbook': (e,i) => <SinglePlaybook play={e} index={i} />,
     }
 
-    const rendePosts = posts && Object.values(posts).map( post => {
+    const rendePosts = posts && Object.values(posts).map( (post, i) => {
         if (!filteredPosts.includes(post.post_type) ) {
-            return mapPostsTypes[post.post_type](post);
+            return mapPostsTypes[post.post_type](post, i);
         }
     })
 

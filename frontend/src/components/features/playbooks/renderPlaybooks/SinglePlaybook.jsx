@@ -7,12 +7,11 @@ import { managePlaybookSeen } from "../../../../store/playbooks";
 
 import { setActivePost } from "../../../../store/home";
 
-export default function SinglePlaybook(props) {
+export default function SinglePlaybook({play, index}) {
 
-    const play = props.play;
     const dispatch = useDispatch();
     const activePost = useSelector(state => state.entities.home.activePost);
-    const isActive = activePost === play.id;
+    const isActive = activePost === index;
 
     const [firstClick, setFirstClick] = useState(true);
     const [bgColor, setBgColor] = useState("bg-cyan-700");
@@ -27,13 +26,14 @@ export default function SinglePlaybook(props) {
                 behavior: 'smooth',
                 block: 'start',
             });
+            setBgColor("bg-cyan-900");
         } 
-        if (isActive) setBgColor("bg-cyan-900");
         const timeoutId = setTimeout(() => {
             if (!isActive && !seen) {
                 setBgColor("bg-cyan-700")
             }
         }, 500);
+        console.log(index)
         return () => clearTimeout(timeoutId);
     }, [isActive])
 
@@ -47,7 +47,7 @@ export default function SinglePlaybook(props) {
                 className={`flex items-center gap-4 w-full pr-4 cursor-pointer ${bgColor}`}
                 onClick={() => {
                     if (isActive) dispatch(setActivePost([null, false]))
-                    else dispatch(setActivePost([play.id, true]))
+                    else dispatch(setActivePost([index, true]))
                     if (firstClick) {
                         setFirstClick(false);
                         dispatch(managePlaybookSeen(play.id, true));
