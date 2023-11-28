@@ -96,7 +96,7 @@ export default function MetricsTable({ ticker}) {
     }
 
     return (
-        <div className="pl-2 text-gray-400">
+        <div className="pl-2 text-gray-300">
             {loading
                 ?
                 <p className="text-3xl text-center animate-ping w-fit mx-auto">Loading...</p>

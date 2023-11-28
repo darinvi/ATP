@@ -38,7 +38,7 @@ export default function TradeIdea() {
                 <TradeIdeaPostButton />
             </div>
             <div className="flex flex-col w-full overflow-y-auto border-t-2 border-cyan-900">
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col">
                     {renderInputs}
                 </div>
             </div>

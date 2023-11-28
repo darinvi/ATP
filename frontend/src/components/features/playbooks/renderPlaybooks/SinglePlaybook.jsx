@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import PlaybookActive from "./PlaybookActive";
 import { AiOutlineCaretRight, AiOutlineCaretDown } from 'react-icons/ai';
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { managePlaybookSeen } from "../../../../store/playbooks";
 
 import { setActivePost } from "../../../../store/home";
 
-export default function SinglePlaybook({play, index}) {
+export default function SinglePlaybook({ play, index }) {
 
     const dispatch = useDispatch();
     const activePost = useSelector(state => state.entities.home.activePost);
@@ -18,8 +18,10 @@ export default function SinglePlaybook({play, index}) {
     const [favorite, setFavorite] = useState(false);
     const [seen, setSeen] = useState(true);
 
+    const myElementRef = useRef(null);
 
     useEffect(() => {
+        // scroll to top of element
         const item = document.getElementById(play.counter);
         if (isActive) {
             item.scrollIntoView({
@@ -27,13 +29,17 @@ export default function SinglePlaybook({play, index}) {
                 block: 'start',
             });
             setBgColor("bg-cyan-900");
-        } 
+        }
+        // seen indication after minimized
         const timeoutId = setTimeout(() => {
             if (!isActive && !seen) {
                 setBgColor("bg-cyan-700")
             }
         }, 500);
-        console.log(index)
+        // ToDo: focus on change up/down so SDF can work. 
+        if (myElementRef.current) {
+            myElementRef.current.focus();
+        }
         return () => clearTimeout(timeoutId);
     }, [isActive])
 
@@ -103,7 +109,7 @@ export default function SinglePlaybook({play, index}) {
 
     return (
         <div
-            className={`border border-cyan-700 flex flex-col my-4 items-center text-gray-300 hover:text-white ${isActive && "border-y-2 shadow-2xl mb-8"} w-full text-gray-300`}
+            className={`border border-cyan-700 flex flex-col my-4 items-center text-gray-300 hover:text-white ${isActive && "border-y-4 shadow-2xl my-14"} w-full text-gray-300`}
             id={play.counter}
         >
             {notActive()}

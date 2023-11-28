@@ -5,11 +5,16 @@ import { hideTime } from "../../../store/filings"
 import PostsFeed from "./feed/PostsFeed"
 import { setLastPage } from "../../../store/filings"
 import MaximizedPage from "./feed/maximizedPages/MaximizedPage"
+import { setActivePost } from "../../../store/home"
 
 export default function Home() {
 
     const dispatch = useDispatch();
     const maximized = useSelector(state => state.entities.home.maximized)
+
+    const posts = useSelector(state => state.entities.home.allPosts);
+    const activePost = useSelector(state => state.entities.home.activePost);
+
 
     useEffect(() => {
         dispatch(hideTime());
@@ -21,7 +26,20 @@ export default function Home() {
     // Trade ideas (with dinamic variables), can be commented by the mentors
     // Dont call all playbooks, only render a couple, then fetch more if scrolled all teh way down?
     return (
-        <div className="flex">
+        <div 
+            className="flex w-full"
+            tabIndex="0"
+            onKeyDown={e => {
+                console.log('are')
+                e.stopPropagation();
+                if (e.code === 'ArrowUp' && activePost > 0) {
+                    dispatch(setActivePost([activePost-1,true]))
+                }
+                if (e.code === 'ArrowDown' && activePost < Object.values(posts).length - 1) {
+                    dispatch(setActivePost([activePost+1,true]))
+                }
+            }}
+        >
             <div
                 className="overflow-y-auto h-[92vh] border border-gray-900 overflow-x-hidden"
             >

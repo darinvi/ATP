@@ -20,7 +20,7 @@ export default function ProtectedApp() {
                         dispatch(loadMentorStatus())
                     })()}
                     <Headers />
-                    <div className="relative h-full flex select-none min-h-[92vh] bg-cyan-800">
+                    <div className="relative h-full w-full flex select-none min-h-[92vh] bg-cyan-800">
                         <AppRoutes />
                     </div>
                 </>

@@ -78,7 +78,7 @@ export default function TradeIdeaVariable({ counter }) {
                                     dispatch(deactivateCancel(counter));
                                 }}
                                 className="text-green-200 hover:text-green-400"
-                                >yes</button>
+                            >yes</button>
                             <button
                                 className="text-red-200 hover:text-red-400"
                                 onClick={() => dispatch(deactivateCancel(counter))}
@@ -102,15 +102,19 @@ export default function TradeIdeaVariable({ counter }) {
             {
                 maximized
                     ?
-                    <div 
+                    <div
                         className="flex flex-col w-full border-y border-cyan-900 py-1 hover:bg-cyan-800 hover:text-gray-300 px-2 gap-1"
-                        onClick={()=>setMaximized(false)}
+                        onClick={() => setMaximized(false)}
                     >
                         {maximizedInput()}
                         {formButtons()}
                     </div>
                     :
-                    <MinimizedIdea setMaximized={setMaximized} name={vars[counter].name}/>
+                    <MinimizedIdea
+                        setMaximized={setMaximized}
+                        name={vars[counter].name}
+                        description={vars[counter].description}
+                    />
             }
         </>
     )
