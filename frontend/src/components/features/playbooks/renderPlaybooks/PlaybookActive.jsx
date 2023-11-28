@@ -35,7 +35,7 @@ export default function PlaybookActive({seen, setSeen, favorite, setFavorite, pl
                         type="checkbox"
                         checked={favorite}
                         onChange={() => setFavorite(prev => !prev)}
-                        />
+                    />
                 </div>
 
                 <div 
