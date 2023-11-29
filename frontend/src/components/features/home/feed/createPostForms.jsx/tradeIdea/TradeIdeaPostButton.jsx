@@ -14,7 +14,7 @@ export default function TradeIdeaPostButton() {
         const disabledClass = "disabled:opacity-20 disabled:border-2 disabled:border-gray-900 disabled:scale-100 disabled:bg-gray-900 disabled:text-gray-300"
         const transformClass = "transform hover:scale-105 active:scale-100"
         return (
-            <div className="flex gap-3">
+            <div className="flex gap-3 h-full">
                 <button
                     disabled={!(Object.values(varsWithContent).length != 0)}
                     onClick={() => {

@@ -30,7 +30,6 @@ export default function Home() {
             className="flex w-full"
             tabIndex="0"
             onKeyDown={e => {
-                console.log('are')
                 e.stopPropagation();
                 if (e.code === 'ArrowUp' && activePost > 0) {
                     dispatch(setActivePost([activePost-1,true]))

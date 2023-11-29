@@ -7,6 +7,8 @@ const slice = createSlice({
         tradeIdeas: {
             counter: 0,
             variables: {},
+            name: "",
+            ticker: "",
             cancelActive: [],
         }
     },
@@ -38,6 +40,13 @@ const slice = createSlice({
             posts.tradeIdeas.counter = 0;
             posts.tradeIdeas.variables = {};
             posts.tradeIdeas.cancelActive = [];
+            posts.tradeIdeas.name = "";
+            posts.tradeIdeas.ticker = "";
+        },
+        setMetaData: (posts, action) => {
+            const [k ,v] = Object.entries(action.payload)[0];
+            if (k === 'name' ) posts.tradeIdeas.name = v;
+            else if (k === 'ticker') posts.tradeIdeas.ticker = v;
         }
     }
 });
@@ -53,7 +62,8 @@ export const {
     removeVariable,
     activateCancel,
     deactivateCancel,
-    clearTradeIdeasState
+    clearTradeIdeasState,
+    setMetaData
 } = slice.actions;
 
 export default slice.reducer;

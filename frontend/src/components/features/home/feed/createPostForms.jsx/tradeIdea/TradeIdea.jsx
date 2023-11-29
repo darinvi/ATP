@@ -26,20 +26,22 @@ export default function TradeIdea() {
 
     return (
         <>
-            <div className="flex justify-between w-full">
-                <div className="flex gap-12">
+            <div className="flex w-full">
+                <div className="flex gap-4 w-2/3">
                     <button
                         className="border border-orange-900 text-gray-400 hover:text-black hover:bg-orange-300 transform hover:scale-105 active:scale-100 rounded px-3 pb-2 pt-1 w-fit text-2xl"
                         onClick={() => {
                             dispatch(addVariable());
                         }}
                     >+</button>
-                    <div className="flex flex-col h-full justify-between">
+                    <div className="flex flex-col h-full w-2/3">
                         <TradeIdeaMetaData />
                         <TradeIdeaTagSelect />
                     </div>
                 </div>
-                <TradeIdeaPostButton />
+                <div className="h-full w-1/3">
+                    <TradeIdeaPostButton />
+                </div>
             </div>
             <div className="flex flex-col w-full overflow-y-auto border-t-2 border-cyan-900">
                 <div className="flex flex-col">
