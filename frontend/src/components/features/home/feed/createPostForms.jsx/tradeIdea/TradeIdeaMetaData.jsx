@@ -11,12 +11,15 @@ export default function TradeIdeaMetaData() {
     const name = useSelector(state => state.entities.posts.tradeIdeas.name);
     const ticker = useSelector(state => state.entities.posts.tradeIdeas.ticker);
 
+    function handleInputClosed(){
+        setActiveInput("");
+        setInputData("");
+    }
+
     function activeInputComponent() {
 
-        const disabledClass = "disabled:opacity-20 disabled:scale-100 disabled:bg-gray-900 disabled:text-gray-300 rounded"
-
         return (
-            <div className="w-full flex gap-4 items-center pl-2">
+            <div className="w-full flex items-center pl-2">
                 <input
                     value={activeInput === 'Name' ? name : ticker}
                     onChange={ e => {
@@ -25,17 +28,10 @@ export default function TradeIdeaMetaData() {
                     }}
                     className="rounded bg-cyan-800 focus:bg-cyan-900 hover:bg-cyan-900 w-full pl-2"
                     type="text"
-                ></input>
-
-                <button
-                    className="hover:text-white w-fit"
-                    onClick={()=>{
-                        setActiveInput("");
-                        setInputData("");
+                    onKeyDown={e => {
+                        if (e.code === 'Enter') handleInputClosed();
                     }}
-                >
-                    close
-                </button>
+                ></input>
             </div>
         )
     }

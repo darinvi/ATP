@@ -47,6 +47,10 @@ const slice = createSlice({
             const [k ,v] = Object.entries(action.payload)[0];
             if (k === 'name' ) posts.tradeIdeas.name = v;
             else if (k === 'ticker') posts.tradeIdeas.ticker = v;
+        },
+        addNumericVariable: (posts, action) => {
+            const [counter, value] = action.payload;
+            posts.tradeIdeas.variables[counter]['numeric'] = value;
         }
     }
 });
@@ -63,17 +67,20 @@ export const {
     activateCancel,
     deactivateCancel,
     clearTradeIdeasState,
-    setMetaData
+    setMetaData,
+    addNumericVariable
 } = slice.actions;
 
 export default slice.reducer;
 
 export const createTradeIdea = () => (dispatch, getState) => {
     const data = getState().entities.posts.tradeIdeas.variables
+    const name = getState().entities.posts.tradeIdeas.name
+    const ticker = getState().entities.posts.tradeIdeas.ticker
     dispatch(apiCallBegan({
         url: 'create-trade-idea',
         method: 'post',
-        data,
+        data: {...data, name, ticker},
         headers: {},
         // onSuccess: removePersonalQuestion.type
     }))

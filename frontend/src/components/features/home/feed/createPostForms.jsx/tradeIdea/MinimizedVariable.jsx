@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function MinimizedIdea({ setMaximized, name, description }) {
+export default function MinimizedIdea({ setMaximized, name, description, numeric }) {
 
     const [hovered, setHovered] = useState(false);
 
@@ -11,15 +11,40 @@ export default function MinimizedIdea({ setMaximized, name, description }) {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
-            <div className="w-[80%] flex gap-3">
-                <div className="flex gap-1 w-1/2 items-center">
+            <div className="w-[80%] flex whitespace-nowrap">
+                <div className="flex gap-1 w-1/3 items-center">
                     <p className="text-sm">Variable:</p>
                     <p className="text-ellipsis  overflow-hidden text-gray-300">{name}</p>
                 </div>
 
-                <div className="flex gap-1 w-1/2 items-center">
+                <div className="flex gap-1 w-1/3 items-center text-center whitespace-nowrap pl-2">
                     <p className="text-sm">Description: </p>
-                    <p className="text-ellipsis overflow-hidden text-gray-300">{description}</p>
+                    {
+                        description
+                            ?
+                            <p
+                                className="text-ellipsis overflow-hidden text-gray-300"
+                            >
+                                {description}
+                            </p>
+                            :
+                            <p className="text-gray-400 text-sm">N/A</p>
+                    }
+                </div>
+
+                <div className="flex gap-1 w-1/3 items-center pl-2">
+                    <p className="text-sm">Numeric: </p>
+                    {
+                        numeric
+                            ?
+                            <p
+                                className={`text-ellipsis overflow-hidden ${numeric > 0 ? "text-green-200" : "text-red-200"}`}
+                            >
+                                {numeric}
+                            </p>
+                            :
+                            <p className="text-gray-400 text-sm">N/A</p>
+                    }
                 </div>
             </div>
             {hovered

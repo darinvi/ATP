@@ -6,6 +6,8 @@ export default function TradeIdeaPostButton() {
 
     const dispatch = useDispatch();
     const vars = useSelector(state => state.entities.posts.tradeIdeas.variables)
+    const name = useSelector(state => state.entities.posts.tradeIdeas.name)
+    const ticker = useSelector(state => state.entities.posts.tradeIdeas.ticker)
     const varsWithContent = vars && Object.values(vars).filter( e => e.name && e.description);
 
     const [deleting, setDeleting] = useState(false);
@@ -16,7 +18,7 @@ export default function TradeIdeaPostButton() {
         return (
             <div className="flex gap-3 h-full">
                 <button
-                    disabled={!(Object.values(varsWithContent).length != 0)}
+                    disabled={!(Object.values(varsWithContent).length != 0 && name && ticker)}
                     onClick={() => {
                         dispatch(createTradeIdea());
                     }}

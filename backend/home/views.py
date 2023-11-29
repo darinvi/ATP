@@ -128,12 +128,25 @@ def edit_playbook_comment(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def create_trade_idea(request):
+    # extract name and ticker in order to create trade idea
     data = json.loads(request.body)
-    name = data.get("name")
-    ticker = data.get("ticker")
+    name = data.get("name"); del data['name']
+    ticker = data.get("ticker"); del data['ticker']
+    # create trade idea, then use the id as fk in trade variables
+    db = mongo_client()['testdb']
+    collection = db.get_collection("trade_ideas")
+    idea = collection.insert_one({
+        "name":name,
+        "ticker":ticker,
+        "user": request.user.pk,
+    }).inserted_id
+
+    collection = db.get_collection("trade_variables")
+    for item in data.values():
+        if 'numeric' in item.keys():
+            item['numeric'] = float(item['numeric'])
+        item['user'] = request.user.pk
+        item['idea'] = idea
+        collection.insert_one(item)
     
-    collection = mongo_client()['testdb'].get_collection("trade_ideas")
-    id = collection.insert_one({"test":5}).inserted_id
-    print(id.inserted_id)
-    
-    return Response(status=200)
+    return Response(status=201)

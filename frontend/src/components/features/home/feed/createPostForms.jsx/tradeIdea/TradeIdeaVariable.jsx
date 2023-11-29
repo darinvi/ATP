@@ -3,6 +3,7 @@ import { modifyName, modifyDescription, removeVariable, activateCancel, deactiva
 import { useState } from "react";
 import MinimizedIdea from "./MinimizedVariable";
 import VariableSelect from "../postForm/VariableSelect";
+import AddNumeric from "./AddNumeric";
 
 export default function TradeIdeaVariable({ counter }) {
 
@@ -20,24 +21,28 @@ export default function TradeIdeaVariable({ counter }) {
         const sharedInputClass = "rounded border-2 border-cyan-900 text-black bg-gray-200 hover:bg-white focus:bg-white"
         return (
             <div className="flex flex-col gap-4">
-                <div className="flex w-full gap-12 items-center">
+                <div className="flex w-full gap-4">
                     <div className="flex flex-col w-1/3">
-                    <label
-                        className="text-xs"
-                        htmlFor={`var-name-${counter}`}
-                    >variable name</label>
-                    <input
-                        id={`var-name-${counter}`}
-                        type="text"
-                        onClick={e => e.stopPropagation()}
-                        className={`${sharedInputClass}`}
-                        value={vars[counter].name}
-                        onChange={e => dispatch(modifyName([counter, e.target.value]))}
-                    ></input>
+                        <label
+                            className="text-xs"
+                            htmlFor={`var-name-${counter}`}
+                        >variable name</label>
+                        <input
+                            id={`var-name-${counter}`}
+                            type="text"
+                            onClick={e => e.stopPropagation()}
+                            className={`${sharedInputClass}`}
+                            value={vars[counter].name}
+                            onChange={e => dispatch(modifyName([counter, e.target.value]))}
+                        ></input>
                     </div>
                     <VariableSelect 
                         variables={tradeIDeaVariables}
                         counter={counter}
+                    />
+                    <AddNumeric 
+                        counter={counter}
+                        variables={vars}
                     />
                 </div>
                 <div className="flex flex-col w-full">
@@ -65,7 +70,7 @@ export default function TradeIdeaVariable({ counter }) {
         return (
             <div className="flex gap-2">
                 <button
-                    disabled={!(vars[counter].name && vars[counter].description)}
+                    disabled={!(vars[counter].name && (vars[counter].description || vars[counter].numeric))}
                     onClick={() => setMaximized(false)}
                     className={`hover:bg-green-400 ${sharedClass} disabled:bg-gray-100 disabled:scale-100 ${disabledClass}`}
                 >minimize</button>
@@ -125,6 +130,7 @@ export default function TradeIdeaVariable({ counter }) {
                         setMaximized={setMaximized}
                         name={vars[counter].name}
                         description={vars[counter].description}
+                        numeric={vars[counter].numeric}
                     />
             }
         </>
