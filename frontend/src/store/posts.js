@@ -57,3 +57,14 @@ export const {
 } = slice.actions;
 
 export default slice.reducer;
+
+export const createTradeIdea = () => (dispatch, getState) => {
+    const data = getState().entities.posts.tradeIdeas.variables
+    dispatch(apiCallBegan({
+        url: 'create-trade-idea',
+        method: 'post',
+        data,
+        headers: {},
+        // onSuccess: removePersonalQuestion.type
+    }))
+}

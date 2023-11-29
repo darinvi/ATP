@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { modifyName, modifyDescription, removeVariable, activateCancel, deactivateCancel } from "../../../../../../store/posts";
 import { useState } from "react";
 import MinimizedIdea from "./MinimizedVariable";
+import VariableSelect from "../postForm/VariableSelect";
 
 export default function TradeIdeaVariable({ counter }) {
 
@@ -11,11 +12,16 @@ export default function TradeIdeaVariable({ counter }) {
     const vars = useSelector(state => state.entities.posts.tradeIdeas.variables);
     const cancels = useSelector(state => state.entities.posts.tradeIdeas.cancelActive);
 
+    const tradeIDeaVariables = {
+        'Market Technicals' : 'market_technicals',
+    }
+
     function maximizedInput() {
         const sharedInputClass = "rounded border-2 border-cyan-900 text-black bg-gray-200 hover:bg-white focus:bg-white"
         return (
             <div className="flex flex-col gap-4">
-                <div className="flex flex-col flex-1 w-1/3">
+                <div className="flex w-full gap-12 items-center">
+                    <div className="flex flex-col w-1/3">
                     <label
                         className="text-xs"
                         htmlFor={`var-name-${counter}`}
@@ -28,8 +34,13 @@ export default function TradeIdeaVariable({ counter }) {
                         value={vars[counter].name}
                         onChange={e => dispatch(modifyName([counter, e.target.value]))}
                     ></input>
+                    </div>
+                    <VariableSelect 
+                        variables={tradeIDeaVariables}
+                        counter={counter}
+                    />
                 </div>
-                <div className="flex flex-col flex-3 w-full">
+                <div className="flex flex-col w-full">
                     <label
                         htmlFor={`var-desc-${counter}`}
                         className="text-xs"
@@ -49,7 +60,7 @@ export default function TradeIdeaVariable({ counter }) {
 
 
     function formButtons() {
-        const sharedClass = 'text-sm px-3 rounded transform hover:scale-105 active:scale-100 text-gray-300 border border-cyan-900 hover:text-black opacity-70 hover:opacity-100 '
+        const sharedClass = 'text-sm px-3 rounded transform hover:scale-105 active:scale-100 text-white border border-cyan-900 hover:text-black opacity-70 hover:opacity-100 '
         const disabledClass = "disabled:opacity-20 disabled:border-2 disabled:border-gray-900 disabled:scale-100 disabled:bg-gray-900 disabled:text-gray-300"
         return (
             <div className="flex gap-2">
@@ -70,7 +81,7 @@ export default function TradeIdeaVariable({ counter }) {
                 {
                     cancels.includes(counter)
                         ?
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 ">
                             <p>proceed?</p>
                             <button
                                 onClick={() => {
@@ -103,8 +114,8 @@ export default function TradeIdeaVariable({ counter }) {
                 maximized
                     ?
                     <div
-                        className="flex flex-col w-full border-y border-cyan-900 py-1 hover:bg-cyan-800 hover:text-gray-300 px-2 gap-1"
-                        onClick={() => setMaximized(false)}
+                        className="flex flex-col w-full border-y border-cyan-900 py-1 bg-cyan-800 text-gray-300 hover:text-white px-2 gap-1"
+                        // onDoubleClick={() => setMaximized(false)}
                     >
                         {maximizedInput()}
                         {formButtons()}

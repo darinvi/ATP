@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { clearTradeIdeasState } from "../../../../../../store/posts";
+import { clearTradeIdeasState, createTradeIdea } from "../../../../../../store/posts";
 import { useState } from "react";
 
 export default function TradeIdeaPostButton() {
@@ -17,7 +17,9 @@ export default function TradeIdeaPostButton() {
             <div className="flex gap-3">
                 <button
                     disabled={!(Object.values(varsWithContent).length != 0)}
-                    onClick={() => { }}
+                    onClick={() => {
+                        dispatch(createTradeIdea());
+                    }}
                     className={`hover:bg-green-300 text-gray-300 opacity-80 hover:text-black px-8 rounded border border-green-900 ${transformClass} ${disabledClass}`}
                 >
                     Post

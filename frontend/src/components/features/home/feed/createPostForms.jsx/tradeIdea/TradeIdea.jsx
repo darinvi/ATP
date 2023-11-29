@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { clearTradeIdeasState } from "../../../../../../store/posts";
 import TradeIdeaTagSelect from "./TradeIdeaTagSelect";
+import TradeIdeaMetaData from "./TradeIdeaMetaData";
 
 export default function TradeIdea() {
 
@@ -33,7 +34,10 @@ export default function TradeIdea() {
                             dispatch(addVariable());
                         }}
                     >+</button>
-                    <TradeIdeaTagSelect />
+                    <div className="flex flex-col h-full justify-between">
+                        <TradeIdeaMetaData />
+                        <TradeIdeaTagSelect />
+                    </div>
                 </div>
                 <TradeIdeaPostButton />
             </div>

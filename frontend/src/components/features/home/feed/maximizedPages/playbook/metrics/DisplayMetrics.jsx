@@ -10,7 +10,7 @@ export default function DisplayMetrics() {
 
     return (
         <div className="flex-1 flex flex-col w-full ml-2">
-            <div className="flex-1 flex flex-col justify-around text-gray-400">
+            <div className="flex-1 flex flex-col justify-around text-gray-400 select-text">
                 <p>Created by: <span className={metricSpan}>{play.user.username}</span></p>
                 <p>Play: <span className={metricSpan}>{play.play}</span></p>
                 <div className="flex w-full justify-between pr-8">

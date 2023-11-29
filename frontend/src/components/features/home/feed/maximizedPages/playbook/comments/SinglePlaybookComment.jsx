@@ -62,7 +62,7 @@ export default function SinglePlaybookComment({ comment }) {
                         delActive
                         ?
                         <>
-                            <p className="text-xs hover:text-white">proceed?</p>
+                            <p className="text-xs">proceed?</p>
                             <button
                                 className="text-xs hover:text-white"
                                 onClick={() => dispatch(deletePBComment(comment._id))}

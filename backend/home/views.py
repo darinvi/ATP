@@ -122,3 +122,18 @@ def edit_playbook_comment(request):
         return Response([id, comment])
     else:
         return Response(status=500)
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def create_trade_idea(request):
+    data = json.loads(request.body)
+    name = data.get("name")
+    ticker = data.get("ticker")
+    
+    collection = mongo_client()['testdb'].get_collection("trade_ideas")
+    id = collection.insert_one({"test":5}).inserted_id
+    print(id.inserted_id)
+    
+    return Response(status=200)
