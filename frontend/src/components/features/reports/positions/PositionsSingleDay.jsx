@@ -1,41 +1,44 @@
 export default function PositionsSingleDay(props) {
+
+    const pClass = "flex-1 text-center"
+
     const renderPositions = props.positions && Object.entries(props.positions).map(e => {
         const [ticker, data] = e;
         const { unrealized, quantity, realized, commision, ecn_fee, reg_fee, net, total } = data;
         return <>
-            <tr>
-                <td>{ticker}</td>
-                <td>{unrealized}</td>
-                <td>{quantity}</td>
-                <td>{realized}</td>
-                <td>{commision}</td>
-                <td>{ecn_fee}</td>
-                <td>{reg_fee}</td>
-                <td>{net}</td>
-                <td>{total}</td>
-            </tr>
+            <div 
+                className={`flex ${ticker === 'TOTALS' && "border-t-2 border-cyan-900 mt-2"} text-gray-300 hover:text-white`}
+            >
+                <p className={pClass}>{ticker}</p>
+                <p className={pClass}>{unrealized}</p>
+                <p className={pClass}>{quantity}</p>
+                <p className={pClass}>{realized}</p>
+                <p className={pClass}>{commision}</p>
+                <p className={pClass}>{ecn_fee}</p>
+                <p className={pClass}>{reg_fee}</p>
+                <p className={pClass}>{net}</p>
+                <p className={pClass}>{total}</p>
+            </div>
         </>
     })
 
-    return <div className="shadow container mx-auto p-4">
+    return <div className="flex flex-col items-center w-full text-gray-300 hover:text-white">
         <p>{props.day}</p>
-        <table className="table-auto">
-            <thead>
-                <tr>
-                <th>ticker</th>
-                <th>unrealized</th>
-                <th>quantity</th>
-                <th>realized</th>
-                <th>commission</th>
-                <th>ecn fee</th>
-                <th>regulatory fee</th>
-                <th>net</th>
-                <th>total</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div className="flex flex-col w-full border-y-2 border-cyan-700 py-2 hover:bg-cyan-700">
+            <div className="flex border-b-2 border-cyan-900 mb-2">
+                <p className={pClass}>ticker</p>
+                <p className={pClass}>unrealized</p>
+                <p className={pClass}>quantity</p>
+                <p className={pClass}>realized</p>
+                <p className={pClass}>commission</p>
+                <p className={pClass}>ecn fee</p>
+                <p className={pClass}>reg. fee</p>
+                <p className={pClass}>net</p>
+                <p className={pClass}>total</p>
+            </div>
+            <div className="w-full">
                 {renderPositions}
-            </tbody>
-        </table>
+            </div>
+        </div>
     </div>
 }

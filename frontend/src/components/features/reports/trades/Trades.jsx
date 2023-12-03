@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import ShowTradeDetails from "./ShowTradeDetails";
 import { useState } from "react";
 import SingleTrade from "./SingleTrade";
-import ApplyFilters from "./ApplyTradesFilters";
+import ApplyFilters from "../filters/ApplyTradesFilters";
 import TradeChart from "./TradeChart";
 
 export default function Trades() {

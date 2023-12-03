@@ -168,8 +168,8 @@ export const clearReportState = clearState;
 export const clearReportData = clearData;
 export const setCalledType = setCurrentType;
 
-function applyFilters(data, filterVariable, comparisonType, filterValue) {
-    filterValue = parseFloat(filterValue)
+function applyFilters(data, filterVariable, comparisonType, filterValueOriginal) {
+    const filterValue = parseFloat(filterValueOriginal)
     return data.map(trade => {
         if (trade.filtered === false) return trade;
         let isHigher;
@@ -186,45 +186,27 @@ function applyFilters(data, filterVariable, comparisonType, filterValue) {
                 isHigher = trade.gross > filterValue
                 trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
                 return trade
-            case 'gross (absolute)':
-                isHigher = Math.abs(trade.gross) > filterValue
-                trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
-                return trade
+                case 'gross (absolute)':
+                    isHigher = Math.abs(trade.gross) > filterValue
+                    trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
+                    return trade
             case 'time opened':
                 // Make sure to have a vlaidator in the front end, always send hh:mm:ss even if only hh:mm provided.
-                console.log(filterValue)
-                console.log(typeof filterValue)
-                const [h, m, s] = trade.time_open.split(":") // hour, minute, seconds
-                const [fvh, fvm, fvs] = filterValue.split(":") // filter value h, m, s
-                isHigher = (
-                    h > fvh
-                        ?
-                        true
-                        :
-                        ( 
-                            h === fvh
-                                ?
-                                (
-                                    m > fvm
-                                        ?
-                                        true
-                                        :
-                                        (
-                                            m === fvm
-                                                ?
-                                                (s > fvs ? true : false)
-                                                :
-                                                false
-                                        )
-                                )
-                                :
-                                false
-                        )
-                )
+                const [h, m, s] = trade.time_open.split(":").map(e => parseFloat(e)) // hour, minute, seconds
+                const [fvh, fvm, fvs] = filterValueOriginal.split(":").map(e => parseFloat(e)) // filter value h, m, s
+                isHigher = h > fvh ||
+                (h === fvh && m > fvm) ||
+                (h === fvh && m === fvm && s > fvs)
                 trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
                 return trade
             case 'time closed':
-                // Implement time comparison logic here
+                const [hc, mc, sc] = trade.time_closed.split(":").map(e => parseFloat(e)) // hour, minute, seconds
+                const [fvhc, fvmc, fvsc] = filterValueOriginal.split(":").map(e => parseFloat(e)) // filter value h, m, s
+                isHigher = hc > fvhc ||
+                (hc === fvhc && mc > fvmc) ||
+                (hc === fvhc && mc === fvmc && sc > fvsc)
+                trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
+                return trade
                 break;
             case 'duration held':
                 // Implement duration comparison logic here
@@ -260,4 +242,10 @@ function resetFiltered(data) {
         d['filtered'] = true;
     }
     return data
+}
+
+
+
+function applyFiltersTotals() {
+
 }

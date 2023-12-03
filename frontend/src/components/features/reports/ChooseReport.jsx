@@ -1,10 +1,19 @@
 import GetReportsForm from "./GetReportsForm"
-import ApplyTradesFilters from "./trades/ApplyTradesFilters"
+import ApplyTotalsFilters from "./filters/ApplyTotalsFilters";
+import ApplyTradesFilters from "./filters/ApplyTradesFilters"
+import { useSelector } from "react-redux"
 
 export default function ChooseReport({showForm, setShowForm}) {
     
+    const tradeType = useSelector(state => state.entities.reports.type);
+
+    const mapFilters = {
+        'Trades': <ApplyTradesFilters />,
+        'Totals': <ApplyTotalsFilters />,
+    }
+
     return (
-        <div className="mt-1 flex flex-col items-center w-full h-fit">
+        <div className="relative pt-1 flex flex-col items-center w-1/2 h-fit">
             <div className="mx-auto flex gap-2">
                 <button
                     onClick={() => setShowForm(true)}
@@ -12,7 +21,7 @@ export default function ChooseReport({showForm, setShowForm}) {
                 >
                     Change Report Criteria
                 </button>
-                <ApplyTradesFilters />
+                {tradeType && mapFilters[tradeType]}
             </div>
 
             {showForm && <GetReportsForm setShowForm={setShowForm} />}

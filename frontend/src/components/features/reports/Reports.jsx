@@ -58,14 +58,14 @@ export default function Reports() {
                     setShowForm={setShowForm}
                 />
 
-                {/* {!loading
-                    ? */}
+                {!loading
+                    ?
                     <div className="w-full h-full">
                         {mapTypeToComponent[lastTypeCalled]}
                     </div>
-                    {/* : */}
-                    {/* <p className="text-2xl text-black animate-ping">Loading...</p> */}
-                {/* } */}
+                    :
+                    <p className="text-2xl text-black animate-ping">Loading...</p>
+                }
 
             </div>
 

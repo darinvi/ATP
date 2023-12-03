@@ -17,7 +17,7 @@ export default function Positions() {
     })
 
     return (
-        <div className="flex overflow-y-auto">
+        <div className="flex overflow-y-auto px-4">
             {
                 currentData
                 &&

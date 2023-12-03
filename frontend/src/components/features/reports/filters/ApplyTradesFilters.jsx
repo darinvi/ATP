@@ -162,7 +162,7 @@ export default function ApplyTradesFilters() {
                 {/* <p>Having the same filter type (e.g. absolute net) removes all tags on click.</p> */}
             </>
             :
-            <div className="absolute top-0 left-1/4 flex gap-4 border-b-2 border-x-2 border-cyan-700 py-4 px-2 bg-cyan-900">
+            <div className="absolute top-0 left-0 w-full flex gap-4 border-b-2 border-x-2 border-cyan-700 py-4 px-2 bg-cyan-900">
                 <div className="flex flex-col gap-2">
                     {getInputs()}
                     {getFilterList()}
