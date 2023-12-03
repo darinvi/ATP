@@ -190,8 +190,7 @@ function applyFilters(data, filterVariable, comparisonType, filterValueOriginal)
                     isHigher = Math.abs(trade.gross) > filterValue
                     trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
                     return trade
-            case 'time opened':
-                // Make sure to have a vlaidator in the front end, always send hh:mm:ss even if only hh:mm provided.
+            case 'time opened':// Make sure to have a vlaidator in the front end, always send hh:mm:ss even if only hh:mm provided.
                 const [h, m, s] = trade.time_open.split(":").map(e => parseFloat(e)) // hour, minute, seconds
                 const [fvh, fvm, fvs] = filterValueOriginal.split(":").map(e => parseFloat(e)) // filter value h, m, s
                 isHigher = h > fvh ||
@@ -207,7 +206,6 @@ function applyFilters(data, filterVariable, comparisonType, filterValueOriginal)
                 (hc === fvhc && mc === fvmc && sc > fvsc)
                 trade['filtered'] = comparisonType === 'Greater' ? (isHigher ? true : false) : (isHigher ? false : true)
                 return trade
-                break;
             case 'duration held':
                 // Implement duration comparison logic here
                 break;

@@ -18,7 +18,7 @@ export default function TablePrefs() {
 
     function getTableHeaders() {
         return (
-            <div className="flex w-full bg-gray-200 sticky top-0 border-y border-gray-500">
+            <div className="flex w-full bg-cyan-700 sticky top-0 border-y-2 border-cyan-900">
                     <PrefColnames text="Ticker" reducer={sortByTicker} sorted={sorted} setSorted={setSorted}/>
                     <PrefColnames text="AVG.Volume" reducer={sortByAvgVolume} sorted={sorted} setSorted={setSorted}/>
                     <PrefColnames text="Div.Amount" reducer={sortByDivAmount} sorted={sorted} setSorted={setSorted}/>
@@ -39,7 +39,7 @@ export default function TablePrefs() {
 
     return (
         <div
-            className="flex flex-col"
+            className="flex flex-col text-gray-300"
         >
             {getTableHeaders()}
             {getTableData()}

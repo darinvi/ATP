@@ -18,7 +18,7 @@ export default function PrefColnames(props){
                 }
             }}
         >   
-                <p className={`${props.sorted === props.text && "text-gray-400"}`}>{props.text}</p>
+                <p className={`${props.sorted === props.text && "text-cyan-400"}`}>{props.text}</p>
         </th>
     )
 }

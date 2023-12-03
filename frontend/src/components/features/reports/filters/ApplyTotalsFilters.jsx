@@ -1,13 +1,16 @@
 import { useState } from "react"
+import { useSelector } from "react-redux";
 
 export default function ApplyTotalsFilters() {
 
     const [showFilters, setShowFilters] = useState(false);
 
+    const data = useSelector(state => state.entities.reports.currentData);
+
     const disabledClass = "disabled:opacity-20 disabled:border-2 disabled:border-gray-900 disabled:scale-100 disabled:bg-gray-900 disabled:text-gray-300"
     const buttonClass = "w-fit px-2 border-2 border-cyan-800 rounded hover:text-black transform active:scale-95"
 
-    function getButtons(){        
+    function getButtons() {
         return (
             <div className="flex gap-4">
                 <button
@@ -15,18 +18,18 @@ export default function ApplyTotalsFilters() {
                 >Apply</button>
                 <button
                     className={`${buttonClass} ${disabledClass} hover:bg-red-200`}
-                    onClick={()=> setShowFilters(false)}
+                    onClick={() => setShowFilters(false)}
                 >Close</button>
             </div>
         )
     }
 
-    function getCriteriaSelect(){
+    function getCriteriaSelect() {
         return (
-            <div 
+            <div
                 className="flex gap-6"
             >
-                <div 
+                <div
                     className="flex gap-2 hover:text-white"
                 >
                     <label
@@ -35,7 +38,7 @@ export default function ApplyTotalsFilters() {
                     <select
                         id="criteria-select-totals-profit-and-loss"
                         className="w-fit bg-cyan-900"
-                    > 
+                    >
                         <option>net</option>
                         <option>total</option>
                         <option>realized</option>
@@ -47,22 +50,16 @@ export default function ApplyTotalsFilters() {
                         <option>trades</option>
                     </select>
                 </div>
-                <div
-                    className="flex gap-2 hover:text-white"
+                <select
+                    id="criteria-select-totals-profit-and-loss"
+                    className="w-fit bg-cyan-900 hover:text-white"
                 >
-                    <label
-                        htmlFor="criteria-select-totals-profit-and-loss"
-                    >Criteria:</label>
-                    <select
-                        id="criteria-select-totals-profit-and-loss"
-                        className="w-fit bg-cyan-900"
-                    > 
-                        <option>Above</option>
-                        <option>Below</option>
-                    </select>
-                </div>
+                    <option>Above</option>
+                    <option>Below</option>
+                </select>
                 <input
                     type="number"
+                    step="0.01"
                     className="rounded bg-cyan-700 active:bg-cyan-800 hover:bg-cyan-800"
                 />
                 <button
@@ -74,7 +71,7 @@ export default function ApplyTotalsFilters() {
         )
     }
 
-    function getFilters(){
+    function getFilters() {
         return (
             <div
                 className="absolute z-20 w-full bg-cyan-900 border-x-2 border-b-2 border-cyan-700 rounded-b p-4 left-0 top-0 flex flex-col gap-2"
@@ -90,7 +87,7 @@ export default function ApplyTotalsFilters() {
             ?
             <>
                 <button
-                    // disabled={!trades}
+                    disabled={!data}
                     className={`hover:bg-green-200 hover:text-black border-2 border-cyan-900 px-4 rounded transform hover:scale-105 ${disabledClass}`}
                     onClick={() => setShowFilters(true)}
                 >Show Filters</button>

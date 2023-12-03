@@ -3,6 +3,7 @@ import PositionsSingleDay from "./PositionsSingleDay"
 import EquityCurve from "../EquityCurve"
 
 export default function Positions() {
+
     const currentData = useSelector(state => state.entities.reports.currentData)
 
     const total = currentData && Object.values(currentData).reduce((prev, curr) => {
@@ -11,9 +12,9 @@ export default function Positions() {
         return prev
     }, [0])
 
-    const renderReports = currentData && Object.entries(currentData).map(e => {
+    const renderReports = currentData && Object.entries(currentData).map((e, i) => {
         const [date, data] = e;
-        return <PositionsSingleDay day={date} positions={data} />
+        return <PositionsSingleDay day={date} positions={data} index={i} />
     })
 
     return (

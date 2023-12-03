@@ -12,10 +12,12 @@ export default function PrefDataRow(props) {
 
     const data = props.data
 
+    const linkClass = "hover:bg-green-200 hover:text-black px-2 rounded border-2 border-cyan-900"
+
     return (
         <>
             <tr 
-                className={`hover:bg-gray-200 ${isActive && "bg-gray-200" } border-b cursor-pointer flex`}
+                className={`hover:bg-cyan-700 hover:text-white ${isActive && "bg-cyan-700" } border-b-2 border-cyan-900 cursor-pointer flex`}
                 onClick={()=>setIsActive(prev => !prev)}
             >
                 <td className="text-center flex-1">{data.ticker}</td>
@@ -25,10 +27,10 @@ export default function PrefDataRow(props) {
                 <td className="text-center flex-1">{parseFloat(data.atr).toFixed(2)}</td>
                 <td className="text-center flex-1">{data.industry}</td>
             </tr>
-            <div className={`${!isActive && "hidden" } flex items-center items-center z-50 bg-gray-100 w-full py-2`}>
+            <div className={`${!isActive && "hidden" } flex items-center items-center z-50 bg-cyan-700 w-full py-2`}>
                 <div className="mx-auto flex gap-2">
                     <Link 
-                        className="bg-gray-200 hover:bg-green-300 hover:text-white px-2 rounded"
+                        className={linkClass}
                         to='http://localhost:3000/backtests/dividends'
                         onClick={ () => {
                             dispatch(getDividendStats(data.ticker))
@@ -36,14 +38,14 @@ export default function PrefDataRow(props) {
                     >Dividends</Link>  
                     
                     <Link 
-                        className="bg-gray-200 hover:bg-green-300 hover:text-white px-2 rounded"
+                        className={linkClass}
                         to='#'
                         onClick={ () => {
                         }}
                     >Trade Idea</Link>  
 
                     <Link 
-                        className="bg-gray-200 hover:bg-green-300 hover:text-white px-2 rounded"
+                        className={linkClass}
                         to='/playbook'
                         onClick={ () => {
                             dispatch(inputTicker(data.ticker));
