@@ -21,6 +21,7 @@ export default function TradeIdeaMetaData() {
         return (
             <div className="w-full flex items-center pl-2">
                 <input
+                    placeholder={activeInput === 'Name' ? "Insert Trade Name (e.g. dividend play)" : "Insert Ticker Name"}
                     value={activeInput === 'Name' ? name : ticker}
                     onChange={ e => {
                         if (activeInput === 'Name') dispatch(setMetaData({'name': e.target.value}));

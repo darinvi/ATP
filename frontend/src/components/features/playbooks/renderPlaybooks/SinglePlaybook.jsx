@@ -109,7 +109,7 @@ export default function SinglePlaybook({ play, index }) {
 
     return (
         <div
-            className={`border border-cyan-700 flex flex-col my-4 items-center text-gray-300 hover:text-white ${isActive && "border-y-4 shadow-2xl my-14"} w-full text-gray-300`}
+            className={`border border-cyan-700 flex flex-col my-4 items-center text-gray-300 hover:text-white ${isActive && "border-y-4 shadow-2xl my-16"} w-full text-gray-300`}
             id={play.counter}
         >
             {notActive()}

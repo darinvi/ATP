@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { loadPositions, loadTrades, setCalledType } from "../../../store/reports";
 
-export default function GetReportForm(props) {
+export default function GetReportForm({ setShowForm }) {
 
     const dispatch = useDispatch();
     const reportToken = useSelector(state => state.entities.reports.reportToken)
@@ -26,9 +26,9 @@ export default function GetReportForm(props) {
         } else if (type == 'Summary') {
             console.log('ToDo: dispatch Summary')
         }
-        props.disableForm(false);
+        setShowForm(false);
     }
-    
+
     function validateDateInput(date) {
         // if (date == "") return true; 
         const [day, month, year] = date.split('/').map(Number);
@@ -64,40 +64,50 @@ export default function GetReportForm(props) {
                 setDatesValid({ ...datesValid, end: true })
             })()
             : setDatesValid({ ...datesValid, end: false })
-        }
+    }
 
-        // handle start year > end year and invalid inputs.
-        return (
-        <form onSubmit={handleSubmitForm} className="flex flex-col mx-auto gap-4 mt-12 mb-6 items-center">
+    const sharedClass = "hover:text-black border-2 border-cyan-800"
+    const inputClass = "bg-cyan-700 rounded pl-2 focus:bg-cyan-800 hover:bg-cyan-800 text-white"
+
+    // handle start year > end year and invalid inputs.
+    return (
+        <form 
+            onSubmit={handleSubmitForm} 
+            className="absolute bg-cyan-900 flex flex-col mx-auto gap-4 z-20 top-0 p-2 rounded-b-lg border-x-2 border-b-2 border-cyan-700"
+        >
             <div className="flex gap-6" >
-                <div className="flex gap-2">
+                <div className="flex gap-2 hover:text-white">
                     <label htmlFor="dateFrom">from</label>
                     <input
                         id="dateFrom"
                         type="text"
-                        className={`shadow rounded ${!datesValid.start && 'bg-red-100'}`}
+                        className={`${inputClass} ${!datesValid.start && 'bg-red-100'}`}
                         placeholder="dd/mm/yy"
                         // value={start}
                         onChange={handleStartInput}
                     ></input>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 hover:text-white">
                     <label htmlFor="dateTo">to</label>
                     <input
                         id="dateTo"
                         type="text"
-                        className={`shadow rounded ${!datesValid.end && 'bg-red-100'}`}
+                        className={`${inputClass} ${!datesValid.end && 'bg-red-100'}`}
                         placeholder="dd/mm/yy"
                         onChange={handleEndInput}
-                        // value={start}
-                        ></input>
+                    // value={start}
+                    ></input>
                 </div>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex gap-4  hover:text-white">
                 <label htmlFor="account-select">Account:</label>
-                <select id="account-select" className="shadow" onChange={(e) => setAccountId(e.target.value)}>
+                <select
+                    id="account-select"
+                    className="bg-cyan-900"
+                    onChange={(e) => setAccountId(e.target.value)}
+                >
                     {accounts && accounts.map(acc => {
                         return <option value={acc[0]}>{acc[1]} {acc[2]}</option>
                     })}
@@ -105,33 +115,34 @@ export default function GetReportForm(props) {
                 {/* Maybe a <button>ADD ACC</button> here would be perfect for creating the matrix. */}
             </div>
 
-            <div className="flex gap-4">
-                <label htmlFor="report-select">Type:</label>
+            <div className="flex gap-4 hover:text-white">
+                <label htmlFor="report-select">Report Type:</label>
                 <select
                     id="report-select"
-                    className="shadow"
+                    className="bg-cyan-900"
                     onChange={(e) => setType(e.target.value)}
                 >
-                    <option value="" disabled={type}>Choose Report Type:</option>
                     {reportTypes.map(type => {
                         return <option value={type}>{type}</option>
                     })}
                 </select>
             </div>
 
-            <div className="flex gap-4 border-b-2 border-gray-300 pb-4">
-                <button
-                    type="submit"
-                    className="disabled:text-sm disabled:text-white disabled:bg-gray-100 bg-green-300 w-48 rounded transform hover:scale-105"
+            <div className="flex gap-4 w-full border-t-2 border-cyan-800 pt-1 mx-auto">
+                <div className="mx-auto flex gap-4 my-2">
+                    <button
+                        type="submit"
+                        className={`hover:bg-green-200 px-2 rounded transform hover:scale-105 ${sharedClass}`}
                     // disabled={}
                     >Load Report</button>
-                <button
-                    className="bg-yellow-200 px-4 rounded transform hover:scale-105"
-                    onClick={(e)=>{
-                        e.preventDefault()
-                        props.disableForm(false);
-                    }}
-                >Hide Form</button>
+                    <button
+                        className={`hover:bg-red-200 px-4 rounded transform hover:scale-105 ${sharedClass}`}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setShowForm(false);
+                        }}
+                    >Hide Form</button>
+                </div>
             </div>
         </form>
     )

@@ -16,17 +16,20 @@ export default function Positions() {
         return <PositionsSingleDay day={date} positions={data} />
     })
 
-    return <div className="flex">
-        {
-            currentData 
-            &&
-            <div className="flex flex-col gap-8 overflow-y-scroll h-96">
-                <p>HAVE A FILTER FOR DAYS WHERE PFF / SPY / TLT GAP MORE THAN x. </p>
-                <p>ON CLICK OF SPECIFIC DAY, ALLOW FOR ADDING COMMENTS TO THE JOURNAL FOR SAID DAY. </p>
-                <p>FILTER DAYS BASED ON TAGS / AVERAGE / SPECIFIC</p>
-                {renderReports}
-            </div>
-        }
-        {total && <EquityCurve data={total} />}
-    </div>
+    return (
+        <div className="flex overflow-y-auto">
+            {
+                currentData
+                &&
+                <div className="flex flex-col gap-8 overflow-y-scroll h-[80vh] w-1/2">
+                    {/* <p>HAVE A FILTER FOR DAYS WHERE PFF / SPY / TLT GAP MORE THAN x. </p>
+                    <p>ON CLICK OF SPECIFIC DAY, ALLOW FOR ADDING COMMENTS TO THE JOURNAL FOR SAID DAY. </p>
+                    <p>FILTER DAYS BASED ON TAGS / AVERAGE / SPECIFIC</p> */}
+                    {renderReports}
+                </div>
+            }
+            {total && <EquityCurve data={total} />}
+        </div>
+
+    )
 }

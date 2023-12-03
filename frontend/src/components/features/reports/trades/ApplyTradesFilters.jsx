@@ -1,5 +1,4 @@
 import { useState } from "react"
-import {applySelectedFilters } from "../../../../scripts/filterTrades";
 import { useSelector, useDispatch } from "react-redux";
 import { setFiltered } from "../../../../store/reports";
 
@@ -8,7 +7,7 @@ import { setFiltered } from "../../../../store/reports";
 // HAVE TO FIX THE BEHAVIOUR ON VARIABLE ADD. STATES GET VERY CONFUSED.
 // ADD SOME VISUALIZATION ORIGINAL DATA VS FILTERED.
 // ADD FILTERING BY TAG AS WELL.
-export default function ApplyFilters() {
+export default function ApplyTradesFilters() {
     const [showFilters, setShowFilters] = useState(false);
     const [currentFilter, setCurrentFilter] = useState(null)
     const [currentDuration, setCurrentDuration] = useState('All')
@@ -18,6 +17,7 @@ export default function ApplyFilters() {
     const [filterValue, setFilterValue] = useState(null);
     const [valueDirection, setValueDirection] = useState(null);
 
+    const disabledClass = "disabled:opacity-20 disabled:border-2 disabled:border-gray-900 disabled:scale-100 disabled:bg-gray-900 disabled:text-gray-300"
 
     const trades = useSelector(state => state.entities.reports.currentData)
     const dispatch = useDispatch();
@@ -30,7 +30,7 @@ export default function ApplyFilters() {
 
     const renderFilters = filters && filters.map(e => {
         return <div
-            className="flex gap-2 bg-cyan-300 px-2 rounded hover:bg-red-100 transform hover:scale-95"
+            className="flex gap-2 bg-cyan-300 px-2 rounded hover:bg-red-100 transform hover:scale-95 text-black text-sm"
             onClick={()=>{
                 const newFilters = filters.filter(el => el[0] != e[0])
                 // setFilterKeys([...filterKeys, e[0]])
@@ -58,7 +58,7 @@ export default function ApplyFilters() {
     function getInputs() {
         return <div className="flex gap-4">
             <select
-                className="bg-gray-100 shadow rounded transform hover:scale-105"
+                className="bg-cyan-900 hover:text-white rounded"
                 onChange={e => setCurrentFilter(e.target.value)}
             >
                 <option 
@@ -67,17 +67,21 @@ export default function ApplyFilters() {
                 {renderFilterKeys}
             </select>
             <select
-                className="bg-gray-100 shadow rounded transform hover:scale-105"
+                className="bg-cyan-900 hover:text-white rounded"
                 onChange={(e) => setValueDirection(e.target.value)}
             >
                 <option disabled={valueDirection}> gt / ls ?</option>
                 <option value="Greater">Greater</option>
                 <option value="Lesser">Lesser</option>
             </select>
-            <p>than</p>
+            <label 
+                className="hover:text-white"
+                htmlFor="gt-ls-criteria"
+            >than</label>
             <input
+                id="gt-ls-criteria"
                 type="text"
-                className="shadow border border-gray-200 transform hover:scale-105 rounded"
+                className="border border-cyan-700 rounded bg-cyan-700 hover:bg-cyan-800 focus:bg-cyan-800"
                 onChange={e => setFilterValue(e.target.value)}
                 value={filterValue}
             ></input>
@@ -86,26 +90,26 @@ export default function ApplyFilters() {
 
     function selectDurationAndDirection() {
         return <div className="flex gap-12">
-            <div className="flex gap-2">
+            <div className="flex gap-2 hover:text-white">
                 <label htmlFor="select-duration">Trade Type (Intraday/Swing)</label>
                 <select
                     value={currentDuration}
                     onChange={e => setCurrentDuration(e.target.value)}
                     id="select-duration"
-                    className="shadow rounded bg-gray-100 transform hover:scale-105"
+                    className="rounded bg-cyan-900"
                 >
                     <option>All</option>
                     <option>Intraday</option>
                     <option>Swing</option>
                 </select>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 hover:text-white">
                 <label htmlFor="select-direction">Trade Direction (Short/Long)</label>
                 <select
                     value={currentDirection}
                     onChange={e => setCurrentDirection(e.target.value)}
                     id="select-direction"
-                    className="shadow rounded bg-gray-100 transform hover:scale-105"
+                    className="rounded bg-cyan-900"
                 >
                     <option>All</option>
                     <option>Short</option>
@@ -124,16 +128,16 @@ export default function ApplyFilters() {
     function inputFilterButtons() {
         return <>
             <button
-                className="bg-green-300 px-4 rounded transform hover:scale-105 h-8 disabled:bg-gray-100 disabled:scale-100 disabled:text-xs"
+                className={`hover:bg-green-200 hover:text-black border-2 border-cyan-800 px-4 rounded h-8 ${disabledClass}`}
                 onClick={handleFilterAdd}
                 disabled={!(currentFilter && valueDirection && filterValue)}
             >Add</button>
             <button
-                className="bg-yellow-200 px-4 rounded transform hover:scale-105 h-8"
+                className="hover:bg-yellow-200 hover:text-black px-4 rounded transform hover:scale-105 h-8 active:scale-100 border-2 border-cyan-800"
                 onClick={() => setShowFilters(false)}
             >Hide</button>
             <button
-                className="bg-cyan-200 px-4 rounded transform hover:scale-105 h-8"
+                className="hover:bg-green-200 hover:text-black border-2 border-cyan-800 px-4 rounded transform hover:scale-105 h-8"
                 onClick={handleApplyButton}
             >Apply</button>
         </>
@@ -151,13 +155,14 @@ export default function ApplyFilters() {
             ?
             <>
                 <button
-                    className="bg-green-300 px-4 rounded transform hover:scale-105"
+                    disabled={!trades}
+                    className={`hover:bg-green-200 hover:text-black border-2 border-cyan-900 px-4 rounded transform hover:scale-105 ${disabledClass}`}
                     onClick={() => setShowFilters(true)}
                 >Show Filters</button>
-                <p>Having the same filter type (e.g. absolute net) removes all tags on click.</p>
+                {/* <p>Having the same filter type (e.g. absolute net) removes all tags on click.</p> */}
             </>
             :
-            <div className="flex gap-4 border-2 py-4 px-2">
+            <div className="absolute top-0 left-1/4 flex gap-4 border-b-2 border-x-2 border-cyan-700 py-4 px-2 bg-cyan-900">
                 <div className="flex flex-col gap-2">
                     {getInputs()}
                     {getFilterList()}

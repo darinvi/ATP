@@ -8,7 +8,7 @@ export default function TradeIdeaPostButton() {
     const vars = useSelector(state => state.entities.posts.tradeIdeas.variables)
     const name = useSelector(state => state.entities.posts.tradeIdeas.name)
     const ticker = useSelector(state => state.entities.posts.tradeIdeas.ticker)
-    const varsWithContent = vars && Object.values(vars).filter( e => e.name && e.description);
+    const varsWithContent = vars && Object.values(vars).filter( e => (e.name && e.description) || (e.name && e.numeric));
 
     const [deleting, setDeleting] = useState(false);
 

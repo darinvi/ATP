@@ -13,7 +13,6 @@ from bson import ObjectId
 import json, time
 
 # X7W
-
 MODELS = {
     'playbook': PlayBook, 
     'journal': DailyJournal
@@ -150,3 +149,6 @@ def create_trade_idea(request):
         collection.insert_one(item)
     
     return Response(status=201)
+
+
+# print(ObjectId(c['_id']).generation_time)

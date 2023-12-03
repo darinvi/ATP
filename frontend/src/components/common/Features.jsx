@@ -77,7 +77,7 @@ export default function Features() {
     const className = "hover:text-cyan-300 w-full flex items-center"
     const linkClass = "w-full h-full px-4 py-2";
 
-    return <ul className="border-2 border-cyan-900">
+    return <ul className="border-x-2 border-b-2 border-cyan-700 bg-cyan-900">
         <li className={className}>{backtestsSubNav()}</li>
         <li className={className}>{inquiriesSubNav()}</li>
         <li className={className}><Link to="/filings" className={linkClass}>Filings</Link></li>
