@@ -13,7 +13,9 @@ const slice = createSlice({
         reportRange: [],
         type: null,
         loading: false,
-        tradeFilters: []
+        tradeFilters: [],
+        checkedTrades: [],
+        tradeTags: [],
     },
     reducers: {
         setTokenSuccess: (reports, action) => {
@@ -35,9 +37,6 @@ const slice = createSlice({
         clearData: (reports, action) => {
             reports.currentData = null;
             reports.loading = false;
-        },
-        removeReportToken: (reports, action) => {
-
         },
         setAccounts: (reports, action) => {
             reports.accounts = action.payload.response
@@ -69,6 +68,20 @@ const slice = createSlice({
                 return { ...e, filtered: true }
             })
         },
+        handleCheckedTrades: (reports, action) => {
+            const [hash, checked] = action.payload;
+            if (checked && !reports.checkedTrades.includes(hash)) {
+                reports.checkedTrades.push(hash);
+            } else {
+                reports.checkedTrades = reports.checkedTrades.filter(e => e !== hash);
+            }
+        },
+        addTradeTag: (reports, action) => {
+            if (!reports.tradeTags.includes(action.payload)) reports.tradeTags.push(action.payload);
+        },
+        setTradeTags: (reports, action) => {
+            reports.tradeTags = action.payload;
+        },
     }
 });
 
@@ -82,11 +95,14 @@ const {
     setCurrentData,
     setCurrentType,
     setLoading,
+    addTradeTag,
+    setTradeTags
 } = slice.actions;
 
 export const {
     setFiltered,
-    clearFiltered
+    clearFiltered,
+    handleCheckedTrades
 } = slice.actions
 
 export default slice.reducer;
@@ -122,6 +138,27 @@ export const loadAccounts = (token) => (dispatch) => {
         },
         onSuccess: setAccounts.type,
         onError: genericError.type
+    }))
+}
+export const createTradeTag = (body) => (dispatch) => {
+    dispatch(apiCallBegan({
+        method: 'POST',
+        headers: {},
+        url: 'reports/create-trade-tag',
+        data: body,
+        onSuccess: addTradeTag.type,
+        // onError: genericError.type
+    }))
+}
+
+export const getTradeTags = () => (dispatch) => {
+    dispatch(apiCallBegan({
+        method: 'GET',
+        headers: {},
+        url: 'reports/get-trade-tags',
+        data: {},
+        onSuccess: setTradeTags.type,
+        // onError: genericError.type
     }))
 }
 
@@ -162,6 +199,10 @@ export const loadTrades = (token, start, end, id) => (dispatch) => {
         onSuccess: setCurrentData.type
     }))
 }
+
+// SELECTORS
+
+export const selectCheckedTrades = (state) => state.entities.reports.checkedTrades;
 
 
 export const clearReportState = clearState;
@@ -245,5 +286,5 @@ function resetFiltered(data) {
 
 
 function applyFiltersTotals() {
-
+    return
 }

@@ -2,7 +2,7 @@ import PostTypeButton from "./PostTypeButton"
 
 export default function FilterPosts() {
     return (
-        <div className="flex items-center">
+        <div className="flex items-center py-1">
             <PostTypeButton postType={'Playbook'} />
             <PostTypeButton postType={'Trade Ideas'} />
             <PostTypeButton postType={'Generic Posts'} />

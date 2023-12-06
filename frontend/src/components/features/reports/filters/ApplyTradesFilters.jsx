@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { setFiltered } from "../../../../store/reports";
+import { setFiltered, selectCheckedTrades } from "../../../../store/reports";
+import ApplyTradeTags from "./ApplyTradeTags";
 
 // FOR NOW REMOVING THE DISABLING OF A GIVEN VARIABLE IF USED.
 // HAVE TO ADD 'BETWEEN' EXCEPT FOR THE GREATER/LESSER.
@@ -13,13 +14,15 @@ export default function ApplyTradesFilters() {
     const [currentDuration, setCurrentDuration] = useState('All')
     const [currentDirection, setCurrentDirection] = useState('All')
     const [filters, setFilters] = useState([]);
-    const [filterKeys, setFilterKeys] = useState(['net', 'net (absolute)','gross', 'gross (absolute)','time opened', 'time closed', 'duration held', 'entry price', 'quantity'])
+    const [filterKeys, setFilterKeys] = useState(['net', 'net (absolute)', 'gross', 'gross (absolute)', 'time opened', 'time closed', 'duration held', 'entry price', 'quantity'])
     const [filterValue, setFilterValue] = useState(null);
     const [valueDirection, setValueDirection] = useState(null);
+    const [showTags, setShowTags] = useState(false);
 
-    const disabledClass = "disabled:opacity-20 disabled:border-2 disabled:border-gray-900 disabled:scale-100 disabled:bg-gray-900 disabled:text-gray-300"
+    const disabledClass = "disabled:opacity-20 disabled:border-gray-900 disabled:scale-100 disabled:bg-gray-900 disabled:text-gray-300"
 
     const trades = useSelector(state => state.entities.reports.currentData)
+    const selectedTrades = useSelector(selectCheckedTrades);
     const dispatch = useDispatch();
 
     const renderFilterKeys = filterKeys && filterKeys.map(e => {
@@ -31,13 +34,13 @@ export default function ApplyTradesFilters() {
     const renderFilters = filters && filters.map(e => {
         return <div
             className="flex gap-2 bg-cyan-300 px-2 rounded hover:bg-red-100 transform hover:scale-95 text-black text-sm"
-            onClick={()=>{
+            onClick={() => {
                 const newFilters = filters.filter(el => el[0] != e[0])
                 // setFilterKeys([...filterKeys, e[0]])
                 setFilters(newFilters)
             }}
         >
-            <p>{e[0]}</p>   
+            <p>{e[0]}</p>
             <p>{e[1]}</p>
             <p>{e[2]}</p>
         </div>
@@ -61,7 +64,7 @@ export default function ApplyTradesFilters() {
                 className="bg-cyan-900 hover:text-white rounded"
                 onChange={e => setCurrentFilter(e.target.value)}
             >
-                <option 
+                <option
                     disabled={currentFilter !== ""}
                 >Choose Variable</option>
                 {renderFilterKeys}
@@ -74,7 +77,7 @@ export default function ApplyTradesFilters() {
                 <option value="Greater">Greater</option>
                 <option value="Lesser">Lesser</option>
             </select>
-            <label 
+            <label
                 className="hover:text-white"
                 htmlFor="gt-ls-criteria"
             >than</label>
@@ -124,7 +127,7 @@ export default function ApplyTradesFilters() {
         // dispatch(setFiltered(applySelectedFilters(trades, filters)))
         dispatch(setFiltered(filters))
     }
-    
+
     function inputFilterButtons() {
         return <>
             <button
@@ -153,16 +156,22 @@ export default function ApplyTradesFilters() {
     return <div>
         {!showFilters
             ?
-            <>
+            <div className="flex gap-2">
                 <button
                     disabled={!trades}
                     className={`hover:bg-green-200 hover:text-black border-2 border-cyan-900 px-4 rounded transform hover:scale-105 ${disabledClass}`}
                     onClick={() => setShowFilters(true)}
                 >Show Filters</button>
                 {/* <p>Having the same filter type (e.g. absolute net) removes all tags on click.</p> */}
-            </>
+                {/* <AddTradesTags disabledClass={disabledClass} /> */}
+                <button
+                    disabled={selectedTrades.length == 0}
+                    className={`border-2 border-cyan-900 px-2 rounded hover:bg-green-200 hover:text-black ${disabledClass}`}
+                    onClick={() => setShowTags(true)}
+                >Add Tags</button>
+            </div>
             :
-            <div className="absolute top-0 left-0 w-full flex gap-4 border-b-2 border-x-2 border-cyan-700 py-4 px-2 bg-cyan-900">
+            <div className="absolute top-0 left-0 min-w-full max-w-fit flex gap-4 border-b-2 border-x-2 border-cyan-700 py-4 px-2 bg-cyan-900">
                 <div className="flex flex-col gap-2">
                     {getInputs()}
                     {getFilterList()}
@@ -170,6 +179,13 @@ export default function ApplyTradesFilters() {
                 </div>
                 {inputFilterButtons()}
             </div>
+        }
+        { 
+            showTags && 
+            <ApplyTradeTags 
+                disabledClass={disabledClass} 
+                setShowTags={setShowTags}
+            />
         }
     </div>
 

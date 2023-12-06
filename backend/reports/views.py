@@ -5,6 +5,8 @@ from accounts.models import Mentors
 from django.http import JsonResponse
 import requests, json
 from scripts.reports import prepare_response
+from rest_framework.response import Response
+from scripts.mongo.client import mongo_client
 
 REPORT_URL = "https://alaric.propreports.com/api.php"
 REPORT_HEADERS = {"Content-Type": "application/x-www-form-URLencoded"}
@@ -41,4 +43,27 @@ def call_propreports(request):
     except requests.exceptions.RequestException as e:
         return JsonResponse({"message": f"Failed to send request: {e}"})
 
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_trade_tags(request):
+    db = mongo_client()['testdb']
+    collection = db.get_collection("trade_tags")
+    tags = collection.find({'user': request.user.id})
+    serialized = [{**tag, "_id":str(tag["_id"])} for tag in tags]
+    return Response(serialized)
 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def create_trade_tag(request):
+    data=json.loads(request.body)
+    tag = data.get('tag', None)
+    description = data.get('description', None)
+    db = mongo_client()['testdb']
+    collection = db.get_collection("trade_tags")
+    body = {'user': request.user.id}
+    if tag: body['tag'] = tag
+    if description: body['description'] = description
+    collection.insert_one(body)
+    return Response()
