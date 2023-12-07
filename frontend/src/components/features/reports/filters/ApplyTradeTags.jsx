@@ -1,44 +1,49 @@
-import { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { getTradeTags } from "../../../../store/reports";
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getTradeTags, tradeTags } from "../../../../store/reports";
+import CreateTag from "./CreateTag";
 
-export default function ApplyTradeTags({disabledClass, setShowTags}) {
+export default function ApplyTradeTags({ disabledClass, setShowTags }) {
 
-    const buttonClass = "px-2 rounded border-2 border-cyan-800 hover:text-black"
-
-    const dispatch = useDispatch();
     
-    useEffect(()=>{
+    const dispatch = useDispatch();
+    const tags = useSelector(tradeTags)
+    
+    const [currentTag, setCurrentTag] = useState("");
+
+    useEffect(() => {
         dispatch(getTradeTags())
         // return cleanup
     }, [])
-
-    function getTagSelect(){
+ 
+    const buttonClass = "px-2 rounded border border-cyan-700 hover:text-black transform active:scale-95"
+    
+    function getTagSelect() {
         return (
-            <select className="w-fit">
-                <option>tag1</option>
-                <option>tag2</option>
-                <option>tag3</option>
-            </select>
-        )
-    }
-
-    function createTag(){
-        return (
-            <div>
-                <div>
-                    <label htmlFor="create-trade-tag">Tag:</label>
-                    <input 
-                        id="create-trade-tag"
-                        type="text"
-                        className=""
-                    />
-                </div>
+            <div className="flex gap-4">
+                <select 
+                    className="w-fit bg-cyan-700 focus:bg-cyan-800 hover:bg-cyan-800 rounded hover:text-white w-1/4"
+                    onChange={e => setCurrentTag(e.target.value._id)}
+                >
+                    {tags && tags.map( t => {
+                        return <option key={t._id}>{t.tag}</option>
+                    })}
+                </select>
+                <button
+                    className={`${buttonClass} px-4 hover:bg-green-200`}
+                >
+                    Add
+                </button>
+                <button
+                    className={`${buttonClass} hover:bg-red-200`}
+                >
+                    Delete
+                </button>
             </div>
         )
     }
 
-    function getButtons(){
+    function getButtons() {
         return (
             <div className="flex gap-2 h-full overflow-x-auto items-center">
                 <button
@@ -53,12 +58,19 @@ export default function ApplyTradeTags({disabledClass, setShowTags}) {
         )
     }
 
+    function listTags() {
+        return (
+            <p>Tags: {currentTag}</p>
+        )
+    }
+
     return (
         <div
             className="absolute top-0 left-0 min-w-full max-w-fit h-fit p-4 bg-cyan-900 rounded-b-lg border-b-2 border-x-2 border-cyan-700 flex flex-col gap-6"
         >
+            <CreateTag />
             {getTagSelect()}
-            {createTag()}
+            {listTags()}
             {getButtons()}
         </div>
     )

@@ -25,6 +25,7 @@ export default function SingleTrade(props) {
             <input 
                 type="checkbox"
                 checked={checked}
+                onChange={()=>{}} //so the err in console doesn't show
             />
             <p>{trade.ticker}</p>
             <p>{trade.type}</p> 

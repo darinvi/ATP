@@ -141,6 +141,7 @@ export const loadAccounts = (token) => (dispatch) => {
     }))
 }
 export const createTradeTag = (body) => (dispatch) => {
+    console.log(body)
     dispatch(apiCallBegan({
         method: 'POST',
         headers: {},
@@ -203,9 +204,9 @@ export const loadTrades = (token, start, end, id) => (dispatch) => {
 // SELECTORS
 
 export const selectCheckedTrades = (state) => state.entities.reports.checkedTrades;
+export const tradeTags = (state) => state.entities.reports.tradeTags;
 
-
-export const clearReportState = clearState;
+export const clearReportState = clearState; 
 export const clearReportData = clearData;
 export const setCalledType = setCurrentType;
 
