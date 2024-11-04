@@ -16,6 +16,7 @@ const slice = createSlice({
         tradeFilters: [],
         checkedTrades: [],
         tradeTags: [],
+        activeSelect: "",
     },
     reducers: {
         setTokenSuccess: (reports, action) => {
@@ -82,6 +83,9 @@ const slice = createSlice({
         setTradeTags: (reports, action) => {
             reports.tradeTags = action.payload;
         },
+        setActiveSelect: (reports, action) => {
+            reports.activeSelect = action.payload;
+        }
     }
 });
 
@@ -102,7 +106,8 @@ const {
 export const {
     setFiltered,
     clearFiltered,
-    handleCheckedTrades
+    handleCheckedTrades,
+    setActiveSelect
 } = slice.actions
 
 export default slice.reducer;
@@ -205,6 +210,7 @@ export const loadTrades = (token, start, end, id) => (dispatch) => {
 
 export const selectCheckedTrades = (state) => state.entities.reports.checkedTrades;
 export const tradeTags = (state) => state.entities.reports.tradeTags;
+export const getActiveSelect = (state) => state.entities.reports.activeSelect;
 
 export const clearReportState = clearState; 
 export const clearReportData = clearData;

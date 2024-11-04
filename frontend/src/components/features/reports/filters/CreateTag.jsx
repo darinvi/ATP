@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
-import { createTradeTag } from "../../../../store/reports";
+import { createTradeTag, setActiveSelect } from "../../../../store/reports";
 
 export default function CreateTag() {
 
@@ -18,7 +18,7 @@ export default function CreateTag() {
         return (
             <div className="flex w-full gap-2">
                 <div className="flex gap-6 w-full">
-                    <div className="flex gap-2 w-1/3">
+                    <div className="flex gap-2">
                         <label
                             htmlFor="create-trade-tag-name"
                             className="hover:text-white"
@@ -31,7 +31,7 @@ export default function CreateTag() {
                             onChange={e => setName(e.target.value)}
                         />
                     </div>
-                    <div className="flex gap-2 w-2/3">
+                    <div className="flex gap-2">
                         <label
                             htmlFor="create-trade-tag-description"
                             className="hover:text-white"
@@ -64,13 +64,19 @@ export default function CreateTag() {
     }
 
     function inputsInactive() {
-        return (
-            <button
-                className={`${buttonClass} hover:bg-green-200 w-fit`}
-                onClick={()=>setIsActive(true)}
-            >
-                Create Tag
-            </button>
+        return (    
+            <div className="flex gap-4">
+                <button
+                    className={`${buttonClass} hover:bg-green-200 w-fit`}
+                    onClick={()=>setIsActive(true)}
+                    >
+                    Create Tag
+                </button>
+                <button
+                    className={`${buttonClass} hover:bg-green-200 w-fit`}
+                    onClick={() => dispatch(setActiveSelect("strategy"))}
+                >Strategy Builder</button>
+            </div>
         )
     }
 
