@@ -26,7 +26,7 @@ export default function CreateTag() {
                         <input
                             id="create-trade-tag-name"
                             type="text"
-                            className={inputCLass}
+                            className='TEXT_INPUT'
                             value={name}
                             onChange={e => setName(e.target.value)}
                         />
@@ -40,7 +40,7 @@ export default function CreateTag() {
                             placeholder="(optional)"
                             id="create-trade-tag-description"
                             type="text"
-                            className={`${inputCLass} w-full`}
+                            className={'TEXT_INPUT w-full'}
                             value={description}
                             onChange={e => setDescription(e.target.value)}
                         />
@@ -51,12 +51,12 @@ export default function CreateTag() {
                         disabled={!name}
                         className={`${disabledClass} ${buttonClass} hover:bg-green-200 px-4`}
                         onClick={() => {
-                            dispatch(createTradeTag({tag:name, description}))
+                            dispatch(createTradeTag({ tag: name, description }))
                         }}
                     >Save</button>
                     <button
                         className={`${buttonClass} hover:bg-red-200`}
-                        onClick={()=>setIsActive(false)}
+                        onClick={() => setIsActive(false)}
                     >Cancel</button>
                 </div>
             </div>
@@ -64,12 +64,12 @@ export default function CreateTag() {
     }
 
     function inputsInactive() {
-        return (    
+        return (
             <div className="flex gap-4">
                 <button
                     className={`${buttonClass} hover:bg-green-200 w-fit`}
-                    onClick={()=>setIsActive(true)}
-                    >
+                    onClick={() => setIsActive(true)}
+                >
                     Create Tag
                 </button>
                 <button
@@ -82,7 +82,7 @@ export default function CreateTag() {
 
     return (
         <>
-            { isActive ? inputsActive() : inputsInactive()}
+            {isActive ? inputsActive() : inputsInactive()}
         </>
     )
 }
