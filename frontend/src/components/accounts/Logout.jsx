@@ -2,14 +2,14 @@ import { useDispatch } from "react-redux"
 import { logout } from "../../store/auth";
 
 export default function Logout() {
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
 
-    function handleLogout(){
+    function handleLogout() {
         dispatch(logout())
     }
     return (
         <li
-            className="hover:text-cyan-300 px-4 list-none h-full cursor-pointer m-auto flex items-center" 
+            className="hover:text-cyan-300 px-4 list-none h-full cursor-pointer m-auto flex items-center"
             onClick={handleLogout}
         >Logout</li>
 
