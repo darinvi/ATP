@@ -16,6 +16,7 @@ pyarrow = "*"
 fastparquet = "*"
 django-environ = "*"
 pymongo = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

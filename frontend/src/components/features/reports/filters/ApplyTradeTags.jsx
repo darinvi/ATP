@@ -5,15 +5,15 @@ import TagsStrategyChoose from "./TagsStrategyChoose";
 import CreateTag from "./CreateTag";
 
 export default function ApplyTradeTags({ disabledClass, setShowTags }) {
-    
+
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         dispatch(getTradeTags())
         // return cleanup
     }, [])
- 
-    const buttonClass = "px-2 rounded border border-cyan-700 hover:text-black transform active:scale-95"    
+
+    const buttonClass = "px-2 rounded border border-cyan-700 hover:text-black transform active:scale-95"
 
     function getButtons() {
         return (
@@ -32,7 +32,7 @@ export default function ApplyTradeTags({ disabledClass, setShowTags }) {
 
     function listTags() {
         return (
-            <p>Tags: </p>
+            <p>Tags: dae</p>
         )
     }
 
@@ -41,7 +41,7 @@ export default function ApplyTradeTags({ disabledClass, setShowTags }) {
             className="absolute top-0 left-0 min-w-full max-w-fit h-fit p-4 bg-cyan-900 rounded-b-lg border-b-2 border-x-2 border-cyan-700 flex flex-col gap-6"
         >
             <CreateTag />
-            <TagsStrategyChoose />            
+            <TagsStrategyChoose />
             {listTags()}
             {getButtons()}
         </div>

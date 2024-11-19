@@ -18,9 +18,8 @@ export default function CreateTags() {
         setDescription("");
     }
 
-    return <div className="flex items-center gap-4">
-        {
-            showForm ?
+    function createTagForm() {
+        return (
             <>
                 <form className="flex gap-12 items-center" onSubmit={handleSubmitForm}>
                     <div className="flex gap-4">
@@ -51,17 +50,24 @@ export default function CreateTags() {
                         disabled={!(name && description)}
                     >Create</button>
                 </form>
-                <button 
+                <button
                     className="bg-red-300 hover:bg-red-400 px-4 h-8 transform hover:scale-105 active:scale-100 rounded"
-                    onClick={()=>setShowForm(false)}
+                    onClick={() => setShowForm(false)}
                 >Close</button>
             </>
-            :
-        
-            <button
-                onClick={() => setShowForm(true)}
-                className="bg-green-300 hover:bg-green-500 px-4 h-8 transform hover:scale-105 active:scale-100 rounded"
-            >Create Tag</button>
+        )
+    }
+
+    return <div className="flex items-center gap-4">
+        {
+            showForm
+                ?
+                createTagForm()
+                :
+                <button
+                    onClick={() => setShowForm(true)}
+                    className="bg-green-300 hover:bg-green-500 px-4 h-8 transform hover:scale-105 active:scale-100 rounded"
+                >Create Tag</button>
         }
     </div>
 }
