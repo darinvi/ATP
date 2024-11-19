@@ -57,13 +57,19 @@ def get_trade_tags(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def create_trade_tag(request):
-    data=json.loads(request.body)
-    tag = data.get('tag', None)
-    description = data.get('description', None)
     db = mongo_client()['testdb']
     collection = db.get_collection("trade_tags")
     body = {'user': request.user.id}
-    if tag: body['tag'] = tag
+    
+    data = json.loads(request.body)
+    tag = data.get('tag')
+    if tag: 
+        body['tag'] = tag
+    else: 
+        return Response({'message': 'Tag is required'}, status=400)
+    
+    description = data.get('description')
     if description: body['description'] = description
+    
     collection.insert_one(body)
     return Response()

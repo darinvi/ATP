@@ -1,0 +1,4 @@
+.TEXT_INPUT {
+    /* input style */
+    @apply bg-cyan-700 hover:bg-cyan-800 focus:bg-cyan-800 text-white px-3 rounded;
+}

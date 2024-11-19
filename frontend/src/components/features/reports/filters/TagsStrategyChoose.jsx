@@ -4,7 +4,7 @@ import { useState } from "react";
 import StrategyBuilder from "./strategyBuilder/StrategyBuilder";
 import { getActiveSelect, setActiveSelect } from "../../../../store/reports";
 
-export default function TagsStrategyChoose(){
+export default function TagsStrategyChoose() {
 
     const tags = useSelector(tradeTags)
     const activeSelect = useSelector(getActiveSelect)
@@ -14,15 +14,15 @@ export default function TagsStrategyChoose(){
 
 
     const buttonClass = "px-2 rounded border border-cyan-700 hover:text-black transform active:scale-95"
-    
+
     function getTagSelect() {
         return (
             <div className="flex gap-4">
-                <select 
+                <select
                     className="w-fit bg-cyan-700 focus:bg-cyan-800 hover:bg-cyan-800 rounded hover:text-white w-1/4"
                     onChange={e => setCurrentTag(e.target.value._id)}
                 >
-                    {tags && tags.map( t => {
+                    {tags && tags.map(t => {
                         return <option key={t._id}>{t.tag}</option>
                     })}
                 </select>
@@ -34,7 +34,7 @@ export default function TagsStrategyChoose(){
                 <button
                     className={`${buttonClass} hover:bg-red-200`}
                 >
-                    Delete 
+                    Delete
                 </button>
                 <button
                     className={`${buttonClass} hover:bg-red-200`}
@@ -50,18 +50,20 @@ export default function TagsStrategyChoose(){
         <>
             {!activeSelect && (
                 <div className="flex gap-4">
-                    <button 
+                    <button
                         className={`${buttonClass} hover:bg-green-200`}
                         onClick={() => dispatch(setActiveSelect("tags"))}
-                        >Manage Tags</button>
-                    <button 
+                    >Manage Tags</button>
+                    <button
                         className={`${buttonClass} hover:bg-green-200`}
                     >Apply Strategy</button>
                 </div>
             )}
+
             {activeSelect === 'tags' && (
                 getTagSelect()
             )}
+
             {activeSelect === 'strategy' && (
                 <StrategyBuilder />
             )}

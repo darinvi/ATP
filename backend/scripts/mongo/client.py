@@ -1,12 +1,14 @@
 from pymongo import MongoClient
-# import environ
+from dotenv import load_dotenv
+import os
 
-# env = environ.Env()
-# environ.Env.read_env()
+load_dotenv()
 
-# mongo_string = env('MONGO_STRING')
-
-mongo_string = "mongodb+srv://testdb:testdb@cluster0.wblz5ep.mongodb.net/"
+MONGO_STRING = os.getenv('MONGO_STRING')
+CLIENT = MongoClient(MONGO_STRING)
 
 def mongo_client():
-    return MongoClient(mongo_string)
+    return CLIENT
+
+c = mongo_client()['testdb']
+print(c)
