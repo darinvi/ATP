@@ -43,7 +43,6 @@ export default function CreateTags() {
                             onChange={(e) => setDescription(e.target.value)}
                         ></input>
                     </div>
-
                     <button
                         type="submit"
                         className="bg-green-300 hover:bg-green-400 px-4 h-8 transform hover:scale-105 active:scale-100 disabled:bg-gray-500 disabled:scale-100 rounded"

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { loadPositions, loadTrades, setCalledType } from "../../../store/reports";
+import ClosingSVG from "../../utils/ClosingSVG";
 
 export default function GetReportForm({ setShowForm }) {
 
@@ -66,13 +67,18 @@ export default function GetReportForm({ setShowForm }) {
             : setDatesValid({ ...datesValid, end: false })
     }
 
+    function closeForm(e) {
+        e.preventDefault();
+        setShowForm(false);
+    }
+
     const sharedClass = "hover:text-black border-2 border-cyan-800"
     const inputClass = "bg-cyan-700 rounded pl-2 focus:bg-cyan-800 hover:bg-cyan-800 text-white"
 
     // handle start year > end year and invalid inputs.
     return (
-        <form 
-            onSubmit={handleSubmitForm} 
+        <form
+            onSubmit={handleSubmitForm}
             className="absolute bg-cyan-900 flex flex-col mx-auto gap-4 z-20 top-0 p-2 rounded-b-lg border-x-2 border-b-2 border-cyan-700"
         >
             <div className="flex gap-6" >
@@ -129,19 +135,13 @@ export default function GetReportForm({ setShowForm }) {
             </div>
 
             <div className="flex gap-4 w-full border-t-2 border-cyan-800 pt-1 mx-auto">
+                {/* <div className="mx-auto flex gap-4 my-2"> */}
                 <div className="mx-auto flex gap-4 my-2">
                     <button
                         type="submit"
                         className={`hover:bg-green-200 px-2 rounded transform hover:scale-105 ${sharedClass}`}
-                    // disabled={}
                     >Load Report</button>
-                    <button
-                        className={`hover:bg-red-200 px-4 rounded transform hover:scale-105 ${sharedClass}`}
-                        onClick={(e) => {
-                            e.preventDefault()
-                            setShowForm(false);
-                        }}
-                    >Hide Form</button>
+                    <ClosingSVG onClick={closeForm} />
                 </div>
             </div>
         </form>

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setFiltered, selectCheckedTrades } from "../../../../store/reports";
 import ApplyTradeTags from "./ApplyTradeTags";
+import ClosingSVG from "../../../utils/ClosingSVG";
 
 // FOR NOW REMOVING THE DISABLING OF A GIVEN VARIABLE IF USED.
 // HAVE TO ADD 'BETWEEN' EXCEPT FOR THE GREATER/LESSER.
@@ -135,10 +136,7 @@ export default function ApplyTradesFilters() {
                 onClick={handleFilterAdd}
                 disabled={!(currentFilter && valueDirection && filterValue)}
             >Add</button>
-            <button
-                className="hover:bg-yellow-200 hover:text-black px-4 rounded transform hover:scale-105 h-8 active:scale-100 border-2 border-cyan-800"
-                onClick={() => setShowFilters(false)}
-            >Hide</button>
+            <ClosingSVG onClick={() => setShowFilters(false)} additionalClass='h-8' />
             <button
                 className="hover:bg-green-200 hover:text-black border-2 border-cyan-800 px-4 rounded transform hover:scale-105 h-8"
                 onClick={handleApplyButton}
@@ -180,10 +178,10 @@ export default function ApplyTradesFilters() {
                 {inputFilterButtons()}
             </div>
         }
-        { 
-            showTags && 
-            <ApplyTradeTags 
-                disabledClass={disabledClass} 
+        {
+            showTags &&
+            <ApplyTradeTags
+                disabledClass={disabledClass}
                 setShowTags={setShowTags}
             />
         }

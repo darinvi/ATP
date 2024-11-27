@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useState } from "react";
 import StrategyBuilder from "./strategyBuilder/StrategyBuilder";
 import { getActiveSelect, setActiveSelect } from "../../../../store/reports";
-
+import ClosingSVG from "../../../utils/ClosingSVG";
 export default function TagsStrategyChoose() {
 
     const tags = useSelector(tradeTags)
@@ -36,19 +36,22 @@ export default function TagsStrategyChoose() {
                 >
                     Delete
                 </button>
-                <button
+                {/* <button
                     className={`${buttonClass} hover:bg-red-200`}
                     onClick={() => dispatch(setActiveSelect(""))}
                 >
                     Hide
-                </button>
+                </button> */}
+                <ClosingSVG
+                    onClick={() => dispatch(setActiveSelect(""))}
+                />
             </div>
         )
     }
 
     return (
         <>
-            {!activeSelect && (
+            {activeSelect !== 'tags' && (
                 <div className="flex gap-4">
                     <button
                         className={`${buttonClass} hover:bg-green-200`}
