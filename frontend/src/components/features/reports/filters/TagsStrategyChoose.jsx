@@ -57,7 +57,6 @@ export default function TagsStrategyChoose() {
                     <button
                         className={`${buttonClass} hover:bg-green-200`}
                     >Apply Strategy</button>
-                    TODO: activeSelect to hive Tags/Strategy buttons if Create Tag active
                 </div>
             )}
 

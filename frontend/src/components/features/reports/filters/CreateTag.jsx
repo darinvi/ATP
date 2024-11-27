@@ -1,12 +1,14 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { createTradeTag, setActiveSelect } from "../../../../store/reports";
+import { useSelector } from "react-redux";
+import { getActiveSelect } from "../../../../store/reports";
 
 export default function CreateTag() {
 
     const dispatch = useDispatch();
-
-    const [name, setName] = useState("");
+    const activeSelect = useSelector(getActiveSelect)
+    const [name, setName] = useState("")
     const [description, setDescription] = useState("");
     const [isActive, setIsActive] = useState(false);
 
@@ -56,7 +58,10 @@ export default function CreateTag() {
                     >Save</button>
                     <button
                         className={`${buttonClass} hover:bg-red-200`}
-                        onClick={() => setIsActive(false)}
+                        onClick={() => {
+                            setIsActive(false)
+                            dispatch(setActiveSelect(""))
+                        }}
                     >Cancel</button>
                 </div>
             </div>
@@ -68,7 +73,10 @@ export default function CreateTag() {
             <div className="flex gap-4">
                 <button
                     className={`${buttonClass} hover:bg-green-200 w-fit`}
-                    onClick={() => setIsActive(true)}
+                    onClick={() => {
+                        setIsActive(true)
+                        dispatch(setActiveSelect("create-tag"))
+                    }}
                 >
                     Create Tag
                 </button>

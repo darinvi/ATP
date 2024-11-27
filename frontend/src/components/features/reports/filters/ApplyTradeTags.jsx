@@ -5,7 +5,7 @@ import TagsStrategyChoose from "./TagsStrategyChoose";
 import CreateTag from "./CreateTag";
 import { getActiveSelect } from "../../../../store/reports";
 import { useSelector } from "react-redux";
-
+import { setActiveSelect } from "../../../../store/reports";
 export default function ApplyTradeTags({ disabledClass, setShowTags }) {
 
     const dispatch = useDispatch();
@@ -45,10 +45,13 @@ export default function ApplyTradeTags({ disabledClass, setShowTags }) {
     function getCreateTag() {
         return <div className="flex gap-4">
             <TagsStrategyChoose />
-            {(showBuilders && activeSelect === '') && <CreateTag />}
+            {(showBuilders && (activeSelect === '' || activeSelect === 'create-tag')) && <CreateTag />}
             {activeSelect != 'tags' && <button
                 className={`flex gap-2 items-center hover:scale-110 ${showBuilders ? 'hover:text-red-200' : 'hover:text-green-200'}`}
-                onClick={() => setShowBuilders(!showBuilders)}
+                onClick={() => {
+                    setShowBuilders(!showBuilders)
+                    showBuilders && dispatch(setActiveSelect(""))
+                }}
             >
                 {`${showBuilders ? '' : 'Create'}`}
                 <svg
