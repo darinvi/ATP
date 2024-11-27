@@ -131,7 +131,6 @@ export default function CreateTag({ setShowBuilders }) {
             <Modal
                 onClickOutside={() => {
                     dispatch(setActiveSelect(""))
-                    setShowBuilders()
                 }}
                 children={modalChildren()}
             ></Modal>
@@ -145,6 +144,8 @@ export default function CreateTag({ setShowBuilders }) {
                     className={`${buttonClass} hover:bg-green-200 w-fit`}
                     onClick={() => {
                         dispatch(setActiveSelect("reports-create-tag"))
+                        setShowBuilders()
+
                     }}
                 >
                     Create Tag
@@ -159,8 +160,7 @@ export default function CreateTag({ setShowBuilders }) {
 
     return (
         <>
-            {activeSelect === "reports-create-tag" && inputsActive()}
-            {inputsInactive()}
+            {activeSelect === "reports-create-tag" ? inputsActive() : inputsInactive()}
         </>
     )
 }

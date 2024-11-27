@@ -46,7 +46,7 @@ export default function ApplyTradeTags({ disabledClass, setShowTags }) {
     function getCreateTag() {
         return <div className="flex gap-4">
             <TagsStrategyChoose />
-            {showBuilders && <CreateTag setShowBuilders={() => setShowBuilders(false)} />}
+            {(showBuilders || activeSelect === 'reports-create-tag') && <CreateTag setShowBuilders={() => setShowBuilders(false)} />}
             {activeSelect != 'tags' && <button
                 className={`flex gap-2 items-center hover:scale-110 ${showBuilders ? 'hover:text-red-200' : 'hover:text-green-200'}`}
                 onClick={() => {
